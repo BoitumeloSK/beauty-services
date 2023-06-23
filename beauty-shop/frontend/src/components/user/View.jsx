@@ -22,6 +22,7 @@ export default function ViewProfile() {
       .then((response) => response.json())
       .then((result) => {
         localStorage.removeItem("beauty-shop-user");
+        window.location.replace("/");
       });
   }
 
