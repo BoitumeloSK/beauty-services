@@ -150,6 +150,32 @@ function updateUser(req, res) {
   });
 }
 
+function updateRole(req, res) {
+  const { id } = req.params;
+  const { role } = req.body;
+
+  User.findAll({ where: { id } }).then((data) => {
+    if (data.length == 0) {
+      return res
+        .status(400)
+        .json({ success: false, error: "User does not exist" });
+    }
+    const { role } = JWT.verify(req.cookies.access_token, process.env.SECRET);
+
+    if (role != "admin") {
+      return res.status(400).json({ success: false, error: "Access denied" });
+    }
+
+    User.update({ role: role }, { where: { id } })
+      .then((data) => {
+        return res.status(200).json({ success: true, data: data });
+      })
+      .catch((error) => {
+        return res.status(400).json({ success: false, error: error });
+      });
+  });
+}
+
 function updatePassword(req, res) {
   const { id } = req.params;
   const { password, confirmPassword } = req.body;
@@ -223,5 +249,6 @@ module.exports = {
   logout,
   updateUser,
   updatePassword,
+  updateRole,
   deleteUser,
 };
