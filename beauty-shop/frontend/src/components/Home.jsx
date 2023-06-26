@@ -27,8 +27,14 @@ function logout() {
 }
 
 function GrantedAccess() {
+  const storageKey = JSON.parse(localStorage.getItem("beauty-shop-user"));
   return (
     <>
+      {storageKey.role === "admin" ? (
+        <Link to="/applications">Applications</Link>
+      ) : (
+        ""
+      )}
       <Link to="/profile">View Profile</Link>
       <br></br>
       <Link to="/changePassword">Change Password</Link>

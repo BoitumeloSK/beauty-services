@@ -3,19 +3,21 @@ function OptionView(name, { changeFunction }) {
   return (
     <>
       <label htmlFor={name}>About</label>
-      <textarea name={name} onChange={() => changeFunction}></textarea>
+      <textarea name={name} required onChange={() => changeFunction}></textarea>
     </>
   );
 }
 export default function SignUp() {
-  const [fName, setFName] = useState("");
-  const [lName, setLName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [about, setAbout] = useState("");
-  const [address, setAddress] = useState("");
-  const [userOption, setUserOption] = useState("");
+  const [fName, setFName] = useState();
+  const [lName, setLName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
+  const [about, setAbout] = useState("I am a customer");
+  const [image, setImage] = useState();
+  const [url, setUrl] = useState();
+  const [address, setAddress] = useState();
+  const [userOption, setUserOption] = useState();
 
   function handleChange(e) {
     if (e.target.name === "fName") {
@@ -42,8 +44,26 @@ export default function SignUp() {
     if (e.target.name === "user") {
       setUserOption(e.target.value);
     }
+    if (e.target.name === "image") {
+      setImage(e.target.files[0]);
+    }
   }
 
+  function postImage() {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "beauty-shop");
+    const imageMethod = {
+      method: "POST",
+      body: data,
+    };
+    fetch("https://api.cloudinary.com/v1_1/dhrftaik2/image/upload", imageMethod)
+      .then((res) => res.json())
+      .then((result) => {
+        setUrl(result.url);
+        console.log(result.url);
+      });
+  }
   function createProvider(
     fName,
     lName,
@@ -51,8 +71,16 @@ export default function SignUp() {
     password,
     confirmPassword,
     about,
-    address
+    address,
+    url
   ) {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "beauty-shop");
+    const imageMethod = {
+      method: "POST",
+      body: data,
+    };
     const createMethod = {
       method: "POST",
       headers: {
@@ -66,7 +94,7 @@ export default function SignUp() {
         confirmPassword: confirmPassword,
         about: about,
         address: address,
-        image: document.querySelector("#profile-image").value.split("\\").pop(),
+        image: url,
       }),
       redirect: "follow",
     };
@@ -75,7 +103,7 @@ export default function SignUp() {
       .then((response) => response.json())
       .then((result) => {
         if (result.success === true) {
-          window.location.replace("/");
+          //window.location.replace("/");
         } else {
           console.log(result);
         }
@@ -92,21 +120,34 @@ export default function SignUp() {
         <option value="provider">Service Provider</option>
       </select>
       <label htmlFor="fName">First Name</label>
-      <input name="fName" onChange={(e) => handleChange(e)} />
+      <input name="fName" required onChange={(e) => handleChange(e)} />
       <label htmlFor="lName">Last Name</label>
-      <input name="lName" onChange={(e) => handleChange(e)} />
+      <input name="lName" required onChange={(e) => handleChange(e)} />
       <label htmlFor="email">Email</label>
-      <input name="email" onChange={(e) => handleChange(e)} />
+      <input name="email" required onChange={(e) => handleChange(e)} />
       <label htmlFor="password">Password</label>
       <input
         name="password"
         type="password"
+        required
         onChange={(e) => handleChange(e)}
       />
       <label htmlFor="confirm">Confirm Password</label>
-      <input name="confirm" type="password" onChange={(e) => handleChange(e)} />
+      <input
+        name="confirm"
+        type="password"
+        onChange={(e) => handleChange(e)}
+        required
+      />
       <label htmlFor="image">Profile Image</label>
-      <input type="file" accept="image/*" id="profile-image" name="image" />
+      <input
+        type="file"
+        accept="image/*"
+        id="profile-image"
+        name="image"
+        required
+        onChange={(e) => handleChange(e)}
+      />
       {userOption === "provider" ? (
         <OptionView name="about" changeFunction={handleChange} />
       ) : (
@@ -123,12 +164,14 @@ export default function SignUp() {
             password,
             confirmPassword,
             about,
-            address
+            address,
+            url
           )
         }
       >
         Sign Up
       </button>
+      <button onClick={() => postImage()}>Image</button>
     </Fragment>
   );
 }
