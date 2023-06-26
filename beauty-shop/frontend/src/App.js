@@ -6,7 +6,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ViewProfile from "./components/user/View";
 import EditProfile from "./components/user/Edit";
 import ChangePassword from "./components/user/ChangePassword";
-import ProviderApplications from "./components/user/ProviderApplications";
+import Applications from "./components/user/Applications";
+import UserProfile from "./components/user/UserProfile";
 function App() {
   return (
     <BrowserRouter>
@@ -17,7 +18,8 @@ function App() {
         <Route path="/profile" element={<ViewProfile />} />
         <Route path="/edit/Profile" element={<EditProfile />} />
         <Route path="/changePassword" element={<ChangePassword />} />
-        <Route path="/approveApplications" element={<ProviderApplications />} />
+        <Route path="/applications" element={<Applications />} />
+        <Route path="/userProfile" element={<UserProfile />} />
       </Routes>
     </BrowserRouter>
   );

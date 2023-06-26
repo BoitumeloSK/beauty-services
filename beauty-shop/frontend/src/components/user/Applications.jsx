@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function ProviderApplications() {
+export default function Applications() {
   const [applicants, setApplicants] = useState([]);
 
   useEffect(() => {
@@ -14,6 +14,22 @@ export default function ProviderApplications() {
         setApplicants(users);
       });
   }, []);
+
+  function getUser(userId) {
+    const getMethod = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    fetch(`api/users/${userId}`, getMethod)
+      .then((response) => response.json())
+      .then((result) => {
+        sessionStorage.setItem("single-user", JSON.stringify(result.data[0]));
+        window.location.replace("/userProfile");
+      });
+  }
 
   return (
     <>
@@ -34,8 +50,7 @@ export default function ProviderApplications() {
                 <td>{item.lastName}</td>
                 <td>{item.email}</td>
                 <td>
-                  <button>View Profile</button>
-                  <button>Approve</button>
+                  <button onClick={() => getUser(item.id)}>View Profile</button>
                 </td>
               </tr>
             );

@@ -90,7 +90,7 @@ function login(req, res) {
     const token = JWT.sign(
       { userId: data[0].id, role: data[0].role },
       process.env.SECRET,
-      { expiresIn: "2h" }
+      { expiresIn: "10h" }
     );
 
     return res
