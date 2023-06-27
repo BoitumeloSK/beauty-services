@@ -9,6 +9,7 @@ export default function ViewProfile() {
   const email = user.email;
   const about = user.about;
   const address = user.address;
+  const image = user.image;
 
   function deleteUser() {
     const deleteMethod = {
@@ -28,6 +29,7 @@ export default function ViewProfile() {
 
   return (
     <Fragment>
+      <img src={image} alt="User" />
       {firstName}
       <br></br>
       {lastName}

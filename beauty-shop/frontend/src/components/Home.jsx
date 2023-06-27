@@ -35,6 +35,11 @@ function GrantedAccess() {
       ) : (
         ""
       )}
+      {storageKey.role === "provider" ? (
+        <Link to="/postService">Post Service</Link>
+      ) : (
+        ""
+      )}
       <Link to="/profile">View Profile</Link>
       <br></br>
       <Link to="/changePassword">Change Password</Link>
