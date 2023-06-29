@@ -60,7 +60,7 @@ function getUserServices(req, res) {
 }
 
 function createService(req, res) {
-  const { description, images, price, approved } = req.body;
+  const { description, images, price } = req.body;
   const { userId } = JWT.verify(req.header("token"), process.env.SECRET);
   Service.findAll({ where: { description, UserId: userId } }).then((data) => {
     if (data.length > 0) {
@@ -69,7 +69,7 @@ function createService(req, res) {
         error: "You have already posted this service",
       });
     }
-    Service.create({ description, images, price, approved, UserId: userId })
+    Service.create({ description, images, price, UserId: userId })
       .then((data) => {
         return res.status(200).json({ success: true, data: data });
       })

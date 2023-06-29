@@ -20,6 +20,7 @@ export default function CreateService() {
   }
 
   function postImages() {
+    const photosArray = [];
     Array.from(images).forEach((image) => {
       const data = new FormData();
       data.append("file", image);
@@ -36,11 +37,14 @@ export default function CreateService() {
       )
         .then((res) => res.json())
         .then((result) => {
-          setUrls([...urls, result.url]);
+          photosArray.push(result.url);
+          //setUrls([...urls, result.url]);
+
           console.log(result.url);
           console.log(urls);
         });
     });
+    setUrls(photosArray);
   }
 
   function check() {

@@ -28,6 +28,7 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       defaultValue: "customer",
     },
+    //add isActive
   },
   {
     freezeTableName: true,

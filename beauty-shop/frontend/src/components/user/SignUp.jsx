@@ -60,10 +60,12 @@ export default function SignUp() {
     fetch("https://api.cloudinary.com/v1_1/dhrftaik2/image/upload", imageMethod)
       .then((res) => res.json())
       .then((result) => {
+        //remove below. Move create user here
         setUrl(result.url);
         console.log(result.url);
       });
   }
+
   function createProvider(
     fName,
     lName,
@@ -77,10 +79,7 @@ export default function SignUp() {
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "beauty-shop");
-    const imageMethod = {
-      method: "POST",
-      body: data,
-    };
+
     const createMethod = {
       method: "POST",
       headers: {

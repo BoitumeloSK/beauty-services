@@ -23,6 +23,7 @@ const Service = sequelize.define(
     },
     approved: {
       type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
   },
   {
