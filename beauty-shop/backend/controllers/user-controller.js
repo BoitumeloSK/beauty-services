@@ -79,6 +79,12 @@ function login(req, res) {
         .status(400)
         .json({ success: false, error: "Invalid credential" });
     }
+
+    if (!data[0].isActive) {
+      return res
+        .status(400)
+        .json({ success: false, error: "Invalid credentials" });
+    }
     const match = await bcrypt.compare(password, data[0].password);
 
     if (!match) {
@@ -228,7 +234,7 @@ function deleteUser(req, res) {
       });
     }
 
-    User.destroy({ where: { id } })
+    User.update({ isActive: false }, { where: { id } })
       .then((data) => {
         return res
           .status(200)

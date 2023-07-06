@@ -28,7 +28,10 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       defaultValue: "customer",
     },
-    //add isActive
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
   },
   {
     freezeTableName: true,
