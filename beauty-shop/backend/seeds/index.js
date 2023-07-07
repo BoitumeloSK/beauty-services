@@ -67,7 +67,7 @@ sequelize.sync({ force: false }).then(async () => {
 			images:
 				"http://res.cloudinary.com/dhrftaik2/image/upload/v1688577706/beauty-shop/s8rwkqfjdefjr66hwrei.png",
 			price: 100,
-			approved: false,
+			visible: false,
 			UserId: 2,
 		},
 		{
@@ -76,7 +76,7 @@ sequelize.sync({ force: false }).then(async () => {
 			images:
 				"http://res.cloudinary.com/dhrftaik2/image/upload/v1688577741/beauty-shop/n1qq5npy7spnoboif8ws.png",
 			price: 300,
-			approved: true,
+			visible: true,
 			UserId: 2,
 		},
 	]);

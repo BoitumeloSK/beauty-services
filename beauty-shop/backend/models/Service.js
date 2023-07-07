@@ -24,9 +24,8 @@ const Service = sequelize.define(
 		price: {
 			type: DataTypes.DOUBLE(10, 2),
 		},
-		approved: {
+		visible: {
 			type: DataTypes.BOOLEAN,
-			defaultValue: false,
 		},
 	},
 	{

@@ -28,13 +28,13 @@ function getService(req, res) {
 		});
 }
 
-function getApprovedServices(req, res) {
-	Service.findAll({ where: { approved: true } })
+function getVisibleServices(req, res) {
+	Service.findAll({ where: { visible: true } })
 		.then((data) => {
 			if (data.length == 0) {
 				return res
 					.status(400)
-					.json({ success: false, error: "No approved services found" });
+					.json({ success: false, error: "No visible services found" });
 			}
 			return res.status(200).json({ success: true, data: data });
 		})
@@ -67,7 +67,7 @@ function getUserServices(req, res) {
 }
 
 function createService(req, res) {
-	const { title, description, images, price } = req.body;
+	const { title, description, images, price, visible } = req.body;
 	const { userId } = JWT.verify(req.cookies.access_token, process.env.SECRET);
 	Service.findAll({ where: { description, UserId: userId } }).then((data) => {
 		if (data.length > 0) {
@@ -76,7 +76,14 @@ function createService(req, res) {
 				error: "You have already posted this service",
 			});
 		}
-		Service.create({ title, description, images, price, UserId: userId })
+		Service.create({
+			title,
+			description,
+			images,
+			price,
+			visible,
+			UserId: userId,
+		})
 			.then((data) => {
 				return res.status(200).json({ success: true, data: data });
 			})
@@ -88,7 +95,7 @@ function createService(req, res) {
 
 function updateService(req, res) {
 	const { id } = req.params;
-	const { title, description, images, price, approved } = req.body;
+	const { title, description, images, price, visible } = req.body;
 	const updates = {};
 	Service.findAll({ where: { id } }).then((data) => {
 		if (data.length == 0) {
@@ -120,8 +127,8 @@ function updateService(req, res) {
 			if (price) {
 				updates["price"] = price;
 			}
-			if (approved) {
-				updates["approved"] = approved;
+			if (visible) {
+				updates["visible"] = visible;
 			}
 
 			Service.update(updates, { where: { id } })
@@ -168,7 +175,7 @@ function deleteService(req, res) {
 
 module.exports = {
 	getAllServices,
-	getApprovedServices,
+	getVisibleServices,
 	getService,
 	getUserServices,
 	createService,

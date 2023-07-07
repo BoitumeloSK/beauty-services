@@ -1,6 +1,6 @@
 const {
 	getAllServices,
-	getApprovedServices,
+	getVisibleServices,
 	getService,
 	getUserServices,
 	createService,
@@ -11,7 +11,7 @@ const { auth, provider } = require("../middleware/auth");
 const router = require("express").Router();
 
 router.get("/", getAllServices);
-router.get("/approved", getApprovedServices);
+router.get("/visible", getVisibleServices);
 router.get("/:id", getService);
 router.get("/myservices/:id", provider, getUserServices);
 router.post("/", provider, createService);
