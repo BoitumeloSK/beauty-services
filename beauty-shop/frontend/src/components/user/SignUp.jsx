@@ -1,12 +1,4 @@
 import { Fragment, useState } from "react";
-function OptionView(name, { changeFunction }) {
-  return (
-    <>
-      <label htmlFor={name}>About</label>
-      <textarea name={name} required onChange={() => changeFunction}></textarea>
-    </>
-  );
-}
 export default function SignUp() {
   const [fName, setFName] = useState();
   const [lName, setLName] = useState();
@@ -15,7 +7,6 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState();
   const [about, setAbout] = useState("I am a customer");
   const [image, setImage] = useState();
-  const [url, setUrl] = useState();
   const [address, setAddress] = useState();
   const [userOption, setUserOption] = useState();
 
@@ -49,7 +40,15 @@ export default function SignUp() {
     }
   }
 
-  function postImage() {
+  function createUser(
+    fName,
+    lName,
+    email,
+    password,
+    confirmPassword,
+    about,
+    address
+  ) {
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "beauty-shop");
@@ -60,54 +59,33 @@ export default function SignUp() {
     fetch("https://api.cloudinary.com/v1_1/dhrftaik2/image/upload", imageMethod)
       .then((res) => res.json())
       .then((result) => {
-        //remove below. Move create user here
-        setUrl(result.url);
-        console.log(result.url);
+        const createMethod = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName: fName,
+            lastName: lName,
+            email: email,
+            password: password,
+            confirmPassword: confirmPassword,
+            about: about,
+            address: address,
+            image: result.url,
+          }),
+        };
+        fetch("api/users", createMethod)
+          .then((response) => response.json())
+          .then((result) => {
+            if (result.success === true) {
+              window.location.replace("/");
+            } else {
+              console.log(result);
+            }
+          })
+          .catch((error) => console.log("error", error));
       });
-  }
-
-  function createProvider(
-    fName,
-    lName,
-    email,
-    password,
-    confirmPassword,
-    about,
-    address,
-    url
-  ) {
-    const data = new FormData();
-    data.append("file", image);
-    data.append("upload_preset", "beauty-shop");
-
-    const createMethod = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        firstName: fName,
-        lastName: lName,
-        email: email,
-        password: password,
-        confirmPassword: confirmPassword,
-        about: about,
-        address: address,
-        image: url,
-      }),
-      redirect: "follow",
-    };
-
-    fetch("api/users", createMethod)
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.success === true) {
-          //window.location.replace("/");
-        } else {
-          console.log(result);
-        }
-      })
-      .catch((error) => console.log("error", error));
   }
 
   return (
@@ -148,7 +126,14 @@ export default function SignUp() {
         onChange={(e) => handleChange(e)}
       />
       {userOption === "provider" ? (
-        <OptionView name="about" changeFunction={handleChange} />
+        <>
+          <label htmlFor="about">About</label>
+          <textarea
+            name="about"
+            required
+            onChange={(e) => handleChange(e)}
+          ></textarea>
+        </>
       ) : (
         about === "I am a customer"
       )}
@@ -156,21 +141,19 @@ export default function SignUp() {
       <input name="address" onChange={(e) => handleChange(e)} />
       <button
         onClick={() =>
-          createProvider(
+          createUser(
             fName,
             lName,
             email,
             password,
             confirmPassword,
             about,
-            address,
-            url
+            address
           )
         }
       >
         Sign Up
       </button>
-      <button onClick={() => postImage()}>Image</button>
     </Fragment>
   );
 }

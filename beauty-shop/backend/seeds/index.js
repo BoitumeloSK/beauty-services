@@ -1,5 +1,5 @@
 const sequelize = require("../config/config");
-const { User, Service, Booking } = require("../models");
+const { User, Service, Booking, Slot } = require("../models");
 const bcrypt = require("bcrypt");
 
 sequelize.sync({ force: false }).then(async () => {
@@ -81,10 +81,39 @@ sequelize.sync({ force: false }).then(async () => {
 		},
 	]);
 
+	await Slot.bulkCreate([
+		{
+			ServiceId: 2,
+			startTime: "13:00",
+			endTime: "14:00",
+		},
+		{
+			ServiceId: 2,
+			startTime: "15:00",
+			endTime: "16:00",
+		},
+		{
+			ServiceId: 2,
+			startTime: "10:00",
+			endTime: "11:00",
+		},
+		{
+			ServiceId: 2,
+			startTime: "08:00",
+			endTime: "09:00",
+		},
+		{
+			ServiceId: 2,
+			startTime: "17:00",
+			endTime: "18:00",
+		},
+	]);
+
 	await Booking.bulkCreate([
 		{
 			UserId: 4,
 			ServiceId: 2,
+			SlotId: 1,
 			bookingDate: "2023-05-05",
 			fulfilled: false,
 			totalPaid: 300,
@@ -92,6 +121,7 @@ sequelize.sync({ force: false }).then(async () => {
 		{
 			UserId: 4,
 			ServiceId: 2,
+			SlotId: 2,
 			bookingDate: "2023-05-05",
 			fulfilled: false,
 			totalPaid: 300,
@@ -99,6 +129,7 @@ sequelize.sync({ force: false }).then(async () => {
 		{
 			UserId: 1,
 			ServiceId: 2,
+			SlotId: 3,
 			bookingDate: "2023-05-05",
 			fulfilled: false,
 			totalPaid: 300,
@@ -106,6 +137,7 @@ sequelize.sync({ force: false }).then(async () => {
 		{
 			UserId: 1,
 			ServiceId: 2,
+			SlotId: 4,
 			bookingDate: "2023-05-05",
 			fulfilled: false,
 			totalPaid: 300,
@@ -113,6 +145,7 @@ sequelize.sync({ force: false }).then(async () => {
 		{
 			UserId: 5,
 			ServiceId: 2,
+			SlotId: 5,
 			bookingDate: "2023-05-05",
 			fulfilled: false,
 			totalPaid: 300,

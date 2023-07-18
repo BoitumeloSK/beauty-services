@@ -36,3 +36,38 @@
     transform: rotate(360deg);
   }
 }
+
+img{
+  width:100px;
+  margin: 10px;
+}
+.file{
+  opacity: 0;
+  width: 200px;
+  height: 50px;
+  position: absolute;
+  z-index:2
+}
+.file-label label{
+  display: block;
+  position: relative;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:"black";
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform .2s ease-out;
+}
+.file-label input:hover + label,
+.file-label input:focus + label {
+  transform: scale(1.02);
+}
+.file-label input:focus + label {
+  outline: 1px solid #000;
+  outline: -webkit-focus-ring-color auto 2px;
+}
