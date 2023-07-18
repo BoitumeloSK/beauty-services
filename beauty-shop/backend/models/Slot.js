@@ -13,33 +13,30 @@ const Slot = sequelize.define(
 			allowNull: false,
 		},
 		startTime: {
-			type: DataTypes.TIME,
+			type: DataTypes.DATE,
 		},
 		endTime: {
-			type: DataTypes.TIME,
-			// set() {
-			// 	const startTime = this.getDataValue("startTime");
-			// 	let updated = startTime.split(":");
-			// 	updated[0] = (Number(updated[0]) + 1).toString();
-			// 	updated = updated.join(":");
-			// 	this.setDataValue("endTime", updated);
-			// },
+			type: DataTypes.DATE,
 		},
 	},
 	{
 		freezeTableName: true,
 		hooks: {
-			beforeCreate: (instance) => {
+			beforeCreate: async (instance) => {
 				const startTime = instance.startTime;
-				const endTime = addHour(startTime);
+				const endTime = await addHour(startTime);
 				instance.endTime = endTime;
 			},
 		},
 	}
 );
-function addHour(startTime) {
-	const [hours, minutes] = startTime.split(":");
-	const newHours = (Number(hours) + 1).toString().padStart(2, "0");
-	return `${newHours}:${minutes}`;
+async function addHour(startTime) {
+	// const [date, time] = startTime.split(" ");
+	// const [hours, minutes, seconds] = time.split(":");
+	// const newHours = (Number(hours) + 1).toString().padStart(2, "0");
+	// return `${date} ${newHours}:${minutes}:${seconds}`;
+	const newStartTime = new Date(startTime);
+	newStartTime.setHours(newStartTime.getHours() + 1);
+	return newStartTime;
 }
 module.exports = Slot;

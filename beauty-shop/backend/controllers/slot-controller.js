@@ -1,4 +1,5 @@
 const { Slot, Service } = require("../models");
+const moment = require("moment");
 const JWT = require("jsonwebtoken");
 require("dotenv").config();
 function getAllServiceSlots(req, res) {
@@ -20,22 +21,33 @@ function getAllServiceSlots(req, res) {
 
 function createSlot(req, res) {
 	const { ServiceId, startTime } = req.body;
-	Slot.findAll({ where: { ServiceId: ServiceId, startTime: startTime } }).then(
-		(data) => {
-			if (data.length > 0) {
-				return res
-					.status(400)
-					.json({ success: false, error: "Service slot already created" });
-			}
-			Slot.create({ ServiceId: ServiceId, startTime: startTime })
-				.then((data) => {
-					return res.status(200).json({ success: true, data: data });
-				})
-				.catch((error) => {
-					return res.status(400).json({ success: false, error: error });
-				});
+	Slot.findAll({
+		where: {
+			ServiceId: ServiceId,
+			startTime: moment(startTime, "YYYY-MM-DD HH:mm:ss").format(
+				"YYYY-MM-DD HH:mm:ss"
+			),
+		},
+	}).then((data) => {
+		if (data.length > 0) {
+			return res
+				.status(400)
+				.json({ success: false, error: "Service slot already created" });
 		}
-	);
+
+		Slot.create({
+			ServiceId: ServiceId,
+			startTime: moment(startTime, "YYYY-MM-DD HH:mm:ss").format(
+				"YYYY-MM-DD HH:mm:ss"
+			),
+		})
+			.then((data) => {
+				return res.status(200).json({ success: true, data: data });
+			})
+			.catch((error) => {
+				return res.status(400).json({ success: false, error: error });
+			});
+	});
 }
 
 function editSlot(req, res) {
