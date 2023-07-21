@@ -98,4 +98,34 @@ function deleteSlot(req, res) {
 		});
 	});
 }
-module.exports = { getAllServiceSlots, createSlot, editSlot, deleteSlot };
+
+function deleteSlotsByService(req, res) {
+	const { id } = req.params;
+	const { userId } = JWT.verify(req.cookies.access_token, process.env.SECRET);
+	Slot.findAll({ where: { ServiceId: id } }).then((data) => {
+		if (data.length == 0) {
+			return res
+				.status(400)
+				.json({ success: false, error: "Time slots not found" });
+		}
+		Service.findAll({ where: { id: data[0].ServiceId } }).then((data) => {
+			if (userId != data[0].UserId) {
+				return res.status(400).json({ success: false, error: "Access denied" });
+			}
+			Slot.destroy({ where: { ServiceId: id } })
+				.then((data) => {
+					return res.status(200).json({ success: true, data: data });
+				})
+				.catch((error) => {
+					return res.status(400).json({ success: false, error: error });
+				});
+		});
+	});
+}
+module.exports = {
+	getAllServiceSlots,
+	createSlot,
+	editSlot,
+	deleteSlot,
+	deleteSlotsByService,
+};

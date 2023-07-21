@@ -31,10 +31,6 @@ const Slot = sequelize.define(
 	}
 );
 async function addHour(startTime) {
-	// const [date, time] = startTime.split(" ");
-	// const [hours, minutes, seconds] = time.split(":");
-	// const newHours = (Number(hours) + 1).toString().padStart(2, "0");
-	// return `${date} ${newHours}:${minutes}:${seconds}`;
 	const newStartTime = new Date(startTime);
 	newStartTime.setHours(newStartTime.getHours() + 1);
 	return newStartTime;

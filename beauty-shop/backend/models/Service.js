@@ -19,7 +19,7 @@ const Service = sequelize.define(
 			type: DataTypes.STRING,
 		},
 		images: {
-			type: DataTypes.STRING,
+			type: DataTypes.TEXT,
 		},
 		price: {
 			type: DataTypes.DOUBLE(10, 2),
