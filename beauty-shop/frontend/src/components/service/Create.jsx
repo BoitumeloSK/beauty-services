@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function CreateService() {
 	const user = JSON.parse(localStorage.getItem("beauty-shop-user"));
@@ -7,6 +7,10 @@ export default function CreateService() {
 	const [price, setPrice] = useState("");
 	const [urls, setUrls] = useState([]);
 	const [showBtn, setShowBtn] = useState(false);
+	const [startTime, setStartTime] = useState("");
+	const [slotList, setSlotsList] = useState([]);
+	const [duplicateMsg, setDuplicateMsg] = useState(false);
+	const [visible, setVisibility] = useState(false);
 
 	function handleChange(e) {
 		if (e.target.name === "title") {
@@ -36,6 +40,12 @@ export default function CreateService() {
 		if (e.target.name === "price") {
 			setPrice(e.target.value);
 		}
+		if (e.target.name === "dateTime") {
+			setStartTime(e.target.value);
+		}
+		if (e.target.name === "visibility") {
+			setVisibility(e.target.checked);
+		}
 	}
 	function handleClick(e) {
 		setShowBtn(true);
@@ -43,7 +53,16 @@ export default function CreateService() {
 	function check() {
 		console.log(urls);
 	}
-	function addService(description, price) {
+	function addSlot() {
+		let found = slotList.filter((x) => x === startTime);
+		if (found.length > 0) {
+			setDuplicateMsg(true);
+		} else {
+			setDuplicateMsg(false);
+			setSlotsList([...slotList, startTime]);
+		}
+	}
+	function addService(description, price, title, visible) {
 		const createMethod = {
 			method: "POST",
 			headers: {
@@ -53,6 +72,8 @@ export default function CreateService() {
 				UserId: user.id,
 				description,
 				price,
+				title,
+				visible,
 				images: urls.join(),
 			}),
 		};
@@ -60,7 +81,27 @@ export default function CreateService() {
 			.then((response) => response.json())
 			.then((result) => {
 				if (result.success) {
-					window.location.replace("/myservices");
+					slotList.forEach((x) => {
+						const addMethod = {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({
+								ServiceId: result.data.id,
+								startTime: x,
+							}),
+						};
+						fetch("api/slots", addMethod)
+							.then((response) => response.json())
+							.then((result) => {
+								if (result.success) {
+									window.location.replace("/myservices");
+								} else {
+									console.log(result.error);
+								}
+							});
+					});
 				} else {
 					console.log(result.error);
 				}
@@ -71,7 +112,7 @@ export default function CreateService() {
 		<>
 			<div>
 				{urls.map((x, i) => {
-					return <img key={i} src={x} />;
+					return <img key={i} src={x} alt="" />;
 				})}
 			</div>
 			<br></br>
@@ -94,11 +135,30 @@ export default function CreateService() {
 			<br></br>
 			<label htmlFor="price">Price: </label>
 			<input name="price" type="number" onChange={(e) => handleChange(e)} />
-			<button onClick={() => check()}>Post</button>
+			{/* <button onClick={() => check()}>Post</button> */}
 			<br></br>
+
+			{slotList.map((x, i) => {
+				return <p key={i}>{x.split("T").join(" ")}</p>;
+			})}
+			{duplicateMsg ? <>Slot already added</> : ""}
+			<div>
+				<label htmlFor="dateTime">Date:</label>
+				<input
+					name="dateTime"
+					type="datetime-local"
+					onChange={(e) => handleChange(e)}
+				/>
+				<button onClick={() => addSlot()}>Add Slot</button>
+			</div>
+			<br></br>
+			<label htmlFor="visibility">Show?</label>
+			<input type="checkbox" onChange={(e) => handleChange(e)} />
 			{showBtn ? (
 				<>
-					<button onClick={() => addService(description, price)}>
+					<button
+						onClick={() => addService(description, price, title, visible)}
+					>
 						Post Service
 					</button>
 				</>
@@ -113,6 +173,7 @@ export default function CreateService() {
 					</button>
 				</>
 			)}
+			<button onClick={() => check()}>Check</button>
 		</>
 	);
 }

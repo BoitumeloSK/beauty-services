@@ -5,6 +5,7 @@ export default function ViewService() {
 	const { id } = useParams();
 	const [service, setService] = useState();
 	const [isLoading, setIsLoading] = useState(true);
+	const [slots, setSlots] = useState([]);
 	useEffect(() => {
 		const getService = async () => {
 			try {
@@ -19,6 +20,11 @@ export default function ViewService() {
 					.then((result) => {
 						setService(result.data[0]);
 						setIsLoading(false);
+						fetch(`/api/slots/${id}`, getMethod)
+							.then((response) => response.json())
+							.then((result) => {
+								setSlots(result.data);
+							});
 					});
 			} catch (error) {
 				console.log(error);
@@ -37,10 +43,17 @@ export default function ViewService() {
 		fetch(`/api/services/${id}`, deleteMethod)
 			.then((response) => response.json())
 			.then((result) => {
-				window.location.replace("/myservices");
+				fetch(`api/slots/service/${id}`)
+					.then((response) => response.json())
+					.then((result) => {
+						if (result.success) {
+							window.location.replace("/myservices");
+						} else {
+							console.log(result.error);
+						}
+					});
 			});
 	}
-
 	if (isLoading) {
 		return <div>Loading...</div>;
 	}
@@ -59,6 +72,14 @@ export default function ViewService() {
 			<h2>{service.title}</h2>
 			<p>{service.description}</p>
 			<p>R {service.price}</p>
+			{slots.map((x, i) => {
+				//Not too sure about this so query
+				let regex = /\d{4}-\d{2}-\d{2}/;
+				let reg2 = /\d{2}:\d{2}/;
+				let date = x.startTime.match(regex);
+				let time = x.startTime.match(reg2);
+				return <button key={i}>{`${date} ${time}`}</button>;
+			})}
 			{user.id === service.UserId ? (
 				<>
 					<button onClick={() => deleteService()}>Delete Service</button>
