@@ -1,4 +1,4 @@
-const { Slot, Service } = require("../models");
+const { Slot, Service, Booking } = require("../models");
 const moment = require("moment");
 const JWT = require("jsonwebtoken");
 require("dotenv").config();
@@ -47,6 +47,25 @@ function createSlot(req, res) {
 			.catch((error) => {
 				return res.status(400).json({ success: false, error: error });
 			});
+	});
+}
+
+function unbookedSlots(req, res) {
+	const { id } = req.params;
+	Booking.findAll({ where: { ServiceId: id } }).then((data) => {
+		Slot.findAll({ where: { ServiceId: id } }).then((result) => {
+			if (data.length == 0) {
+				return res.status(200).json({ success: true, data: result });
+			} else {
+				let ids = [];
+				data.forEach((x) => {
+					ids.push(x.SlotId);
+				});
+				let bookingSlotIds = new Set(ids);
+				let unbooked = result.filter((x) => !bookingSlotIds.has(x.id));
+				return res.status(200).json({ success: true, data: unbooked });
+			}
+		});
 	});
 }
 
@@ -124,6 +143,7 @@ function deleteSlotsByService(req, res) {
 }
 module.exports = {
 	getAllServiceSlots,
+	unbookedSlots,
 	createSlot,
 	editSlot,
 	deleteSlot,

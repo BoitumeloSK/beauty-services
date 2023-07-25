@@ -43,6 +43,10 @@ function GrantedAccess() {
 			) : (
 				""
 			)}
+			<Link to="/services">Services</Link>
+			<br></br>
+			<Link to="/mybookings">My Bookings</Link>
+			<br></br>
 			<Link to="/profile">View Profile</Link>
 			<br></br>
 			<Link to="/changePassword">Change Password</Link>

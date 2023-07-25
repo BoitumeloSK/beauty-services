@@ -30,11 +30,9 @@ const Booking = sequelize.define(
 			},
 			allowNull: false,
 		},
-		bookingDate: {
-			type: DataTypes.DATE,
-		},
 		totalPaid: {
 			type: DataTypes.DOUBLE(10, 2),
+			defaultValue: 0.0,
 		},
 		fulfilled: {
 			type: DataTypes.BOOLEAN,
@@ -43,6 +41,7 @@ const Booking = sequelize.define(
 	},
 	{
 		freezeTableName: true,
+		timestamps: true,
 	}
 );
 module.exports = Booking;

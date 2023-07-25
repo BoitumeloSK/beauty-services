@@ -98,7 +98,7 @@ export default function EditService() {
 				title,
 				description,
 				price,
-				visibility,
+				visible: visibility,
 			}),
 		};
 		fetch(`/api/services/${service.id}`, editMethod)
@@ -239,7 +239,7 @@ export default function EditService() {
 				type="checkbox"
 				name="visibility"
 				onChange={(e) => handleChange(e)}
-				defaultValue={service.visible}
+				defaultChecked={service.visible}
 			/>
 			<br></br>
 			<button

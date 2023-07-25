@@ -12,6 +12,8 @@ import CreateService from "./components/service/Create";
 import ProviderServices from "./components/service/ProviderServices";
 import ViewService from "./components/service/View";
 import EditService from "./components/service/Edit";
+import VisibleServices from "./components/service/VisibleServices";
+import MyBookings from "./components/booking/MyBookings";
 function App() {
 	return (
 		<BrowserRouter>
@@ -28,6 +30,8 @@ function App() {
 				<Route path="/myservices" element={<ProviderServices />} />
 				<Route path="/viewservice/:id" element={<ViewService />} />
 				<Route path="editservice/:id" element={<EditService />} />
+				<Route path="/services" element={<VisibleServices />} />
+				<Route path="/mybookings" element={<MyBookings />} />
 			</Routes>
 		</BrowserRouter>
 	);
