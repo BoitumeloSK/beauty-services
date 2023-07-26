@@ -48,7 +48,7 @@ function getProviderBookings(req, res) {
 	const { userId } = JWT.verify(req.cookies.access_token, process.env.SECRET);
 	Booking.findAll({ include: [{ model: Service }] })
 		.then((data) => {
-			const providerBookings = data.filter((x) => x.Service.Userid == userId);
+			const providerBookings = data.filter((x) => x.Service.UserId == userId);
 			if (providerBookings.length == 0) {
 				return res.status(400).json({
 					success: false,

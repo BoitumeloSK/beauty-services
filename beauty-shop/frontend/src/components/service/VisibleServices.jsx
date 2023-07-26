@@ -5,23 +5,23 @@ export default function VisibleServices() {
 	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
 		const getServices = async () => {
-			// try {
-			const getMethod = {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-				},
-			};
-			fetch(`api/services/visible`, getMethod)
-				.then((response) => response.json())
-				.then((result) => {
-					setServices(result.data);
-					setIsLoading(false);
-				});
-			// } catch (error) {
-			// 	console.log(error);
-			// 	setIsLoading(false);
-			// }
+			try {
+				const getMethod = {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				};
+				fetch(`api/services/visible`, getMethod)
+					.then((response) => response.json())
+					.then((result) => {
+						setServices(result.data);
+						setIsLoading(false);
+					});
+			} catch (error) {
+				console.log(error);
+				setIsLoading(false);
+			}
 		};
 		getServices();
 	});

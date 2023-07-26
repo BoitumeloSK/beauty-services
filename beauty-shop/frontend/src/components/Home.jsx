@@ -38,14 +38,16 @@ function GrantedAccess() {
 			{storageKey.role === "provider" ? (
 				<>
 					<Link to="/postService">Post Service</Link>
+					<br></br>
 					<Link to="/myservices">My Services</Link>
+					<br></br>
+					<Link to="/providerbookings">Bookings</Link>
+					<br></br>
 				</>
 			) : (
-				""
+				<Link to="/mybookings">My Bookings</Link>
 			)}
 			<Link to="/services">Services</Link>
-			<br></br>
-			<Link to="/mybookings">My Bookings</Link>
 			<br></br>
 			<Link to="/profile">View Profile</Link>
 			<br></br>

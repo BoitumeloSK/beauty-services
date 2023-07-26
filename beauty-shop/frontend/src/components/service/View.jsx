@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import GetSlots from "../booking/GetSlots";
 export default function ViewService() {
 	const user = JSON.parse(localStorage.getItem("beauty-shop-user"));
 	const { id } = useParams();
 	const [service, setService] = useState();
 	const [isLoading, setIsLoading] = useState(true);
-	const [slots, setSlots] = useState([]);
-	const [slotId, setSlotId] = useState();
 	const [ownerId, setOwnerId] = useState();
 	useEffect(() => {
 		const getService = async () => {
@@ -23,13 +22,6 @@ export default function ViewService() {
 						setService(result.data[0]);
 						setOwnerId(result.data[0].UserId);
 						setIsLoading(false);
-						fetch(`/api/slots/unbookedSlots/${id}`, getMethod)
-							.then((response) => response.json())
-							.then((result) => {
-								if (result.success) {
-									setSlots(result.data);
-								}
-							});
 					});
 			} catch (error) {
 				console.log(error);
@@ -59,7 +51,7 @@ export default function ViewService() {
 					});
 			});
 	}
-	function createBooking() {
+	function createBooking(slotId) {
 		const createMethod = {
 			method: "POST",
 			headers: {
@@ -76,9 +68,6 @@ export default function ViewService() {
 				console.log(result);
 			})
 			.catch((error) => console.log(error));
-	}
-	function showBookingBtn(id) {
-		setSlotId(id);
 	}
 
 	if (isLoading) {
@@ -99,33 +88,13 @@ export default function ViewService() {
 			<h2>{service.title}</h2>
 			<p>{service.description}</p>
 			<p>R {service.price}</p>
-			{slots.length > 0 ? (
-				<>
-					{slots.map((x, i) => {
-						//Not too sure about this so query
-						let regex = /\d{4}-\d{2}-\d{2}/;
-						let reg2 = /\d{2}:\d{2}/;
-						let date = x.startTime.match(regex);
-						let time = x.startTime.match(reg2);
-						return (
-							<div key={i}>
-								<button
-									onClick={() => showBookingBtn(x.id)}
-								>{`${date} ${time}`}</button>
-								{slotId === x.id && ownerId !== user.id ? (
-									<button onClick={() => createBooking()}>Book Now</button>
-								) : (
-									""
-								)}
-								<br></br>
-							</div>
-						);
-					})}
-				</>
-			) : (
-				<>No available slots</>
-			)}
-
+			<GetSlots
+				user={user}
+				serviceId={id}
+				preferredFunction={createBooking}
+				ownerId={ownerId}
+				btnTxt={"Book Now"}
+			/>
 			{user.id === service.UserId ? (
 				<>
 					<button onClick={() => deleteService()}>Delete Service</button>
