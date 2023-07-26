@@ -14,7 +14,7 @@ function getAllBookings(req, res) {
 
 function getBookingById(req, res) {
 	const { id } = req.params;
-	Booking.findAll({ where: { id } })
+	Booking.findAll({ where: { id }, include: [{ model: Service }] })
 		.then((data) => {
 			if (data.length == 0) {
 				return res
@@ -77,64 +77,95 @@ function getUnfulfilledBookings(req, res) {
 function createBooking(req, res) {
 	const { ServiceId, SlotId } = req.body;
 	const { userId } = JWT.verify(req.cookies.access_token, process.env.SECRET);
-	Service.findAll({ where: { id: ServiceId } }).then((data) => {
-		if (data.length == 0) {
+	Service.findAll({ where: { id: ServiceId } }).then((result) => {
+		if (result.length == 0) {
 			return res
 				.status(400)
 				.json({ success: false, error: "Service does not exist" });
 		}
-		if (userId == data[0].UserId) {
+		if (userId == result[0].UserId) {
 			return res
 				.status(400)
 				.json({ success: false, error: "Cannot book own service" });
 		}
-		Slot.findAll({ where: { ServiceId: data[0].id } }).then((data) => {
-			if (data.length == 0) {
+		Booking.findAll({ where: { ServiceId } }).then((data) => {
+			const incompleteBookings = data.filter((x) => x.fulfilled == false);
+			if (incompleteBookings.length >= 5) {
 				return res.status(400).json({
 					success: false,
-					error: "Slot does not exist or does not belong to service",
+					error: "Service has a max of 5 unfulfilled bookings",
 				});
 			}
-
-			Booking.findAll({ where: { ServiceId } }).then((data) => {
+			Booking.findAll({ where: { UserId: userId } }).then((data) => {
 				const incompleteBookings = data.filter((x) => x.fulfilled == false);
-				if (incompleteBookings.length >= 5) {
+				if (incompleteBookings.length >= 2) {
 					return res.status(400).json({
 						success: false,
-						error: "Service has a max of 5 unfulfilled bookings",
+						error: "User has a max of 2 unfulfilled bookings",
 					});
 				}
-
-				Booking.findAll({ where: { UserId: userId } }).then((data) => {
-					const incompleteBookings = data.filter((x) => x.fulfilled == false);
-					if (incompleteBookings.length >= 2) {
+				Booking.findAll({ where: { SlotId } }).then((data) => {
+					if (data.length > 0) {
 						return res.status(400).json({
 							success: false,
-							error: "User has a max of 2 unfulfilled bookings",
+							error: "Slot already booked",
 						});
 					}
-					Booking.create({
-						SlotId,
-						ServiceId,
-						UserId: userId,
-					})
-						.then((data) => {
-							return res.status(200).json({ success: true, data: data });
-						})
-						.catch((error) => {
-							return res.status(400).json({ success: false, error: error });
-						});
+					Slot.update({ booked: true }, { where: { id: SlotId } }).then(
+						(data) => {
+							Booking.create({
+								SlotId,
+								ServiceId,
+								UserId: userId,
+							})
+								.then((data) => {
+									return res.status(200).json({ success: true, data: data });
+								})
+								.catch((error) => {
+									return res.status(400).json({ success: false, error: error });
+								});
+						}
+					);
 				});
 			});
 		});
 	});
 }
 
-function updateBooking(req, res) {
+function rescheduleBooking(req, res) {
+	const { id } = req.params;
+	const { SlotId } = req.body;
+	const { userId } = JWT.verify(req.cookies.access_token, process.env.SECRET);
+	Booking.findAll({ where: { id } }).then((data) => {
+		if (data.length == 0) {
+			return res
+				.status(400)
+				.json({ success: false, error: "Booking does not exist" });
+		}
+		if (userId != data[0].UserId) {
+			return res.status(400).json({
+				success: false,
+				error: "Not authorised to make change to booking",
+			});
+		}
+		Slot.update({ booked: false }, { where: { id: data[0].SlotId } }).then(
+			(data) => {
+				Slot.update({ booked: true }, { where: { id: SlotId } })
+					.then((data) => {
+						return res.status(200).json({ success: false, data: data });
+					})
+					.catch((error) => {
+						return res.status(400).json({ success: false, error: error });
+					});
+			}
+		);
+	});
+}
+
+function completeBooking(req, res) {
 	const { id } = req.params;
 	const { fulfilled } = req.body;
 	const { userId } = JWT.verify(req.cookies.access_token, process.env.SECRET);
-	let canUpdate = false;
 
 	Booking.findAll({ where: { id } }).then((data) => {
 		if (data.length == 0) {
@@ -142,17 +173,8 @@ function updateBooking(req, res) {
 				.status(400)
 				.json({ success: false, error: "Booking does not exist" });
 		}
-
-		if (userId == data[0].UserId) {
-			canUpdate = true;
-		}
-
 		Service.findAll({ where: { id: data[0].ServiceId } }).then((data) => {
-			if (userId == data[0].UserId) {
-				canUpdate = true;
-			}
-
-			if (!canUpdate) {
+			if (userId != data[0].UserId) {
 				return res.status(400).json({
 					success: false,
 					error: "Not authorised to make change to booking",
@@ -171,7 +193,7 @@ function updateBooking(req, res) {
 }
 
 function deleteBooking(req, res) {
-	const { userId } = JWT.verify(req.header("token"), process.env.SECRET);
+	const { userId } = JWT.verify(req.cookies.access_token, process.env.SECRET);
 	const { id } = req.params;
 	Booking.findAll({ where: { id } }).then((data) => {
 		if (data.length == 0) {
@@ -184,13 +206,17 @@ function deleteBooking(req, res) {
 				.status(400)
 				.json({ success: false, error: "Not authorised to delete booking" });
 		}
-		Booking.destroy({ where: { id } })
-			.then((data) => {
-				return res.status(200).json({ success: false, data: data });
-			})
-			.catch((error) => {
-				return res.status(400).json({ success: false, error: error });
-			});
+		Slot.update({ booked: false }, { where: { id: data[0].SlotId } }).then(
+			(data) => {
+				Booking.destroy({ where: { id } })
+					.then((data) => {
+						return res.status(200).json({ success: false, data: data });
+					})
+					.catch((error) => {
+						return res.status(400).json({ success: false, error: error });
+					});
+			}
+		);
 	});
 }
 
@@ -201,6 +227,7 @@ module.exports = {
 	getUnfulfilledBookings,
 	getUserBookings,
 	createBooking,
-	updateBooking,
+	completeBooking,
+	rescheduleBooking,
 	deleteBooking,
 };

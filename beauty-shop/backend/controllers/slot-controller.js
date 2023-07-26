@@ -53,7 +53,7 @@ function createSlot(req, res) {
 function unbookedSlots(req, res) {
 	const { id } = req.params;
 	Booking.findAll({ where: { ServiceId: id } }).then((data) => {
-		Slot.findAll({ where: { ServiceId: id } }).then((result) => {
+		Slot.findAll({ where: { ServiceId: id, booked: false } }).then((result) => {
 			if (data.length == 0) {
 				return res.status(200).json({ success: true, data: result });
 			} else {

@@ -18,6 +18,10 @@ const Slot = sequelize.define(
 		endTime: {
 			type: DataTypes.DATE,
 		},
+		booked: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,
+		},
 	},
 	{
 		freezeTableName: true,
