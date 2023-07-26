@@ -4,19 +4,21 @@ const {
 	getFulfilledBookings,
 	getUnfulfilledBookings,
 	getUserBookings,
+	getProviderBookings,
 	createBooking,
 	completeBooking,
 	rescheduleBooking,
 	deleteBooking,
 } = require("../controllers/booking-controller");
-const { auth } = require("../middleware/auth");
+const { auth, provider } = require("../middleware/auth");
 const router = require("express").Router();
 
 router.get("/", getAllBookings);
 router.get("/:id", getBookingById);
 router.get("/completed/list", getFulfilledBookings);
 router.get("/incomplete/list", getUnfulfilledBookings);
-router.get("/mybookings/list", getUserBookings);
+router.get("/mybookings/list", auth, getUserBookings);
+router.get("/provider/list", provider, getProviderBookings);
 router.post("/", auth, createBooking);
 router.put("/complete/:id", auth, completeBooking);
 router.put("/reschedule/:id", auth, rescheduleBooking);
