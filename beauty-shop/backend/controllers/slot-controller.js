@@ -37,9 +37,7 @@ function createSlot(req, res) {
 
 		Slot.create({
 			ServiceId: ServiceId,
-			startTime: moment(startTime, "YYYY-MM-DD HH:mm:ss").format(
-				"YYYY-MM-DD HH:mm:ss"
-			),
+			startTime,
 		})
 			.then((data) => {
 				return res.status(200).json({ success: true, data: data });

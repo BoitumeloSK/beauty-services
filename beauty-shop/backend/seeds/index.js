@@ -85,31 +85,26 @@ sequelize.sync({ force: false }).then(async () => {
 		{
 			ServiceId: 2,
 			startTime: "2023-10-01 13:00:00",
-			endTime: "2023-10-01 14:00",
 			booked: true,
 		},
 		{
 			ServiceId: 2,
 			startTime: "2023-10-01 15:00",
-			endTime: "2023-10-01 16:00",
 			booked: true,
 		},
 		{
 			ServiceId: 1,
 			startTime: "2023-10-01 10:00",
-			endTime: "2023-10-01 11:00",
 			booked: false,
 		},
 		{
 			ServiceId: 1,
 			startTime: "2023-10-01 08:00",
-			endTime: "2023-10-01 09:00",
 			booked: false,
 		},
 		{
 			ServiceId: 2,
 			startTime: "2023-10-01 17:00",
-			endTime: "2023-10-01 18:00",
 			booked: true,
 		},
 	]);

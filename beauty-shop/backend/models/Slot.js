@@ -12,15 +12,12 @@ const Slot = sequelize.define(
 			},
 			allowNull: false,
 		},
-		startTime: {
-			type: DataTypes.DATE,
-		},
-		endTime: {
-			type: DataTypes.DATE,
-		},
 		booked: {
 			type: DataTypes.BOOLEAN,
 			defaultValue: false,
+		},
+		startTime: {
+			type: DataTypes.DATE,
 		},
 	},
 	{
@@ -28,15 +25,15 @@ const Slot = sequelize.define(
 		hooks: {
 			beforeCreate: async (instance) => {
 				const startTime = instance.startTime;
-				const endTime = await addHour(startTime);
-				instance.endTime = endTime;
+				const newTime = await add2hours(startTime);
+				instance.startTime = newTime;
 			},
 		},
 	}
 );
-async function addHour(startTime) {
+async function add2hours(startTime) {
 	const newStartTime = new Date(startTime);
-	newStartTime.setHours(newStartTime.getHours() + 1);
+	newStartTime.setHours(newStartTime.getHours() + 2);
 	return newStartTime;
 }
 module.exports = Slot;
