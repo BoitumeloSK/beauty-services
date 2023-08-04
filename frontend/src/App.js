@@ -1,3 +1,8 @@
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+
 import "./App.css";
 import Home from "./components/Home";
 import SignUp from "./components/user/SignUp";
@@ -16,6 +21,7 @@ import VisibleServices from "./components/service/VisibleServices";
 import MyBookings from "./components/booking/MyBookings";
 import ViewBooking from "./components/booking/View";
 import ProviderBookings from "./components/booking/ProviderBookings";
+//import Check from "./components/Check";
 function App() {
 	return (
 		<BrowserRouter>
@@ -36,6 +42,8 @@ function App() {
 				<Route path="/mybookings" element={<MyBookings />} />
 				<Route path="/viewbooking/:id" element={<ViewBooking />} />
 				<Route path="/providerbookings" element={<ProviderBookings />} />
+
+				{/* <Route path="/check" element={<Check />} /> */}
 			</Routes>
 		</BrowserRouter>
 	);

@@ -75,3 +75,12 @@ img{
 table, th, td {
   border: 1px solid black;
 }
+
+
+/* Changed MUI Code in Sign Up */
+.css-dpjnhs-MuiInputBase-root-MuiOutlinedInput-root{width: 194% !important;}
+/* main button and lock avatar*/
+.css-1vhaqj4-MuiButtonBase-root-MuiButton-root, .css-1999axt-MuiAvatar-root{
+    background-color: #ef0319 !important;
+}
+
