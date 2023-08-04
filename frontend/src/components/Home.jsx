@@ -1,11 +1,29 @@
-import { Fragment } from "react";
 import { Link } from "react-router-dom";
+
+//MUI Related
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+
 function NoAccess() {
 	return (
 		<>
-			<Link to="/signup">Sign Up</Link>
-			<br></br>
-			<Link to="login">Login</Link>
+			<Link
+				variant="button"
+				href="/signup"
+				sx={{ my: 1, mx: 1.5 }}
+				className="link"
+			>
+				SIGN UP
+			</Link>
+			<Link
+				variant="button"
+				href="/login"
+				sx={{ my: 1, mx: 1.5 }}
+				className="link"
+			>
+				LOGIN
+			</Link>
 		</>
 	);
 }
@@ -31,28 +49,81 @@ function GrantedAccess() {
 	return (
 		<>
 			{storageKey.role === "admin" ? (
-				<Link to="/applications">Applications</Link>
+				<Link
+					variant="button"
+					href="/applications"
+					sx={{ my: 1, mx: 1.5 }}
+					className="link"
+				>
+					APPLICATIONS
+				</Link>
 			) : (
 				""
 			)}
 			{storageKey.role === "provider" ? (
 				<>
-					<Link to="/postService">Post Service</Link>
-					<br></br>
-					<Link to="/myservices">My Services</Link>
-					<br></br>
-					<Link to="/providerbookings">Bookings</Link>
-					<br></br>
+					<Link
+						variant="button"
+						href="/postService"
+						sx={{ my: 1, mx: 1.5 }}
+						className="link"
+					>
+						POST SERVICE
+					</Link>
+					<Link
+						variant="button"
+						href="/myservices"
+						sx={{ my: 1, mx: 1.5 }}
+						className="link"
+					>
+						MY SERVICES
+					</Link>
+					<Link
+						variant="button"
+						href="/providerbookings"
+						sx={{ my: 1, mx: 1.5 }}
+						className="link"
+					>
+						BOOKINGS
+					</Link>
 				</>
 			) : (
-				<Link to="/mybookings">My Bookings</Link>
+				<Link
+					variant="button"
+					href="/mybookings"
+					sx={{ my: 1, mx: 1.5 }}
+					className="link"
+				>
+					MY BOOKINGS
+				</Link>
 			)}
-			<Link to="/services">Services</Link>
-			<br></br>
-			<Link to="/profile">View Profile</Link>
-			<br></br>
-			<Link to="/changePassword">Change Password</Link>
-			<button onClick={() => logout()}>Logout</button>
+			<>
+				<Link
+					variant="button"
+					href="/services"
+					sx={{ my: 1, mx: 1.5 }}
+					className="link"
+				>
+					SERVICES
+				</Link>
+				<Link
+					variant="button"
+					href="/profile"
+					sx={{ my: 1, mx: 1.5 }}
+					className="link"
+				>
+					VIEW PROFILE
+				</Link>
+				<Link
+					variant="button"
+					href="/providerbookings"
+					sx={{ my: 1, mx: 1.5 }}
+					className="link"
+				>
+					BOOKINGS
+				</Link>
+			</>
+			<button onClick={() => logout()}>LOGOUT</button>
 		</>
 	);
 }
@@ -61,9 +132,20 @@ export default function Home() {
 	const storageKey = localStorage.getItem("beauty-shop-user");
 
 	return (
-		<Fragment>
-			<h1>This it the home page</h1>
-			{storageKey === null ? <NoAccess /> : <GrantedAccess />}
-		</Fragment>
+		<>
+			<AppBar
+				position="static"
+				color="default"
+				elevation={0}
+				sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
+			>
+				<Toolbar sx={{ flexWrap: "wrap" }}>
+					<Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
+						ICONIC FLAIR
+					</Typography>
+					<nav>{storageKey === null ? <NoAccess /> : <GrantedAccess />}</nav>
+				</Toolbar>
+			</AppBar>
+		</>
 	);
 }

@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 //MUI Related
 import * as React from "react";
@@ -137,6 +137,7 @@ export default function Login() {
 							control={<Checkbox value="remember" color="primary" />}
 							label="Remember me"
 						/> */}
+						{loginDenied ? <p>Invalid Credentials</p> : ""}
 						<Button
 							type="submit"
 							fullWidth
@@ -148,7 +149,7 @@ export default function Login() {
 						</Button>
 						<Grid container>
 							<Grid item xs>
-								<Link href="#" variant="body2">
+								<Link href="/changePassword" variant="body2">
 									Forgot password?
 								</Link>
 							</Grid>
