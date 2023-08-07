@@ -3,9 +3,9 @@ const JWT = require("jsonwebtoken");
 require("dotenv").config();
 
 function getAllBookings(req, res) {
-	Booking.findAll()
+	Booking.findAll({ include: [{ model: Service }] })
 		.then((data) => {
-			return res.status(200).json({ success: false, data: data });
+			return res.status(200).json({ success: true, data: data });
 		})
 		.catch((error) => {
 			return res.status(400).json({ success: false, error: error });
