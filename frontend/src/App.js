@@ -21,6 +21,7 @@ import VisibleServices from "./components/service/VisibleServices";
 import MyBookings from "./components/booking/MyBookings";
 import ViewBooking from "./components/booking/View";
 import ProviderBookings from "./components/booking/ProviderBookings";
+import AllBookings from "./components/booking/AllBookings";
 //import Check from "./components/Check";
 function App() {
 	return (
@@ -42,6 +43,7 @@ function App() {
 				<Route path="/mybookings" element={<MyBookings />} />
 				<Route path="/viewbooking/:id" element={<ViewBooking />} />
 				<Route path="/providerbookings" element={<ProviderBookings />} />
+				<Route path="/allbookings" element={<AllBookings />} />
 
 				{/* <Route path="/check" element={<Check />} /> */}
 			</Routes>

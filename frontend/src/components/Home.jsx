@@ -10,7 +10,7 @@ function NoAccess() {
 		<>
 			<Link
 				variant="button"
-				href="/signup"
+				to="/signup"
 				sx={{ my: 1, mx: 1.5 }}
 				className="link"
 			>
@@ -18,7 +18,7 @@ function NoAccess() {
 			</Link>
 			<Link
 				variant="button"
-				href="/login"
+				to="login"
 				sx={{ my: 1, mx: 1.5 }}
 				className="link"
 			>
@@ -48,23 +48,19 @@ function GrantedAccess() {
 	const storageKey = JSON.parse(localStorage.getItem("beauty-shop-user"));
 	return (
 		<>
-			{storageKey.role === "admin" ? (
-				<Link
-					variant="button"
-					href="/applications"
-					sx={{ my: 1, mx: 1.5 }}
-					className="link"
-				>
-					APPLICATIONS
-				</Link>
-			) : (
-				""
-			)}
+			<Link
+				variant="button"
+				to="/profile"
+				sx={{ my: 1, mx: 1.5 }}
+				className="link"
+			>
+				VIEW PROFILE
+			</Link>
 			{storageKey.role === "provider" ? (
 				<>
 					<Link
 						variant="button"
-						href="/postService"
+						to="/postService"
 						sx={{ my: 1, mx: 1.5 }}
 						className="link"
 					>
@@ -72,7 +68,7 @@ function GrantedAccess() {
 					</Link>
 					<Link
 						variant="button"
-						href="/myservices"
+						to="/myservices"
 						sx={{ my: 1, mx: 1.5 }}
 						className="link"
 					>
@@ -80,57 +76,58 @@ function GrantedAccess() {
 					</Link>
 					<Link
 						variant="button"
-						href="/providerbookings"
+						to="/providerbookings"
 						sx={{ my: 1, mx: 1.5 }}
 						className="link"
 					>
 						BOOKINGS
 					</Link>
 				</>
-			) : (
+			) : storageKey.role === "admin" ? (
+				<>
+					<Link
+						variant="button"
+						to="/applications"
+						sx={{ my: 1, mx: 1.5 }}
+						className="link"
+					>
+						APPLICATIONS
+					</Link>
+					<Link
+						variant="button"
+						to="/allbookings"
+						sx={{ my: 1, mx: 1.5 }}
+						className="link"
+					>
+						ALL BOOKINGS
+					</Link>
+				</>
+			) : storageKey.role === "customer" ? (
 				<Link
 					variant="button"
-					href="/mybookings"
+					to="/mybookings"
 					sx={{ my: 1, mx: 1.5 }}
 					className="link"
 				>
 					MY BOOKINGS
 				</Link>
+			) : (
+				""
 			)}
-			<>
-				<Link
-					variant="button"
-					href="/services"
-					sx={{ my: 1, mx: 1.5 }}
-					className="link"
-				>
-					SERVICES
-				</Link>
-				<Link
-					variant="button"
-					href="/profile"
-					sx={{ my: 1, mx: 1.5 }}
-					className="link"
-				>
-					VIEW PROFILE
-				</Link>
-				<Link
-					variant="button"
-					href="/providerbookings"
-					sx={{ my: 1, mx: 1.5 }}
-					className="link"
-				>
-					BOOKINGS
-				</Link>
-			</>
-			<button onClick={() => logout()}>LOGOUT</button>
+			<button
+				onClick={() => logout()}
+				sx={{ my: 1, mx: 1.5 }}
+				className="link2"
+				variant="button"
+			>
+				LOGOUT
+			</button>
 		</>
 	);
 }
 
 export default function Home() {
 	const storageKey = localStorage.getItem("beauty-shop-user");
-
 	return (
 		<>
 			<AppBar
