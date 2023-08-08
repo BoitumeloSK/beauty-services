@@ -23,10 +23,12 @@ import ViewBooking from "./components/booking/View";
 import ProviderBookings from "./components/booking/ProviderBookings";
 import AllBookings from "./components/booking/AllBookings";
 import CategoryServices from "./components/service/CategoryServices";
+import Navigationbar from "./components/Navigationbar";
 //import Check from "./components/Check";
 function App() {
 	return (
 		<BrowserRouter>
+			<Navigationbar />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/signup" element={<SignUp />} />
