@@ -11,6 +11,7 @@ export default function CreateService() {
 	const [slotList, setSlotsList] = useState([]);
 	const [duplicateMsg, setDuplicateMsg] = useState(false);
 	const [visible, setVisibility] = useState(false);
+	const [category, setCategory] = useState();
 
 	function handleChange(e) {
 		if (e.target.name === "title") {
@@ -46,6 +47,9 @@ export default function CreateService() {
 		if (e.target.name === "visibility") {
 			setVisibility(e.target.checked);
 		}
+		if (e.target.name === "category") {
+			setCategory(e.target.value);
+		}
 	}
 	function handleClick(e) {
 		setShowBtn(true);
@@ -62,7 +66,7 @@ export default function CreateService() {
 			setSlotsList([...slotList, startTime]);
 		}
 	}
-	function addService(description, price, title, visible) {
+	function addService(description, price, title, visible, category) {
 		const createMethod = {
 			method: "POST",
 			headers: {
@@ -74,7 +78,8 @@ export default function CreateService() {
 				price,
 				title,
 				visible,
-				images: urls.join(),
+				category,
+				images: urls.join(","),
 			}),
 		};
 		fetch("api/services", createMethod)
@@ -126,6 +131,17 @@ export default function CreateService() {
 				/>
 				<label htmlFor="images">Add Image</label>
 			</div>
+			<label htmlFor="category">Choose Category:</label>
+			<select
+				name="category"
+				id="choose-category"
+				onChange={(e) => handleChange(e)}
+			>
+				<option value="select">Select a service categotry</option>
+				<option value="skin">Skin</option>
+				<option value="hair">Hair</option>
+				<option value="body">Body</option>
+			</select>
 			<br></br>
 			<label htmlFor="title">Title: </label>
 			<input name="title" onChange={(e) => handleChange(e)} />
@@ -157,7 +173,9 @@ export default function CreateService() {
 			{showBtn ? (
 				<>
 					<button
-						onClick={() => addService(description, price, title, visible)}
+						onClick={() =>
+							addService(description, price, title, visible, category)
+						}
 					>
 						Post Service
 					</button>

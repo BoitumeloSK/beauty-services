@@ -105,4 +105,13 @@ table, th, td {
     background-color: #dab180 !important;
 }
 }
+/*Image slider*/
+.slide2 {
+  margin: 0 auto;
+  overflow: hidden;
+}
 
+.slide2 img{
+  width: 100%;
+  margin:0
+}
