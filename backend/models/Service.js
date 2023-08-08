@@ -12,6 +12,9 @@ const Service = sequelize.define(
 			},
 			allowNull: false,
 		},
+		category: {
+			type: DataTypes.STRING,
+		},
 		title: {
 			type: DataTypes.STRING,
 		},
