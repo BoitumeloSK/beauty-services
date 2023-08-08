@@ -35,7 +35,7 @@ export default function Home() {
 					alt=""
 				/>
 			</div>
-			<div className="card-info">
+			<div className="center">
 				<h1>Choose a Type of service</h1>
 				<p>description</p>
 			</div>
@@ -45,6 +45,7 @@ export default function Home() {
 						<Card
 							sx={{ maxWidth: 345 }}
 							style={{ backgroundColor: item.color }}
+							key={i}
 						>
 							<Link to={`/services/${item.link}`}>
 								<CardActionArea>

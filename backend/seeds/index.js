@@ -88,7 +88,7 @@ sequelize.sync({ force: false }).then(async () => {
 			title: "Pixie Haircut",
 			description: "This is a haircutting service",
 			images:
-				"https://res.cloudinary.com/dhrftaik2/image/upload/v1691493258/beauty-shop/Site%20Images/mehran-biabani-GOpYcd6Y7CM-unsplash_vl5w7v.jpg,https://res.cloudinary.com/dhrftaik2/image/upload/v1691492012/beauty-shop/Site%20Images/mohammadreza-babaei-nIp8LJKxntA-unsplash_kthtw5.jpg",
+				"https://res.cloudinary.com/dhrftaik2/image/upload/c_crop/v1691516540/beauty-shop/Site%20Images/mehran-biabani-GOpYcd6Y7CM-unsplash_vl5w7v.jpg,https://res.cloudinary.com/dhrftaik2/image/upload/v1691492012/beauty-shop/Site%20Images/mohammadreza-babaei-nIp8LJKxntA-unsplash_kthtw5.jpg",
 			price: 100,
 			visible: true,
 			UserId: 3,
@@ -98,7 +98,7 @@ sequelize.sync({ force: false }).then(async () => {
 			title: "Braiding by Jane",
 			description: "This is a hairbraiding service",
 			images:
-				"https://res.cloudinary.com/dhrftaik2/image/upload/v1691491955/beauty-shop/Site%20Images/gift-habeshaw-ptyj_QoPRsQ-unsplash-starbraids_g7tviz.jpg,https://res.cloudinary.com/dhrftaik2/image/upload/v1691492262/beauty-shop/Site%20Images/knotless_braids_d7c0qh.jpg,https://res.cloudinary.com/dhrftaik2/image/upload/v1691492136/beauty-shop/Site%20Images/high-bun_iw3ca6.jpg",
+				"https://res.cloudinary.com/dhrftaik2/image/upload/c_crop/v1691516873/beauty-shop/Site%20Images/gift-habeshaw-ptyj_QoPRsQ-unsplash-starbraids_g7tviz.jpg,https://res.cloudinary.com/dhrftaik2/image/upload/v1691492262/beauty-shop/Site%20Images/knotless_braids_d7c0qh.jpg,https://res.cloudinary.com/dhrftaik2/image/upload/v1691492136/beauty-shop/Site%20Images/high-bun_iw3ca6.jpg",
 			price: 300,
 			visible: true,
 			UserId: 5,

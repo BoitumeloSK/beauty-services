@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import { linkClasses } from "@mui/material";
 function NoAccess() {
 	return (
 		<>
@@ -116,11 +117,13 @@ function logout() {
 	fetch("api/users/logout", removeCookie)
 		.then((response) => response.json())
 		.then((result) => {
+			localStorage.removeItem("beauty-shop-user");
 			document.location.replace("/");
 		});
 }
-const storageKey = localStorage.getItem("beauty-shop-user");
+
 export default function Navigationbar() {
+	const storageKey = localStorage.getItem("beauty-shop-user");
 	return (
 		<AppBar
 			position="static"
@@ -132,7 +135,25 @@ export default function Navigationbar() {
 				<Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
 					ICONIC FLAIR
 				</Typography>
-				<nav>{storageKey === null ? <NoAccess /> : <GrantedAccess />}</nav>
+				<nav>
+					<Link
+						variant="button"
+						to="/"
+						sx={{ my: 1, mx: 1.5 }}
+						className="link"
+					>
+						HOME
+					</Link>
+					<Link
+						variant="button"
+						to="/services"
+						sx={{ my: 1, mx: 1.5 }}
+						className="link"
+					>
+						SERVICES
+					</Link>
+					{storageKey === null ? <NoAccess /> : <GrantedAccess />}
+				</nav>
 			</Toolbar>
 		</AppBar>
 	);
