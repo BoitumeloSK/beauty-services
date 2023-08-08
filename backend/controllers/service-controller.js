@@ -28,6 +28,23 @@ function getService(req, res) {
 		});
 }
 
+function getServicesByCategory(req, res) {
+	const { category } = req.params;
+	Service.findAll({ where: { category } })
+		.then((data) => {
+			if (data.length == 0) {
+				return res.status(400).json({
+					success: false,
+					error: "This category has no services right now",
+				});
+			}
+			return res.status(200).json({ success: true, data: data });
+		})
+		.catch((error) => {
+			return res.status(400).json({ success: false, error: error });
+		});
+}
+
 function getVisibleServices(req, res) {
 	Service.findAll({ where: { visible: true } })
 		.then((data) => {
@@ -176,6 +193,7 @@ function deleteService(req, res) {
 module.exports = {
 	getAllServices,
 	getVisibleServices,
+	getServicesByCategory,
 	getService,
 	getUserServices,
 	createService,
