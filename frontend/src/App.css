@@ -115,3 +115,38 @@ table, th, td {
   width: 100%;
   margin:0
 }
+
+/*Cards*/
+.cards{
+  display:flex
+}
+.css-1ri6ub7-MuiPaper-root-MuiCard-root{
+  overflow: hidden;
+      width: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+      height: 250px !important;
+  }
+.css-1oitmrd-MuiButtonBase-root-MuiCardActionArea-root{
+  text-align: center !important;
+  color:white !important;
+}
+/*Card*/
+.css-1ri6ub7-MuiPaper-root-MuiCard-root{
+max-width: 100% !important;
+display: flex !important;
+align-items: center;
+border-radius:0
+}
+.css-1ri6ub7-MuiPaper-root-MuiCard-root a{
+  text-decoration: none;
+  width:100%;
+}
+/*Card hover*/
+.css-46bh2p-MuiCardContent-root {
+  padding: 80px 20px 80px 20px !important;
+}
+/*Card bottom text*/
+.css-adfmws-MuiTypography-root {
+  color: #fdfdfdcf !important;
+}

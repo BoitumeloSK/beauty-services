@@ -30,7 +30,7 @@ function getService(req, res) {
 
 function getServicesByCategory(req, res) {
 	const { category } = req.params;
-	Service.findAll({ where: { category } })
+	Service.findAll({ where: { category, visible: true } })
 		.then((data) => {
 			if (data.length == 0) {
 				return res.status(400).json({

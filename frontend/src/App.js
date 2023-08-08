@@ -22,6 +22,7 @@ import MyBookings from "./components/booking/MyBookings";
 import ViewBooking from "./components/booking/View";
 import ProviderBookings from "./components/booking/ProviderBookings";
 import AllBookings from "./components/booking/AllBookings";
+import CategoryServices from "./components/service/CategoryServices";
 //import Check from "./components/Check";
 function App() {
 	return (
@@ -44,6 +45,7 @@ function App() {
 				<Route path="/viewbooking/:id" element={<ViewBooking />} />
 				<Route path="/providerbookings" element={<ProviderBookings />} />
 				<Route path="/allbookings" element={<AllBookings />} />
+				<Route path="/services/:category" element={<CategoryServices />} />
 
 				{/* <Route path="/check" element={<Check />} /> */}
 			</Routes>
