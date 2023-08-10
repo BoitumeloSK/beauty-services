@@ -88,10 +88,10 @@ sequelize.sync({ force: false }).then(async () => {
 			title: "Pixie Haircut",
 			description: "This is a haircutting service",
 			images:
-				"https://res.cloudinary.com/dhrftaik2/image/upload/c_crop/v1691516540/beauty-shop/Site%20Images/mehran-biabani-GOpYcd6Y7CM-unsplash_vl5w7v.jpg,https://res.cloudinary.com/dhrftaik2/image/upload/v1691492012/beauty-shop/Site%20Images/mohammadreza-babaei-nIp8LJKxntA-unsplash_kthtw5.jpg",
+				"https://res.cloudinary.com/dhrftaik2/image/upload/c_crop/v1691516540/beauty-shop/Site%20Images/mehran-biabani-GOpYcd6Y7CM-unsplash_vl5w7v.jpg,https://res.cloudinary.com/dhrftaik2/image/upload/v1691700448/beauty-shop/Site%20Images/mohammadreza-babaei-nIp8LJKxntA-unsplash_kthtw5.jpg",
 			price: 100,
 			visible: true,
-			UserId: 3,
+			UserId: 4,
 		},
 		{
 			category: "hair",
@@ -111,7 +111,7 @@ sequelize.sync({ force: false }).then(async () => {
 				"https://res.cloudinary.com/dhrftaik2/image/upload/v1691492825/beauty-shop/Site%20Images/karelys-ruiz-PqyzuzFiQfY-unsplash_qzlyyv.jpg",
 			price: 300,
 			visible: true,
-			UserId: 3,
+			UserId: 4,
 		},
 		{
 			category: "skin",

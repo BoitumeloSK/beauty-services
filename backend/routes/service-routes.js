@@ -13,7 +13,7 @@ const router = require("express").Router();
 
 router.get("/", getAllServices);
 router.get("/visible", getVisibleServices);
-router.get("/:category", getServicesByCategory);
+router.get("/category/:category", getServicesByCategory);
 router.get("/:id", getService);
 router.get("/myservices/:id", provider, getUserServices);
 router.post("/", provider, createService);
