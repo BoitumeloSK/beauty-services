@@ -98,7 +98,7 @@ sequelize.sync({ force: false }).then(async () => {
 			title: "Braiding by Jane",
 			description: "This is a hairbraiding service",
 			images:
-				"https://res.cloudinary.com/dhrftaik2/image/upload/c_crop/v1691516873/beauty-shop/Site%20Images/gift-habeshaw-ptyj_QoPRsQ-unsplash-starbraids_g7tviz.jpg,https://res.cloudinary.com/dhrftaik2/image/upload/v1691492262/beauty-shop/Site%20Images/knotless_braids_d7c0qh.jpg,https://res.cloudinary.com/dhrftaik2/image/upload/v1691492136/beauty-shop/Site%20Images/high-bun_iw3ca6.jpg",
+				"https://res.cloudinary.com/dhrftaik2/image/upload/c_crop/v1691516873/beauty-shop/Site%20Images/gift-habeshaw-ptyj_QoPRsQ-unsplash-starbraids_g7tviz.jpg,https://res.cloudinary.com/dhrftaik2/image/upload/v1691492262/beauty-shop/Site%20Images/knotless_braids_d7c0qh.jpg,https://res.cloudinary.com/dhrftaik2/image/upload/v1691748547/beauty-shop/Site%20Images/high-bun_iw3ca6.jpg",
 			price: 300,
 			visible: true,
 			UserId: 5,

@@ -1,4 +1,4 @@
-const { Service } = require("../models");
+const { Service, Slot } = require("../models");
 const JWT = require("jsonwebtoken");
 require("dotenv").config();
 
@@ -14,7 +14,7 @@ function getAllServices(req, res) {
 
 function getService(req, res) {
 	const { id } = req.params;
-	Service.findAll({ where: { id } })
+	Service.findAll({ where: { id }, include: [{ model: Slot }] })
 		.then((data) => {
 			if (data.length == 0) {
 				return res
