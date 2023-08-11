@@ -1,47 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 //MUI Related
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-export default function ProviderServices() {
-	const [services, setServices] = useState(null);
-	const [isLoading, setIsLoading] = useState(true);
-	const user = JSON.parse(localStorage.getItem("beauty-shop-user"));
-	useEffect(() => {
-		const getServices = async () => {
-			// try {
-			const getMethod = {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-				},
-			};
-			fetch(`/api/services/myservices/${user.id}`, getMethod)
-				.then((response) => response.json())
-				.then((result) => {
-					setServices(result.data);
-					setIsLoading(false);
-				});
-			// } catch (error) {
-			// 	console.log(error);
-			// 	setIsLoading(false);
-			// }
-		};
-		getServices();
-	}, [user.id]);
 
-	if (isLoading) {
-		return <div>Loading...</div>;
-	}
-
-	if (!services) {
-		return <div>No data found.</div>;
-	}
+export default function ServiceCards({ title, pageInfo }) {
 	return (
 		<>
 			<div className="center">
-				<h1>MY SERVICES</h1>
-				<p>All the services you have created</p>
+				<h1>{title}</h1>
+				<p>{pageInfo}</p>
 			</div>
 			<Box sx={{ flexGrow: 1 }}>
 				<Grid

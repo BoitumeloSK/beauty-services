@@ -1,7 +1,11 @@
 .App {
   text-align: center;
+  
 }
-
+/* body { 
+  background: url("https://res.cloudinary.com/dhrftaik2/image/upload/v1691668465/beauty-shop/Site%20Images/chris-lee-70l1tDAI6rM-unsplash_ua0jnu.jpg") no-repeat fixed center; 
+  background-size:auto ;
+} */
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -172,4 +176,66 @@ border-radius:0
   display: flex;
   flex-direction: column;
     align-items: center;
+}
+.center p{
+  margin-top: 0;
+}
+/*View single service*/
+/*-------------------------------------------------*/
+.css-97bign-MuiCardContent-root{
+  display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+/*Service single image*/
+/* .css-97bign-MuiCardContent-root > * {
+  width: 500px !important;
+} */
+
+@media (min-width: 600px){
+  .css-fnq5ct-MuiCardMedia-root {
+    width: 50% !important;
+  }
+}
+.service-btns button{
+  background: #9b6a4e;
+  border: none;
+  cursor: pointer;
+color: white;
+  text-decoration: none;
+  padding: 15px;
+  margin: 10px;
+  width: 100px;
+}
+.service-btns > :first-child{
+  background: #f13602;
+}
+/*Whole card*/
+.css-1oqv2c0-MuiPaper-root-MuiCard-root{
+  box-shadow:none !important;
+}
+/*Service images*/
+.flex-space{
+  justify-content: space-between;
+}
+.flex-space > :last-child{
+  display: flex;
+}
+.flex-space > :last-child div{
+  width: 7.5vw;
+  height: 8vh;
+  display: flex;
+  justify-content: center;
+}
+.flex-space > :last-child div >img{
+  width: fit-content;
+  margin: 0
+}
+.highlighted-date {
+  background-color: #5cb85c; /* Customize the highlight color */
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin: auto;
 }

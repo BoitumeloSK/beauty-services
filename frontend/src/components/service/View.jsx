@@ -1,12 +1,21 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import GetSlots from "../booking/GetSlots";
+
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import AvailabilityCalendar from "../Check";
 export default function ViewService() {
 	const user = JSON.parse(localStorage.getItem("beauty-shop-user"));
 	const { id } = useParams();
 	const [service, setService] = useState();
 	const [isLoading, setIsLoading] = useState(true);
 	const [ownerId, setOwnerId] = useState();
+	const [displayImage, setDisplayImage] = useState("");
+	const [slots, setSlots] = useState([]);
+	const [last, setLast] = useState(false);
 	useEffect(() => {
 		const getService = async () => {
 			try {
@@ -20,8 +29,23 @@ export default function ViewService() {
 					.then((response) => response.json())
 					.then((result) => {
 						setService(result.data[0]);
+						setDisplayImage(result.data[0].images.split(",")[0]);
 						setOwnerId(result.data[0].UserId);
 						setIsLoading(false);
+						let slotsArray = result.data[0].Slots.filter(
+							(x) => x.booked === false
+						);
+						console.log(slotsArray);
+						if (slotsArray.length > 0) {
+							// Loop through the slotsArray and update each slot's startTime
+							for (let i = 0; i < slotsArray.length; i++) {
+								slotsArray[i] = slotsArray[i].startTime.slice(0, 10);
+							}
+							setSlots(slotsArray);
+							setLast(true);
+						}
+
+						// Set the slots state with the modified slotsArray
 					});
 			} catch (error) {
 				console.log(error);
@@ -30,6 +54,8 @@ export default function ViewService() {
 		};
 		getService();
 	}, [id]);
+	useEffect(() => {});
+
 	function deleteService() {
 		const deleteMethod = {
 			method: "DELETE",
@@ -69,6 +95,9 @@ export default function ViewService() {
 			})
 			.catch((error) => console.log(error));
 	}
+	function changeImage(url) {
+		setDisplayImage(url);
+	}
 
 	if (isLoading) {
 		return <div>Loading...</div>;
@@ -80,34 +109,72 @@ export default function ViewService() {
 
 	return (
 		<>
-			<div>
-				{service.images.split(",").map((url, index) => {
-					return <img key={index} src={url} alt="" />;
-				})}
+			<Card sx={{ display: "flex" }}>
+				<CardContent sx={{ flex: 1 }}>
+					<Typography component="h2" variant="h5">
+						{service.title}
+					</Typography>
+					<Typography variant="subtitle1" paragraph>
+						{service.description}
+					</Typography>
+					<Typography variant="subtitle1" color="text.secondary">
+						R {service.price}
+					</Typography>
+					{user.id === service.UserId ? (
+						<>
+							<div className="service-btns">
+								<button onClick={() => deleteService()}>DELETE</button>
+								<Link to={`/editservice/${service.id}`}>
+									<button>EDIT</button>
+								</Link>
+							</div>
+							<br></br>
+							<Link to="/myservices">Back to my services</Link>
+						</>
+					) : (
+						""
+					)}
+					<Link to="/services">Back to services</Link>
+				</CardContent>
+				<CardMedia
+					component="img"
+					sx={{ width: 160, display: { xs: "none", sm: "block" } }}
+					image={displayImage}
+					alt=""
+					style={{ height: "60vh" }}
+				/>
+			</Card>
+			<div className="cards flex-space">
+				<div className="center">
+					<GetSlots
+						user={user}
+						serviceId={id}
+						preferredFunction={createBooking}
+						ownerId={ownerId}
+						btnTxt={"Book Now"}
+					/>
+				</div>
+				<div className="service-pics">
+					{service.images.split(",").map((url, index) => {
+						return (
+							<div key={index}>
+								<img
+									key={index}
+									src={url}
+									onClick={() => changeImage(url)}
+									alt=""
+									style={{ cursor: "pointer" }}
+								/>
+							</div>
+						);
+					})}
+				</div>
 			</div>
-			<h2>{service.title}</h2>
-			<p>{service.description}</p>
-			<p>R {service.price}</p>
-			<GetSlots
-				user={user}
-				serviceId={id}
-				preferredFunction={createBooking}
-				ownerId={ownerId}
-				btnTxt={"Book Now"}
-			/>
-			{user.id === service.UserId ? (
-				<>
-					<button onClick={() => deleteService()}>Delete Service</button>
-					<Link to={`/editservice/${service.id}`}>
-						<button>Edit</button>
-					</Link>
-					<br></br>
-					<Link to="/myservices">Back to my services</Link>
-				</>
+			{last && slots.length > 0 ? (
+				<AvailabilityCalendar availableDates={slots} />
 			) : (
 				""
 			)}
-			<Link to="/services">Back to services</Link>
 		</>
 	);
 }

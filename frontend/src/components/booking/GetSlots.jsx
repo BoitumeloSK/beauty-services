@@ -43,13 +43,15 @@ export default function GetSlots({
 						let reg2 = /\d{2}:\d{2}/;
 						let date = x.startTime.match(regex);
 						let time = x.startTime.match(reg2);
+
 						return (
 							<div key={i}>
 								<button
 									onClick={() => showBookingBtn(x.id)}
+									key={i}
 								>{`${date} ${time}`}</button>
 								{slotId === x.id && ownerId !== user.id ? (
-									<button onClick={() => preferredFunction(slotId)}>
+									<button onClick={() => preferredFunction(slotId)} key={i}>
 										{btnTxt}
 									</button>
 								) : (
