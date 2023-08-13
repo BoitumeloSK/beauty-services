@@ -8,7 +8,7 @@ import EditProfile from "./components/user/Edit";
 import ChangePassword from "./components/user/ChangePassword";
 import Applications from "./components/user/Applications";
 import UserProfile from "./components/user/UserProfile";
-import CreateService from "./components/service/Create";
+import CreateService from "./components/service/create service/CreateService";
 import ProviderServices from "./components/service/ProviderServices";
 import ViewService from "./components/service/View";
 import EditService from "./components/service/Edit";
@@ -19,7 +19,6 @@ import ProviderBookings from "./components/booking/ProviderBookings";
 import AllBookings from "./components/booking/AllBookings";
 import CategoryServices from "./components/service/CategoryServices";
 import Navigationbar from "./components/Navigationbar";
-//import Check from "./components/Check";
 function App() {
 	return (
 		<BrowserRouter>
@@ -43,8 +42,6 @@ function App() {
 				<Route path="/providerbookings" element={<ProviderBookings />} />
 				<Route path="/allbookings" element={<AllBookings />} />
 				<Route path="/services/:category" element={<CategoryServices />} />
-
-				{/* <Route path="/check" element={<Check />} /> */}
 			</Routes>
 		</BrowserRouter>
 	);

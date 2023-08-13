@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import AvailabilityCalendar from "../Check";
+import AvailabilityCalendar from "../Calendar";
 export default function ViewService() {
 	const user = JSON.parse(localStorage.getItem("beauty-shop-user"));
 	const { id } = useParams();
@@ -35,7 +35,6 @@ export default function ViewService() {
 						let slotsArray = result.data[0].Slots.filter(
 							(x) => x.booked === false
 						);
-						console.log(slotsArray);
 						if (slotsArray.length > 0) {
 							// Loop through the slotsArray and update each slot's startTime
 							for (let i = 0; i < slotsArray.length; i++) {
@@ -146,13 +145,20 @@ export default function ViewService() {
 			</Card>
 			<div className="cards flex-space">
 				<div className="center">
-					<GetSlots
-						user={user}
-						serviceId={id}
-						preferredFunction={createBooking}
-						ownerId={ownerId}
-						btnTxt={"Book Now"}
-					/>
+					{last && slots.length > 0 ? (
+						<>
+							<AvailabilityCalendar availableDates={slots} />
+							<GetSlots
+								user={user}
+								serviceId={id}
+								preferredFunction={createBooking}
+								ownerId={ownerId}
+								btnTxt={"Book Now"}
+							/>
+						</>
+					) : (
+						""
+					)}
 				</div>
 				<div className="service-pics">
 					{service.images.split(",").map((url, index) => {
@@ -170,11 +176,6 @@ export default function ViewService() {
 					})}
 				</div>
 			</div>
-			{last && slots.length > 0 ? (
-				<AvailabilityCalendar availableDates={slots} />
-			) : (
-				""
-			)}
 		</>
 	);
 }

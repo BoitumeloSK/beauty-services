@@ -33,6 +33,7 @@ export default function GetSlots({
 	function showBookingBtn(id) {
 		setSlotId(id);
 	}
+
 	return (
 		<>
 			{slots.length > 0 ? (
