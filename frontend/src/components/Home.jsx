@@ -31,7 +31,7 @@ export default function Home() {
 		<>
 			<div className="slide2">
 				<img
-					src="https://res.cloudinary.com/dhrftaik2/image/upload/v1691427724/beauty-shop/Site%20Images/content-pixie-TxBQ7yLj6JU-unsplash-lotiononhand_xmslls.jpg"
+					src="https://res.cloudinary.com/dhrftaik2/image/upload/v1692015821/beauty-shop/Site%20Images/banner_mq8nd7.png"
 					alt=""
 				/>
 			</div>

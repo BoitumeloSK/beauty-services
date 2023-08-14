@@ -20,6 +20,7 @@ export default function GetSlots({
 				fetch(`/api/slots/unbookedSlots/${serviceId}`, getMethod)
 					.then((response) => response.json())
 					.then((result) => {
+						console.log(result);
 						if (result.success) {
 							setSlots(result.data);
 						}
@@ -49,10 +50,9 @@ export default function GetSlots({
 							<div key={i}>
 								<button
 									onClick={() => showBookingBtn(x.id)}
-									key={i}
 								>{`${date} ${time}`}</button>
 								{slotId === x.id && ownerId !== user.id ? (
-									<button onClick={() => preferredFunction(slotId)} key={i}>
+									<button onClick={() => preferredFunction(slotId)}>
 										{btnTxt}
 									</button>
 								) : (
