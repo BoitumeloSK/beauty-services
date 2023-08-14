@@ -14,13 +14,13 @@ export default function ServiceForm({ changeFunction }) {
 				<Grid item xs={12}>
 					<InputLabel id="demo-simple-select-label">Service</InputLabel>
 					<Select
+						style={{ width: "150px" }}
 						labelId="demo-simple-select-label"
 						id="demo-simple-select"
 						label="Service"
-						fullWidth
 						name="category"
 						autoFocus
-						defaultValue="Choose service type"
+						defaultValue="skin"
 						onChange={changeFunction}
 					>
 						<MenuItem value="skin">Skin</MenuItem>
@@ -31,7 +31,7 @@ export default function ServiceForm({ changeFunction }) {
 				<Grid item xs={12}>
 					<TextField
 						required
-						fullWidth
+						style={{ width: "400px" }}
 						label="Title"
 						name="title"
 						autoComplete="title"

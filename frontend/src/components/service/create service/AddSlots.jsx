@@ -13,15 +13,16 @@ export default function AddSlots({
 			{slotList.map((x, i) => {
 				return <p key={i}>{x.split("T").join(" ")}</p>;
 			})}
-			{duplicateMsg ? <>Slot already added</> : ""}
+			{duplicateMsg ? <p style={{ color: "red" }}>Slot already added</p> : ""}
 			<div>
-				<label htmlFor="dateTime">Date:</label>
 				<input
 					name="dateTime"
 					type="datetime-local"
 					onChange={changeFunction}
 				/>
-				<button onClick={slotFunction}>Add Slot</button>
+				<button onClick={slotFunction} className="slot-btn">
+					ADD SLOT
+				</button>
 			</div>
 		</div>
 	);

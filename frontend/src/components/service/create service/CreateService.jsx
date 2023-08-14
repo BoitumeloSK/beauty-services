@@ -27,7 +27,6 @@ export default function CreateService() {
 	const [description, setDescription] = useState("");
 	const [price, setPrice] = useState("");
 	const [urls, setUrls] = useState([]);
-	const [showBtn, setShowBtn] = useState(false);
 	const [startTime, setStartTime] = useState("");
 	const [slotList, setSlotsList] = useState([]);
 	const [duplicateMsg, setDuplicateMsg] = useState(false);
@@ -96,9 +95,6 @@ export default function CreateService() {
 				throw new Error("Unknown step");
 		}
 	}
-	function handleClick(e) {
-		setShowBtn(true);
-	}
 	function addSlot() {
 		let found = slotList.filter((x) => x === startTime);
 		if (found.length > 0) {
@@ -166,7 +162,15 @@ export default function CreateService() {
 	};
 
 	return (
-		<React.Fragment>
+		<div
+			style={{
+				position: "absolute",
+				height: "auto",
+				width: "100%",
+				backgroundImage: `url("https://res.cloudinary.com/dhrftaik2/image/upload/v1692003783/beauty-shop/Site%20Images/josh-calabrese-XXpbdU_31Sg-unsplash-copy_ewguoh.jpg")`,
+				backgroundSize: "cover",
+			}}
+		>
 			<CssBaseline />
 			<Container component="main" maxWidth="md" sx={{ mb: 4 }}>
 				<Paper
@@ -226,6 +230,6 @@ export default function CreateService() {
 					)}
 				</Paper>
 			</Container>
-		</React.Fragment>
+		</div>
 	);
 }

@@ -2,10 +2,9 @@
   text-align: center;
   
 }
-/* body { 
-  background: url("https://res.cloudinary.com/dhrftaik2/image/upload/v1691668465/beauty-shop/Site%20Images/chris-lee-70l1tDAI6rM-unsplash_ua0jnu.jpg") no-repeat fixed center; 
-  background-size:auto ;
-} */
+body{
+  font-family: "Poppins","sans-serif" !important
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -94,15 +93,22 @@ table, th, td {
     font-size: 2.5rem !important;
     color: white !important;
 }
-.link, .link2{
+.link, .link2, .slot-btn{
   color: white;
   text-decoration: none;
   padding: 15px;
-}
-.link2{
-  background: #9b6a4e;
-  border: none;
   cursor: pointer;
+  font-family: "Poppins","sans-serif" !important
+}
+.link2, .css-8bjq0v-MuiButtonBase-root-MuiButton-root{
+  background: #9b6a4e !important;
+  border: none;
+  border-radius: 0 !important;
+}
+.slot-btn{
+padding: 12px; 
+background: #ff5501;
+border: none
 }
 @media (min-width: 600px){
   .css-1r339ym-MuiToolbar-root {
@@ -209,7 +215,7 @@ color: white;
   width: 100px;
 }
 .service-btns > :first-child{
-  background: #f13602;
+  background: #ff5501;
 }
 /*Whole card*/
 .css-1oqv2c0-MuiPaper-root-MuiCard-root{
@@ -233,9 +239,29 @@ color: white;
   margin: 0
 }
 .highlighted-date {
-  background-color: #5cb85c; /* Customize the highlight color */
+  background-color: #219721; /* Customize the highlight color */
   border-radius: 50%;
   width: 20px;
   height: 20px;
   margin: auto;
 }
+.react-calendar__tile--active {
+  background: #2197218a !important;
+}
+/*Create service page*/
+/*-------------------------------------*/
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active, .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed{
+  color: #ff5501 !important;
+}
+.css-1dym4ij-MuiButtonBase-root-MuiButton-root{
+  color: #454545 !important;
+}
+input[type="datetime-local"]{
+  width: 200px;
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
+}
+/* .css-126nd9x-MuiPaper-root > div > *{
+  font-family: "Poppins","sans-serif" !important
+} */
