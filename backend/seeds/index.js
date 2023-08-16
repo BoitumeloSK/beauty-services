@@ -153,78 +153,78 @@ sequelize.sync({ force: false }).then(async () => {
 		},
 		{
 			ServiceId: 1,
-			startTime: "2023-10-01 08:00",
+			startTime: "2023-10-02 08:00",
 			booked: false,
 		},
 		{
 			ServiceId: 2,
-			startTime: "2023-10-01 13:00:00",
+			startTime: "2023-10-03 13:00:00",
 			booked: true,
 		},
 		{
 			ServiceId: 2,
-			startTime: "2023-10-01 15:00",
+			startTime: "2023-10-04 15:00",
 			booked: true,
 		},
 
 		{
 			ServiceId: 2,
-			startTime: "2023-10-01 17:00",
+			startTime: "2023-10-05 17:00",
 			booked: true,
 		},
 		{
 			ServiceId: 3,
-			startTime: "2023-10-01 10:00",
+			startTime: "2023-10-06 10:00",
 			booked: false,
 		},
 		{
 			ServiceId: 3,
-			startTime: "2023-10-01 08:00",
+			startTime: "2023-10-07 08:00",
 			booked: false,
 		},
 		{
 			ServiceId: 3,
-			startTime: "2023-10-01 17:00",
+			startTime: "2023-10-08 17:00",
 			booked: true,
 		},
 		{
 			ServiceId: 4,
-			startTime: "2023-10-01 08:00",
+			startTime: "2023-10-09 08:00",
 			booked: false,
 		},
 		{
 			ServiceId: 4,
-			startTime: "2023-10-01 17:00",
+			startTime: "2023-10-10 17:00",
 			booked: true,
 		},
 		{
 			ServiceId: 5,
-			startTime: "2023-10-01 08:00",
+			startTime: "2023-10-11 08:00",
 			booked: false,
 		},
 		{
 			ServiceId: 5,
-			startTime: "2023-10-01 17:00",
+			startTime: "2023-10-12 17:00",
 			booked: true,
 		},
 		{
 			ServiceId: 5,
-			startTime: "2023-10-01 08:00",
+			startTime: "2023-10-13 08:00",
 			booked: false,
 		},
 		{
 			ServiceId: 5,
-			startTime: "2023-10-01 17:00",
+			startTime: "2023-10-14 17:00",
 			booked: true,
 		},
 		{
 			ServiceId: 6,
-			startTime: "2023-10-01 08:00",
+			startTime: "2023-10-15 08:00",
 			booked: false,
 		},
 		{
 			ServiceId: 6,
-			startTime: "2023-10-01 17:00",
+			startTime: "2023-10-16 17:00",
 			booked: true,
 		},
 	]);
