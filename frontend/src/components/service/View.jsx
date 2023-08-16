@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import GetSlots from "../booking/GetSlots";
 
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -54,7 +53,6 @@ export default function ViewService() {
 		getService();
 	}, [id]);
 	useEffect(() => {});
-
 	function deleteService() {
 		const deleteMethod = {
 			method: "DELETE",
@@ -147,14 +145,22 @@ export default function ViewService() {
 				<div className="center">
 					{last && slots.length > 0 ? (
 						<>
-							<AvailabilityCalendar availableDates={slots} />
-							<GetSlots
+							<AvailabilityCalendar
+								availableDates={slots}
 								user={user}
 								serviceId={id}
 								preferredFunction={createBooking}
 								ownerId={ownerId}
 								btnTxt={"Book Now"}
 							/>
+							{/* <GetSlots
+								user={user}
+								serviceId={id}
+								preferredFunction={createBooking}
+								ownerId={ownerId}
+								btnTxt={"Book Now"}
+								chosen={"2023-10-01"}
+							/> */}
 						</>
 					) : (
 						""

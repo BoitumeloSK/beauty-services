@@ -5,6 +5,7 @@ export default function GetSlots({
 	preferredFunction,
 	ownerId,
 	btnTxt,
+	chosen,
 }) {
 	const [slots, setSlots] = useState([]);
 	const [slotId, setSlotId] = useState();
@@ -20,7 +21,6 @@ export default function GetSlots({
 				fetch(`/api/slots/unbookedSlots/${serviceId}`, getMethod)
 					.then((response) => response.json())
 					.then((result) => {
-						console.log(result);
 						if (result.success) {
 							setSlots(result.data);
 						}
@@ -34,7 +34,6 @@ export default function GetSlots({
 	function showBookingBtn(id) {
 		setSlotId(id);
 	}
-
 	return (
 		<>
 			{slots.length > 0 ? (
@@ -45,20 +44,25 @@ export default function GetSlots({
 						let reg2 = /\d{2}:\d{2}/;
 						let date = x.startTime.match(regex);
 						let time = x.startTime.match(reg2);
-
 						return (
 							<div key={i}>
-								<button
-									onClick={() => showBookingBtn(x.id)}
-								>{`${date} ${time}`}</button>
-								{slotId === x.id && ownerId !== user.id ? (
-									<button onClick={() => preferredFunction(slotId)}>
-										{btnTxt}
-									</button>
+								{date == chosen ? (
+									<div>
+										<button
+											onClick={() => showBookingBtn(x.id)}
+										>{`${time}`}</button>
+										{slotId === x.id && ownerId !== user.id ? (
+											<button onClick={() => preferredFunction(slotId)}>
+												{btnTxt}
+											</button>
+										) : (
+											""
+										)}
+										<br></br>
+									</div>
 								) : (
 									""
 								)}
-								<br></br>
 							</div>
 						);
 					})}

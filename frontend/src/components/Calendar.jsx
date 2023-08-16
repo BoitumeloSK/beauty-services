@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Calendar from "react-calendar";
+import GetSlots from "./booking/GetSlots";
 import "react-calendar/dist/Calendar.css";
 
 class AvailabilityCalendar extends Component {
@@ -8,6 +9,7 @@ class AvailabilityCalendar extends Component {
 		this.state = {
 			availableDates: this.props.availableDates || [], // Replace with your available dates
 			selectedDate: new Date(),
+			chosenDate: "",
 		};
 	}
 	componentDidUpdate(prevProps) {
@@ -18,7 +20,13 @@ class AvailabilityCalendar extends Component {
 		}
 	}
 	handleDateClick = (date) => {
-		return date.toISOString().split("T")[0];
+		// console.log(date.toISOString().split("T")[0]);
+		const year = date.getFullYear();
+		const month = String(date.getMonth() + 1).padStart(2, "0");
+		const day = String(date.getDate()).padStart(2, "0");
+		this.setState({
+			chosenDate: `${year}-${month}-${day}`,
+		});
 	};
 	retreiveDate = (date) => {
 		const year = date.getFullYear();
@@ -42,6 +50,14 @@ class AvailabilityCalendar extends Component {
 					value={selectedDate}
 					onChange={(selectedDate) => this.setState({ selectedDate })}
 					onClickDay={this.handleDateClick}
+				/>
+				<GetSlots
+					user={this.props.user}
+					serviceId={this.props.serviceId}
+					preferredFunction={this.props.preferredFunction}
+					ownerId={this.props.ownerId}
+					btnTxt={this.props.btnTxt}
+					chosen={this.state.chosenDate}
 				/>
 			</div>
 		);
