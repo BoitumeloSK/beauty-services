@@ -6,13 +6,16 @@ export default function AddSlots({
 	changeFunction,
 	duplicateMsg,
 	slotCopy,
+	deleteFunction,
 }) {
 	return (
 		<div className="center">
-			<AvailabilityCalendar availableDates={slotCopy} />
-			{slotList.map((x, i) => {
-				return <p key={i}>{x.split("T").join(" ")}</p>;
-			})}
+			<AvailabilityCalendar
+				availableDates={slotCopy}
+				getSlots={false}
+				slots={slotList}
+				deleteFunction={deleteFunction}
+			/>
 			{duplicateMsg ? <p style={{ color: "red" }}>Slot already added</p> : ""}
 			<div>
 				<input

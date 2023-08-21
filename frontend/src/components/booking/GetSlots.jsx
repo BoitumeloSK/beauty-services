@@ -34,6 +34,7 @@ export default function GetSlots({
 	function showBookingBtn(id) {
 		setSlotId(id);
 	}
+
 	return (
 		<>
 			{slots.length > 0 ? (
@@ -68,7 +69,7 @@ export default function GetSlots({
 					})}
 				</>
 			) : (
-				<>No available slots</>
+				""
 			)}
 		</>
 	);

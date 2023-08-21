@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Calendar from "react-calendar";
 import GetSlots from "./booking/GetSlots";
 import "react-calendar/dist/Calendar.css";
+import ServiceTimes from "./service/create service/ServiceTimes";
 
 class AvailabilityCalendar extends Component {
 	constructor(props) {
@@ -51,14 +52,22 @@ class AvailabilityCalendar extends Component {
 					onChange={(selectedDate) => this.setState({ selectedDate })}
 					onClickDay={this.handleDateClick}
 				/>
-				<GetSlots
-					user={this.props.user}
-					serviceId={this.props.serviceId}
-					preferredFunction={this.props.preferredFunction}
-					ownerId={this.props.ownerId}
-					btnTxt={this.props.btnTxt}
-					chosen={this.state.chosenDate}
-				/>
+				{this.props.getSlots === true ? (
+					<GetSlots
+						user={this.props.user}
+						serviceId={this.props.serviceId}
+						preferredFunction={this.props.preferredFunction}
+						ownerId={this.props.ownerId}
+						btnTxt={this.props.btnTxt}
+						chosen={this.state.chosenDate}
+					/>
+				) : (
+					<ServiceTimes
+						chosen={this.state.chosenDate}
+						slots={this.props.slots}
+						deleteFunction={this.props.deleteFunction}
+					/>
+				)}
 			</div>
 		);
 	}

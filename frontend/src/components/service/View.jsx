@@ -152,6 +152,7 @@ export default function ViewService() {
 								preferredFunction={createBooking}
 								ownerId={ownerId}
 								btnTxt={"Book Now"}
+								getSlots={true}
 							/>
 							{/* <GetSlots
 								user={user}

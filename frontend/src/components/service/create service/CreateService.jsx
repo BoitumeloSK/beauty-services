@@ -87,6 +87,7 @@ export default function CreateService() {
 						duplicateMsg={duplicateMsg}
 						changeFunction={(e) => handleChange(e)}
 						slotCopy={slotCopy}
+						deleteFunction={removeSlot}
 					/>
 				);
 			case 2:
@@ -105,8 +106,29 @@ export default function CreateService() {
 			setSlotCopy([...slotCopy, startTime.split("T")[0]]);
 		}
 	}
+	//For removing slot in create
+	function removeSlot(slot) {
+		//updates the slot list that will be added to created service
+		let updatedSlots = slotList.filter((x) => x !== slot);
+		//updates the dates highlighted on a calendar
+		let duplicateSlots = slotCopy.filter((x) => x === slot.split("T")[0]);
+
+		//Changed state directly
+		if (duplicateSlots.length > 1) {
+			for (let i = 0; i < slotCopy.length; i++) {
+				if (slotCopy[i] === slot.split("T")[0]) {
+					slotCopy.splice(i, 1);
+					break; // Stop after removing the first occurrence
+				}
+			}
+		} else {
+			let calendarSlots = slotCopy.filter((x) => x != slot.split("T")[0]);
+			setSlotCopy(calendarSlots);
+		}
+		setSlotsList(updatedSlots);
+	}
+
 	function addService(description, price, title, visible, category) {
-		console.log(slotList);
 		const createMethod = {
 			method: "POST",
 			headers: {
