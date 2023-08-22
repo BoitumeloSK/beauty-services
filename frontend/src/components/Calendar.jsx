@@ -52,6 +52,7 @@ class AvailabilityCalendar extends Component {
 					onChange={(selectedDate) => this.setState({ selectedDate })}
 					onClickDay={this.handleDateClick}
 				/>
+				<br></br>
 				{this.props.getSlots === true ? (
 					<GetSlots
 						user={this.props.user}

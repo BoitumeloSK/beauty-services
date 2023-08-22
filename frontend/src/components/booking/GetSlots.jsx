@@ -9,6 +9,7 @@ export default function GetSlots({
 }) {
 	const [slots, setSlots] = useState([]);
 	const [slotId, setSlotId] = useState();
+	const [isActive, setActive] = useState(null);
 	useEffect(() => {
 		const getSlots = async () => {
 			try {
@@ -32,13 +33,14 @@ export default function GetSlots({
 		getSlots();
 	}, [serviceId]);
 	function showBookingBtn(id) {
+		setActive(id);
 		setSlotId(id);
 	}
 
 	return (
 		<>
 			{slots.length > 0 ? (
-				<>
+				<div className="grid-container">
 					{slots.map((x, i) => {
 						//Not too sure about this so query
 						let regex = /\d{4}-\d{2}-\d{2}/;
@@ -46,11 +48,14 @@ export default function GetSlots({
 						let date = x.startTime.match(regex);
 						let time = x.startTime.match(reg2);
 						return (
-							<div key={i}>
+							<>
 								{date == chosen ? (
-									<div>
+									<div key={i}>
 										<button
-											onClick={() => showBookingBtn(x.id)}
+											onClick={() => {
+												showBookingBtn(x.id);
+											}}
+											className={isActive === x.id ? "btn" : "no-style-btn"}
 										>{`${time}`}</button>
 										{slotId === x.id && ownerId !== user.id ? (
 											<button onClick={() => preferredFunction(slotId)}>
@@ -64,10 +69,10 @@ export default function GetSlots({
 								) : (
 									""
 								)}
-							</div>
+							</>
 						);
 					})}
-				</>
+				</div>
 			) : (
 				""
 			)}

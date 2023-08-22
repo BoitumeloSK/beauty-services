@@ -140,10 +140,12 @@ export default function ViewService() {
 							) : (
 								""
 							)}
-							<br></br>
 							{/* <Link to="/services">Back to services</Link> */}
-							<button onClick={() => showHideSlots(true)} className="slot-btn">
-								View Slots
+							<button
+								onClick={() => showHideSlots(true)}
+								className="no-style-btn"
+							>
+								VIEW SLOTS
 							</button>
 						</>
 					) : (
@@ -160,12 +162,15 @@ export default function ViewService() {
 										getSlots={true}
 									/>
 									<br></br>
-									<button onClick={() => showHideSlots(false)}>
-										View Service Details
+									<button
+										onClick={() => showHideSlots(false)}
+										className="no-style-btn"
+									>
+										VIEW SERVICE DETAILS
 									</button>
 								</>
 							) : (
-								""
+								<p>Currently no available slots.</p>
 							)}
 						</div>
 					)}
