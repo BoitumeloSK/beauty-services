@@ -11,10 +11,15 @@ export default function ServiceTimes(slots) {
 				return (
 					<div key={i}>
 						{date == slots.chosen ? (
-							<>
-								<p>{time}</p>
-								<button onClick={() => slots.deleteFunction(x)}>Remove</button>
-							</>
+							<div className="flex-and-center">
+								<span>{time}</span>
+								<button
+									onClick={() => slots.deleteFunction(x)}
+									className="slot-delete"
+								>
+									X
+								</button>
+							</div>
 						) : (
 							""
 						)}
