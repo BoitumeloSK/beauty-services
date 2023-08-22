@@ -15,6 +15,7 @@ export default function ViewService() {
 	const [displayImage, setDisplayImage] = useState("");
 	const [slots, setSlots] = useState([]);
 	const [last, setLast] = useState(false);
+	const [viewSlots, setViewSlots] = useState(false);
 	useEffect(() => {
 		const getService = async () => {
 			try {
@@ -95,7 +96,13 @@ export default function ViewService() {
 	function changeImage(url) {
 		setDisplayImage(url);
 	}
-
+	function showHideSlots(x) {
+		if (x === true) {
+			setViewSlots(true);
+		} else {
+			setViewSlots(false);
+		}
+	}
 	if (isLoading) {
 		return <div>Loading...</div>;
 	}
@@ -108,30 +115,60 @@ export default function ViewService() {
 		<>
 			<Card sx={{ display: "flex" }}>
 				<CardContent sx={{ flex: 1 }}>
-					<Typography component="h2" variant="h5">
-						{service.title}
-					</Typography>
-					<Typography variant="subtitle1" paragraph>
-						{service.description}
-					</Typography>
-					<Typography variant="subtitle1" color="text.secondary">
-						R {service.price}
-					</Typography>
-					{user.id === service.UserId ? (
+					{!viewSlots ? (
 						<>
-							<div className="service-btns">
-								<button onClick={() => deleteService()}>DELETE</button>
-								<Link to={`/editservice/${service.id}`}>
-									<button>EDIT</button>
-								</Link>
-							</div>
+							<Typography component="h2" variant="h5">
+								{service.title}
+							</Typography>
+							<Typography variant="subtitle1" paragraph>
+								{service.description}
+							</Typography>
+							<Typography variant="subtitle1" color="text.secondary">
+								R {service.price}
+							</Typography>
+							{user.id === service.UserId ? (
+								<>
+									<div className="service-btns">
+										<button onClick={() => deleteService()}>DELETE</button>
+										<Link to={`/editservice/${service.id}`}>
+											<button>EDIT</button>
+										</Link>
+									</div>
+									<br></br>
+									{/* <Link to="/myservices">Back to my services</Link> */}
+								</>
+							) : (
+								""
+							)}
 							<br></br>
-							<Link to="/myservices">Back to my services</Link>
+							{/* <Link to="/services">Back to services</Link> */}
+							<button onClick={() => showHideSlots(true)} className="slot-btn">
+								View Slots
+							</button>
 						</>
 					) : (
-						""
+						<div className="center">
+							{last && slots.length > 0 ? (
+								<>
+									<AvailabilityCalendar
+										availableDates={slots}
+										user={user}
+										serviceId={id}
+										preferredFunction={createBooking}
+										ownerId={ownerId}
+										btnTxt={"Book Now"}
+										getSlots={true}
+									/>
+									<br></br>
+									<button onClick={() => showHideSlots(false)}>
+										View Service Details
+									</button>
+								</>
+							) : (
+								""
+							)}
+						</div>
 					)}
-					<Link to="/services">Back to services</Link>
 				</CardContent>
 				<CardMedia
 					component="img"
@@ -142,31 +179,6 @@ export default function ViewService() {
 				/>
 			</Card>
 			<div className="cards flex-space">
-				<div className="center">
-					{last && slots.length > 0 ? (
-						<>
-							<AvailabilityCalendar
-								availableDates={slots}
-								user={user}
-								serviceId={id}
-								preferredFunction={createBooking}
-								ownerId={ownerId}
-								btnTxt={"Book Now"}
-								getSlots={true}
-							/>
-							{/* <GetSlots
-								user={user}
-								serviceId={id}
-								preferredFunction={createBooking}
-								ownerId={ownerId}
-								btnTxt={"Book Now"}
-								chosen={"2023-10-01"}
-							/> */}
-						</>
-					) : (
-						""
-					)}
-				</div>
 				<div className="service-pics">
 					{service.images.split(",").map((url, index) => {
 						return (

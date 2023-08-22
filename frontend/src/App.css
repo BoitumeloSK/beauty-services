@@ -221,7 +221,7 @@ color: white;
 }
 /*Service images*/
 .flex-space{
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 .flex-space > :last-child{
   display: flex;
