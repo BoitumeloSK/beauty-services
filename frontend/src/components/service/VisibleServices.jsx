@@ -66,6 +66,7 @@ export default function VisibleServices() {
 									<Link
 										to={`/viewservice/${service.id}`}
 										style={{ textDecoration: "none", color: "black" }}
+										className="no-style-btn"
 									>
 										VIEW SERVICE
 									</Link>

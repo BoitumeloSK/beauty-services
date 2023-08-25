@@ -112,8 +112,22 @@ export default function ViewService() {
 	}
 
 	return (
-		<>
-			<Card sx={{ display: "flex" }}>
+		<div
+			style={{
+				height: "auto",
+				backgroundImage: `url("https://res.cloudinary.com/dhrftaik2/image/upload/v1692972783/beauty-shop/Site%20Images/Untitled_design_l4ombc.png")`,
+				backgroundSize: "cover",
+				padding: "60px",
+				display: "flex",
+				flexDirection: "column",
+			}}
+		>
+			<Card
+				sx={{
+					display: "flex",
+					backgroundColor: "transparent",
+				}}
+			>
 				<CardContent sx={{ flex: 1 }}>
 					{!viewSlots ? (
 						<>
@@ -175,31 +189,32 @@ export default function ViewService() {
 						</div>
 					)}
 				</CardContent>
-				<CardMedia
-					component="img"
-					sx={{ width: 160, display: { xs: "none", sm: "block" } }}
-					image={displayImage}
-					alt=""
-					style={{ height: "60vh" }}
-				/>
-			</Card>
-			<div className="cards flex-space">
-				<div className="service-pics">
-					{service.images.split(",").map((url, index) => {
-						return (
-							<div key={index}>
-								<img
-									key={index}
-									src={url}
-									onClick={() => changeImage(url)}
-									alt=""
-									style={{ cursor: "pointer" }}
-								/>
-							</div>
-						);
-					})}
+				<div style={{ display: "flex", flexDirection: "column" }}>
+					<CardMedia
+						component="img"
+						image={displayImage}
+						alt=""
+						style={{ height: "60vh", width: "45vw" }}
+					/>
+					<div className="cards flex-space">
+						<div className="service-pics">
+							{service.images.split(",").map((url, index) => {
+								return (
+									<div key={index}>
+										<img
+											key={index}
+											src={url}
+											onClick={() => changeImage(url)}
+											alt=""
+											style={{ cursor: "pointer" }}
+										/>
+									</div>
+								);
+							})}
+						</div>
+					</div>
 				</div>
-			</div>
-		</>
+			</Card>
+		</div>
 	);
 }

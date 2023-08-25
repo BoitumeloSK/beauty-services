@@ -82,7 +82,7 @@ table, th, td {
 .css-dpjnhs-MuiInputBase-root-MuiOutlinedInput-root{width: 194% !important;}
 /* main button and lock avatar*/
 .css-1vhaqj4-MuiButtonBase-root-MuiButton-root, .css-1999axt-MuiAvatar-root{
-    background-color: #ef0319 !important;
+    background-color: #ff5501 !important;
 }
 /*Navigation*/
 .css-uh02xs-MuiTypography-root {
@@ -196,6 +196,10 @@ border-radius:0
 /* .css-97bign-MuiCardContent-root > * {
   width: 500px !important;
 } */
+.css-6l8dzn-MuiPaper-root-MuiCard-root{
+  border-radius: 0 !important; 
+  box-shadow: none !important
+}
 
 @media (min-width: 600px){
   .css-fnq5ct-MuiCardMedia-root {
@@ -250,12 +254,21 @@ color: white;
   display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-auto-rows: 40px 40px;
+    background-color: white;
+    border: 1px #959595 solid;
+}
+.grid-container div{
+  display: flex;
+}
+.grid-container div button{
+  width:70px
 }
 .btn{
-  background: #9b6a4e;
+  background: #ff5501;
   border:none;
-  padding:10px;
-  color:white
+  padding:13px;
+  color:white;
+  width:70px
 }
 /*Create service page*/
 /*-------------------------------------*/
