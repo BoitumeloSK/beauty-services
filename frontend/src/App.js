@@ -11,7 +11,7 @@ import UserProfile from "./components/user/UserProfile";
 import CreateService from "./components/service/create service/CreateService";
 import ProviderServices from "./components/service/ProviderServices";
 import ViewService from "./components/service/View";
-import EditService from "./components/service/Edit";
+import EditService from "./components/service/edit service/Edit";
 import VisibleServices from "./components/service/VisibleServices";
 import MyBookings from "./components/booking/MyBookings";
 import ViewBooking from "./components/booking/View";
