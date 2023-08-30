@@ -24,6 +24,7 @@ export default function EditService() {
 	const [duplicateMsg, setDuplicateMsg] = useState(false);
 	const [editView, setEditView] = useState(false);
 	const user = JSON.parse(localStorage.getItem("beauty-shop-user"));
+	const [calendarSlots, setCalendarSlots] = useState([]);
 
 	useEffect(() => {
 		//Get the service by ID based on params and fetch its slots
@@ -45,10 +46,17 @@ export default function EditService() {
 							.then((response) => response.json())
 							.then((result) => {
 								setSlots(result.data);
+								let slotsArray = [];
+								if (result.data.length > 0) {
+									// Loop through the slotsArray and update each slot's startTime
+									for (let i = 0; i < result.data.length; i++) {
+										slotsArray.push(result.data[i].startTime.slice(0, 10));
+									}
+									setCalendarSlots(slotsArray);
+								}
 							});
 					});
 			} catch (error) {
-				setIsLoading(false);
 				console.log(error);
 			}
 		};
@@ -209,54 +217,41 @@ export default function EditService() {
 							Change service details
 						</button>
 						<br></br>
+						<br></br>
 						<React.Fragment>
 							{editView == true ? (
-								<>
+								<div className="center">
 									<AvailabilityCalendar
-										availableDates={slots}
+										availableDates={calendarSlots}
 										user={user}
 										serviceId={id}
 										preferredFunction={deleteSlot}
 										btnTxt={"X"}
 										getSlots={true}
 									/>
-									{slots.map((x) => {
-										let regex = /\d{4}-\d{2}-\d{2}/;
-										let reg2 = /\d{2}:\d{2}/;
-										let date = x.startTime.match(regex);
-										let time = x.startTime.match(reg2);
-										return (
-											<div key={x.id}>
-												<input
-													type="button"
-													name={x.id}
-													onClick={(e) => changeDateTime(e, x.id, x.startTime)}
-													value={`${date} ${time}`}
-												/>
-												<button onClick={() => deleteSlot(x.id)}>X</button>
-												<br></br>
-											</div>
-										);
-									})}
-									<input
-										type="datetime-local"
-										name="dateTime"
-										onChange={(e) => handleChange(e)}
-										defaultValue={dateTime.slice(0, 16)}
-									/>
-									<button onClick={() => changeSlot(slotId)}>
-										Change Slot
-									</button>
-									<br></br>
-									{duplicateMsg ? <>Slot already added</> : ""}
-									<label htmlFor="newDateTime">Add Slot:</label>
-									<input
-										type="datetime-local"
-										name="newDateTime"
-										onChange={(e) => handleChange(e)}
-									/>
-									<button onClick={() => addSlot()}>Add Slot</button>
-								</>
+									<div className="flex-and-center">
+										<div style={{ display: "flex" }}>
+											<input
+												type="datetime-local"
+												name="dateTime"
+												onChange={(e) => handleChange(e)}
+												defaultValue={dateTime.slice(0, 16)}
+											/>
+											<button onClick={() => changeSlot(slotId)}>
+												Change Slot
+											</button>
+										</div>
+										<br></br>
+										{duplicateMsg ? <>Slot already added</> : ""}
+										<label htmlFor="newDateTime">Add Slot:</label>
+										<input
+											type="datetime-local"
+											name="newDateTime"
+											onChange={(e) => handleChange(e)}
+										/>
+										<button onClick={() => addSlot()}>Add Slot</button>
+									</div>
+								</div>
 							) : (
 								<>
 									<label htmlFor="title">Title: </label>
