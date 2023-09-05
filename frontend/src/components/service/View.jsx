@@ -16,6 +16,7 @@ export default function ViewService() {
 	const [slots, setSlots] = useState([]);
 	const [last, setLast] = useState(false);
 	const [viewSlots, setViewSlots] = useState(false);
+
 	useEffect(() => {
 		const getService = async () => {
 			try {
@@ -97,7 +98,7 @@ export default function ViewService() {
 		setDisplayImage(url);
 	}
 	function showHideSlots(x) {
-		if (x === true) {
+		if (x === true && user) {
 			setViewSlots(true);
 		} else {
 			setViewSlots(false);
@@ -140,7 +141,7 @@ export default function ViewService() {
 							<Typography variant="subtitle1" color="text.secondary">
 								R {service.price}
 							</Typography>
-							{user.id === service.UserId ? (
+							{user != null && user.id === service.UserId ? (
 								<>
 									<div className="service-btns">
 										<button onClick={() => deleteService()}>DELETE</button>
@@ -154,13 +155,19 @@ export default function ViewService() {
 							) : (
 								""
 							)}
-							{/* <Link to="/services">Back to services</Link> */}
-							<button
-								onClick={() => showHideSlots(true)}
-								className="no-style-btn"
-							>
-								VIEW SLOTS
-							</button>
+							{!user ? (
+								<p style={{ background: "white" }}>
+									<Link to="/signup">Sign Up</Link> or{" "}
+									<Link to="/login">Login</Link> to view available service slots
+								</p>
+							) : (
+								<button
+									onClick={() => showHideSlots(true)}
+									className="no-style-btn"
+								>
+									VIEW SLOTS
+								</button>
+							)}
 						</>
 					) : (
 						<div className="center">

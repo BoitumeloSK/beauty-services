@@ -19,8 +19,13 @@ export default function ProviderServices() {
 			fetch(`/api/services/myservices/${user.id}`, getMethod)
 				.then((response) => response.json())
 				.then((result) => {
-					setServices(result.data);
-					setIsLoading(false);
+					if (result.success == false) {
+						window.localStorage.clear();
+						window.location.replace("login");
+					} else {
+						setServices(result.data);
+						setIsLoading(false);
+					}
 				});
 			// } catch (error) {
 			// 	console.log(error);

@@ -295,8 +295,10 @@ input[type="datetime-local"]{
   border: none;
   cursor: pointer;
   background: none;
-  padding: 10px
+  padding: 10px;
+  
 }
 .no-style-btn:hover{
-  border-bottom: black 1px solid
+  border-bottom: black 1px solid;
+  background: white;
 }

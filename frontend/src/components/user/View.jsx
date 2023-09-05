@@ -2,49 +2,49 @@ import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
 export default function ViewProfile() {
-  const user = JSON.parse(localStorage.getItem("beauty-shop-user"));
+	const user = JSON.parse(localStorage.getItem("beauty-shop-user"));
 
-  const firstName = user.firstName;
-  const lastName = user.lastName;
-  const email = user.email;
-  const about = user.about;
-  const address = user.address;
-  const image = user.image;
+	function deleteUser() {
+		const deleteMethod = {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		};
 
-  function deleteUser() {
-    const deleteMethod = {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+		fetch(`api/users/${user.id}`, deleteMethod)
+			.then((response) => response.json())
+			.then((result) => {
+				localStorage.removeItem("beauty-shop-user");
+				window.location.replace("/");
+			});
+	}
 
-    fetch(`api/users/${user.id}`, deleteMethod)
-      .then((response) => response.json())
-      .then((result) => {
-        localStorage.removeItem("beauty-shop-user");
-        window.location.replace("/");
-      });
-  }
-
-  return (
-    <Fragment>
-      <img src={image} alt="User" />
-      {firstName}
-      <br></br>
-      {lastName}
-      <br></br>
-      {email}
-      <br></br>
-      {about}
-      <br></br>
-      {address}
-      <br></br>
-      <Link to="/edit/Profile">Edit Profile</Link>
-      <br></br>
-      <Link to="/">Back</Link>
-      <br></br>
-      <button onClick={() => deleteUser()}>Delete Account</button>
-    </Fragment>
-  );
+	return (
+		<Fragment>
+			{user ? (
+				<>
+					{" "}
+					<img src={user.image} alt="User" />
+					{user.firstName}
+					<br></br>
+					{user.lastName}
+					<br></br>
+					{user.email}
+					<br></br>
+					{user.about}
+					<br></br>
+					{user.address}
+					<br></br>
+					<Link to="/edit/Profile">Edit Profile</Link>
+					<br></br>
+					<Link to="/">Back</Link>
+					<br></br>
+					<button onClick={() => deleteUser()}>Delete Account</button>
+				</>
+			) : (
+				<p>Sign Up or Login</p>
+			)}
+		</Fragment>
+	);
 }

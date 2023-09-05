@@ -16,7 +16,7 @@ function NoAccess() {
 			</Link>
 			<Link
 				variant="button"
-				to="login"
+				to="/login"
 				sx={{ my: 1, mx: 1.5 }}
 				className="link"
 			>
@@ -114,7 +114,7 @@ function logout() {
 			"Content-Type": "application/json",
 		},
 	};
-	fetch("api/users/logout", removeCookie)
+	fetch("/api/users/logout", removeCookie)
 		.then((response) => response.json())
 		.then((result) => {
 			localStorage.removeItem("beauty-shop-user");

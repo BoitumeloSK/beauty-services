@@ -19,6 +19,7 @@ import ProviderBookings from "./components/booking/ProviderBookings";
 import AllBookings from "./components/booking/AllBookings";
 import CategoryServices from "./components/service/CategoryServices";
 import Navigationbar from "./components/Navigationbar";
+
 function App() {
 	return (
 		<BrowserRouter>
@@ -26,7 +27,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/signup" element={<SignUp />} />
-				<Route path="login" element={<Login />} />
+				<Route path="/login" element={<Login />} />
 				<Route path="/profile" element={<ViewProfile />} />
 				<Route path="/edit/Profile" element={<EditProfile />} />
 				<Route path="/changePassword" element={<ChangePassword />} />

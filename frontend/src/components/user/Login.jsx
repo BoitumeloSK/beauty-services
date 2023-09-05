@@ -63,10 +63,12 @@ export default function Login() {
 			.then((response) => response.json())
 			.then((result) => {
 				if (result.success === true) {
+					console.log(result);
 					localStorage.setItem(
 						"beauty-shop-user",
 						JSON.stringify(result.data[0])
 					);
+
 					window.location.replace("/");
 				} else {
 					setAccess(true);
