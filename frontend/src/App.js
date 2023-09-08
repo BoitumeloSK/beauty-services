@@ -2,7 +2,7 @@ import "./App.css";
 import Home from "./components/Home";
 import SignUp from "./components/user/SignUp";
 import Login from "./components/user/Login";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Switch } from "react-router-dom";
 import ViewProfile from "./components/user/View";
 import EditProfile from "./components/user/Edit";
 import ChangePassword from "./components/user/ChangePassword";
@@ -19,11 +19,13 @@ import ProviderBookings from "./components/booking/ProviderBookings";
 import AllBookings from "./components/booking/AllBookings";
 import CategoryServices from "./components/service/CategoryServices";
 import Navigationbar from "./components/Navigationbar";
+import TokenExpirationCheck from "./components/TokenExpirationCheck";
 
 function App() {
 	return (
 		<BrowserRouter>
 			<Navigationbar />
+			<TokenExpirationCheck />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/signup" element={<SignUp />} />

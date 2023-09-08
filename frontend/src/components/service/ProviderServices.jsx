@@ -21,7 +21,7 @@ export default function ProviderServices() {
 				.then((result) => {
 					if (result.success == false) {
 						window.localStorage.clear();
-						window.location.replace("login");
+						window.location.replace("/login");
 					} else {
 						setServices(result.data);
 						setIsLoading(false);

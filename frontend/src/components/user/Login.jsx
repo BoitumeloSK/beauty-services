@@ -68,7 +68,7 @@ export default function Login() {
 						"beauty-shop-user",
 						JSON.stringify(result.data[0])
 					);
-
+					localStorage.setItem("JWT-Token", JSON.stringify(result.token));
 					window.location.replace("/");
 				} else {
 					setAccess(true);
