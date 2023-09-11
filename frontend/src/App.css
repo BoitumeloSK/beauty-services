@@ -22,7 +22,8 @@ Common styles
 .flex-and-center{
   display:flex;
   justify-content: center;
-  padding:10px
+  padding:10px;
+  align-items: center;
 }
 
 /*----------------------------------------
@@ -268,7 +269,6 @@ color: white;
   border:none;
   padding:13px;
   color:white;
-  width:70px
 }
 /*Create service page*/
 /*-------------------------------------*/
@@ -281,8 +281,8 @@ color: white;
 input[type="datetime-local"]{
   width: 200px;
   padding: 10px;
-  margin: 10px;
   font-size: 16px;
+  margin-right: 10px;
 }
 .slot-delete{
   margin-left: 5px;
@@ -301,4 +301,43 @@ input[type="datetime-local"]{
 .no-style-btn:hover{
   border-bottom: black 1px solid;
   background: white;
+}
+
+/*Edit service page*/
+/*-------------------------------------*/
+
+/*Visibility checkbox*/
+.css-1sg8fd1-MuiButtonBase-root-MuiCheckbox-root.Mui-checked{
+  color: #ff5501 !important;
+}
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: #ff5501;
+  border-radius: 50%;
+  display: inline-block;
+}
+.line{
+  width: "50%";
+  border-top: "0.2px solid #80808082";
+}
+.btnX{
+  background: red;
+  border:none;
+  padding:13px;
+  color:white;
+  cursor: pointer;
+}
+.a-btn{
+  font-family: "Poppins", "sans-serif";
+  font-size:16px;
+  color: #5518AB;
+  border: none;
+    background: white;
+}
+a{
+  text-decoration: none !important
+}
+.a-btn:hover, a:hover{
+  text-decoration: underline !important;
 }

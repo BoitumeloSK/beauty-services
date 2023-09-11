@@ -6,6 +6,15 @@ import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import AvailabilityCalendar from "../../Calendar";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputAdornment from "@mui/material/InputAdornment";
+import InputLabel from "@mui/material/InputLabel";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 
 import * as React from "react";
 export default function EditService() {
@@ -25,7 +34,29 @@ export default function EditService() {
 	const [editView, setEditView] = useState(false);
 	const user = JSON.parse(localStorage.getItem("beauty-shop-user"));
 	const [calendarSlots, setCalendarSlots] = useState([]);
+	const [actionComplete, setAction] = useState();
 
+	function continueBtn() {
+		setAction(true);
+	}
+	function ContinueEditing() {
+		return (
+			<div className="center" style={{ padding: "50px" }}>
+				<img
+					style={{ width: "200px" }}
+					alt="tick"
+					src="https://res.cloudinary.com/dhrftaik2/image/upload/v1694437054/beauty-shop/Site%20Images/tick_iiqlap.png"
+				/>
+				<h2>Action Complete!</h2>
+				<p>
+					<button className="a-btn" onClick={() => continueBtn()}>
+						Continue editing
+					</button>{" "}
+					or <Link to={`/viewservice/${service.id}`}>view service.</Link>
+				</p>
+			</div>
+		);
+	}
 	useEffect(() => {
 		//Get the service by ID based on params and fetch its slots
 		//isLoading sets the page view to "Loading..."whilst the service is still being fetched
@@ -91,6 +122,7 @@ export default function EditService() {
 
 		//Value of a new slot that should be added
 		if (e.target.name === "newDateTime") {
+			console.log(e.target.value);
 			setNewDateTime({ id: "", startTime: e.target.value });
 		}
 	}
@@ -125,7 +157,7 @@ export default function EditService() {
 			fetch("/api/slots", createMethod)
 				.then((response) => response.json())
 				.then((result) => {
-					console.log(result);
+					setAction(false);
 				});
 		}
 	}
@@ -145,6 +177,7 @@ export default function EditService() {
 			.then((response) => response.json())
 			.then((result) => {
 				console.log(result);
+				setAction(false);
 			});
 		setDateTime("");
 	}
@@ -161,6 +194,7 @@ export default function EditService() {
 			.then((response) => response.json())
 			.then((result) => {
 				console.log(result);
+				setAction(false);
 			});
 	}
 	//Edit a service
@@ -180,7 +214,7 @@ export default function EditService() {
 		fetch(`/api/services/${service.id}`, editMethod)
 			.then((response) => response.json())
 			.then((result) => {
-				window.location.replace(`/viewservice/${service.id}`);
+				setAction(false);
 			});
 	}
 
@@ -202,103 +236,200 @@ export default function EditService() {
 
 	return (
 		<>
-			<React.Fragment>
-				<CssBaseline />
-				<Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-					<Paper
-						variant="outlined"
-						sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
-					>
-						<Typography component="h1" variant="h4" align="center">
-							Edit Service
-						</Typography>
-						<button onClick={() => changeEditView(false)}>Change slots</button>
-						<button onClick={() => changeEditView(true)}>
-							Change service details
-						</button>
-						<br></br>
-						<br></br>
-						<React.Fragment>
-							{editView == true ? (
-								<div className="center">
-									<AvailabilityCalendar
-										availableDates={calendarSlots}
-										user={user}
-										serviceId={id}
-										preferredFunction={deleteSlot}
-										btnTxt={"X"}
-										getSlots={true}
-									/>
-									<div className="flex-and-center">
-										<div style={{ display: "flex" }}>
-											<input
-												type="datetime-local"
-												name="dateTime"
-												onChange={(e) => handleChange(e)}
-												defaultValue={dateTime.slice(0, 16)}
-											/>
-											<button onClick={() => changeSlot(slotId)}>
-												Change Slot
-											</button>
-										</div>
-										<br></br>
-										{duplicateMsg ? <>Slot already added</> : ""}
-										<label htmlFor="newDateTime">Add Slot:</label>
-										<input
-											type="datetime-local"
-											name="newDateTime"
-											onChange={(e) => handleChange(e)}
-										/>
-										<button onClick={() => addSlot()}>Add Slot</button>
-									</div>
-								</div>
+			<div
+				style={{
+					position: "absolute",
+					height: "auto",
+					width: "100%",
+					backgroundImage: `url("https://res.cloudinary.com/dhrftaik2/image/upload/v1692003783/beauty-shop/Site%20Images/josh-calabrese-XXpbdU_31Sg-unsplash-copy_ewguoh.jpg")`,
+					backgroundSize: "cover",
+				}}
+			>
+				<React.Fragment>
+					<CssBaseline />
+					<Container component="main" maxWidth="md" sx={{ mb: 4 }}>
+						<Paper
+							variant="outlined"
+							sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
+						>
+							<Typography component="h1" variant="h4" align="center">
+								Edit Service
+							</Typography>
+							{actionComplete === false ? (
+								<ContinueEditing />
 							) : (
 								<>
-									<label htmlFor="title">Title: </label>
-									<input
-										name="title"
-										defaultValue={service.title}
-										onChange={(e) => handleChange(e)}
-									/>
-									<br></br>
-									<label htmlFor="description">Description: </label>
-									<textarea
-										name="description"
-										defaultValue={service.description}
-										onChange={(e) => handleChange(e)}
-									></textarea>
-									<br></br>
-									<label htmlFor="price">Price: </label>
-									<input
-										type="number"
-										name="price"
-										defaultValue={service.price}
-										onChange={(e) => handleChange(e)}
-									/>
+									<div
+										className="flex-and-center"
+										style={{ justifyContent: "space-between" }}
+									>
+										<div className="flex-and-center">
+											{editView === false ? <span className="dot"></span> : ""}
+											<button
+												className="no-style-btn"
+												onClick={() => changeEditView(true)}
+											>
+												Change Service Details
+											</button>
+										</div>
+										<span
+											style={{
+												display: "inline-block",
+												width: "50%",
+												borderTop: "0.2px solid #80808082",
+											}}
+										></span>
+										<div className="flex-and-center">
+											{editView === true ? <span className="dot"></span> : ""}
+											<button
+												className="no-style-btn"
+												onClick={() => changeEditView(false)}
+											>
+												Change Slots
+											</button>
+										</div>
+									</div>
 
 									<br></br>
-									<label htmlFor="visibility">Visibility: </label>
-									<input
-										type="checkbox"
-										name="visibility"
-										onChange={(e) => handleChange(e)}
-										defaultChecked={service.visible}
-									/>
+
+									<React.Fragment>
+										{editView === true ? (
+											<div className="center">
+												<p>
+													<i>
+														To edit a time slot, click on the date in the
+														calendar and time.
+													</i>
+												</p>
+												<AvailabilityCalendar
+													availableDates={calendarSlots}
+													user={user}
+													serviceId={id}
+													preferredFunction={deleteSlot}
+													btnTxt={"X"}
+													getSlots={true}
+													updateFunction={changeDateTime}
+												/>
+												<div
+													className="flex-and-center"
+													style={{
+														width: "100%",
+														justifyContent: "space-between",
+													}}
+												>
+													<div style={{ display: "flex" }}>
+														<input
+															type="datetime-local"
+															name="dateTime"
+															onChange={(e) => handleChange(e)}
+															defaultValue={dateTime.slice(0, 16)}
+														/>
+														<button
+															onClick={() => changeSlot(slotId)}
+															className="btn"
+															style={{ background: "#9b6a4e" }}
+														>
+															CHANGE SLOT
+														</button>
+													</div>
+													<br></br>
+													{duplicateMsg ? <>Slot already added</> : ""}
+													<div style={{ display: "flex" }}>
+														<input
+															type="datetime-local"
+															name="newDateTime"
+															onChange={(e) => handleChange(e)}
+														/>
+														<button onClick={() => addSlot()} className="btn">
+															ADD SLOT
+														</button>
+													</div>
+												</div>
+											</div>
+										) : (
+											<>
+												<Grid container spacing={3}>
+													<Grid item xs={12}>
+														<InputLabel htmlFor="title">Title</InputLabel>
+														<TextField
+															style={{ width: "400px" }}
+															name="title"
+															autoComplete="title"
+															defaultValue={service.title}
+															onChange={(e) => handleChange(e)}
+														/>
+													</Grid>
+													<Grid item xs={12}>
+														<InputLabel htmlFor="description">
+															Description
+														</InputLabel>
+														<TextField
+															id="outlined-multiline-static"
+															name="description"
+															multiline
+															rows={4}
+															defaultValue={service.description}
+															onChange={(e) => handleChange(e)}
+														/>
+													</Grid>
+													<Grid item xs={4}>
+														<InputLabel htmlFor="outlined-adornment-amount">
+															Amount
+														</InputLabel>
+														<OutlinedInput
+															id="outlined-adornment-amount"
+															startAdornment={
+																<InputAdornment position="start">
+																	R
+																</InputAdornment>
+															}
+															label="Amount"
+															name="price"
+															defaultValue={service.price}
+															onChange={(e) => handleChange(e)}
+														/>
+													</Grid>
+													<Grid item xs={12}>
+														<FormControlLabel
+															control={
+																<Checkbox
+																	color="secondary"
+																	name="visibility"
+																	value={service.visible}
+																	defaultChecked={service.visible}
+																/>
+															}
+															label="Show service to all after adding it?"
+															onChange={(e) => handleChange(e)}
+														/>
+													</Grid>
+												</Grid>
+												<Box
+													sx={{ display: "flex", justifyContent: "flex-end" }}
+												>
+													<Button
+														variant="contained"
+														onClick={() =>
+															editService(title, description, price, visibility)
+														}
+														sx={{ mt: 3, ml: 1 }}
+													>
+														Update Service
+													</Button>
+												</Box>
+											</>
+										)}
+									</React.Fragment>
 									<br></br>
-									<button
-										onClick={() =>
-											editService(title, description, price, visibility)
-										}
-									>
-										Update Service
-									</button>
+									<Link to={`/viewservice/${service.id}`}>
+										<i>Back to service</i>
+									</Link>
 								</>
 							)}
-							<Box sx={{ display: "flex", justifyContent: "flex-end" }}></Box>
-						</React.Fragment>
-					</Paper>
-				</Container>
-			</React.Fragment>
+						</Paper>
+					</Container>
+				</React.Fragment>
+			</div>
 		</>
 	);
 }

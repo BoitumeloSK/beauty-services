@@ -40,7 +40,7 @@ class AvailabilityCalendar extends Component {
 		const { availableDates, selectedDate } = this.state;
 
 		return (
-			<div>
+			<div className="center">
 				<Calendar
 					tileContent={({ date, view }) =>
 						view === "month" &&
@@ -61,6 +61,7 @@ class AvailabilityCalendar extends Component {
 						ownerId={this.props.ownerId}
 						btnTxt={this.props.btnTxt}
 						chosen={this.state.chosenDate}
+						updateFunction={this.props.updateFunction}
 					/>
 				) : (
 					<ServiceTimes

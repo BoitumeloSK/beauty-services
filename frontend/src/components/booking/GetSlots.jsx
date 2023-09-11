@@ -6,6 +6,7 @@ export default function GetSlots({
 	ownerId,
 	btnTxt,
 	chosen,
+	updateFunction = "",
 }) {
 	const [slots, setSlots] = useState([]);
 	const [slotId, setSlotId] = useState();
@@ -52,13 +53,20 @@ export default function GetSlots({
 								{date == chosen ? (
 									<div key={i}>
 										<button
-											onClick={() => {
+											name={x.id}
+											onClick={(e) => {
 												showBookingBtn(x.id);
+												if (updateFunction != "") {
+													updateFunction(e, x.id, x.startTime);
+												}
 											}}
 											className={isActive === x.id ? "btn" : "no-style-btn"}
 										>{`${time}`}</button>
 										{slotId === x.id && ownerId !== user.id ? (
-											<button onClick={() => preferredFunction(slotId)}>
+											<button
+												onClick={() => preferredFunction(slotId)}
+												className={btnTxt === "X" ? "btnX" : ""}
+											>
 												{btnTxt}
 											</button>
 										) : (
