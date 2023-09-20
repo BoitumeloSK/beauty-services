@@ -158,7 +158,7 @@ sequelize.sync({ force: false }).then(async () => {
 		},
 		{
 			ServiceId: 2,
-			startTime: "2023-10-03 13:00:00",
+			startTime: "2023-10-03 13:00",
 			booked: true,
 		},
 		{
