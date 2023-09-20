@@ -66,7 +66,7 @@ export default function ProviderServices() {
 									<p>R {service.price}</p>
 									<Link
 										to={`/viewservice/${service.id}`}
-										style={{ textDecoration: "none", color: "black" }}
+										className="no-style-btn"
 									>
 										VIEW SERVICE
 									</Link>

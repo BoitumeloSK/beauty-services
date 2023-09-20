@@ -49,23 +49,7 @@ export default function ViewBooking() {
 				console.log(result);
 			});
 	}
-	function completeService() {
-		const editMethod = {
-			method: "PUT",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				fulfilled: true,
-			}),
-		};
-		fetch(`/api/bookings/complete/${booking.id}`, editMethod)
-			.then((response) => response.json())
-			.then((result) => {
-				console.log(result);
-			})
-			.catch((error) => console.log(error));
-	}
+
 	if (isLoading) {
 		return <>Loading...</>;
 	}

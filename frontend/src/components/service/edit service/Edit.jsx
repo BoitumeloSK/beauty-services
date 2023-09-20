@@ -49,10 +49,13 @@ export default function EditService() {
 				/>
 				<h2>Action Complete!</h2>
 				<p>
-					<button className="a-btn" onClick={() => continueBtn()}>
+					<button className="no-style-btn a-btn" onClick={() => continueBtn()}>
 						Continue editing
 					</button>{" "}
-					or <Link to={`/viewservice/${service.id}`}>view service.</Link>
+					or{" "}
+					<Link to={`/viewservice/${service.id}`} className="no-style-btn">
+						view service.
+					</Link>
 				</p>
 			</div>
 		);
@@ -122,7 +125,6 @@ export default function EditService() {
 
 		//Value of a new slot that should be added
 		if (e.target.name === "newDateTime") {
-			console.log(e.target.value);
 			setNewDateTime({ id: "", startTime: e.target.value });
 		}
 	}
@@ -176,6 +178,7 @@ export default function EditService() {
 		fetch(`/api/slots/${slotId}`, editMethod)
 			.then((response) => response.json())
 			.then((result) => {
+				console.log(typeof change);
 				console.log(result);
 				setAction(false);
 			});
@@ -421,7 +424,10 @@ export default function EditService() {
 										)}
 									</React.Fragment>
 									<br></br>
-									<Link to={`/viewservice/${service.id}`}>
+									<Link
+										to={`/viewservice/${service.id}`}
+										className="no-style-btn"
+									>
 										<i>Back to service</i>
 									</Link>
 								</>

@@ -20,6 +20,7 @@ import AllBookings from "./components/booking/AllBookings";
 import CategoryServices from "./components/service/CategoryServices";
 import Navigationbar from "./components/Navigationbar";
 import TokenExpirationCheck from "./components/TokenExpirationCheck";
+import Dashboard from "./components/provider dashboard/Dashboard";
 
 function App() {
 	return (
@@ -45,6 +46,7 @@ function App() {
 				<Route path="/providerbookings" element={<ProviderBookings />} />
 				<Route path="/allbookings" element={<AllBookings />} />
 				<Route path="/services/:category" element={<CategoryServices />} />
+				<Route path="/dashboard" element={<Dashboard />} />
 			</Routes>
 		</BrowserRouter>
 	);

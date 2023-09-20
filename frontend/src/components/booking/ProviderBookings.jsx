@@ -15,6 +15,7 @@ export default function ProviderBookings() {
 				fetch("/api/bookings/provider/list", getMethod)
 					.then((response) => response.json())
 					.then((result) => {
+						console.log(result);
 						setLoading(false);
 						setBookings(result.data);
 					});
@@ -25,7 +26,24 @@ export default function ProviderBookings() {
 		};
 		getBookings();
 	}, []);
-
+	function completeService(bookingId) {
+		const editMethod = {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				fulfilled: true,
+			}),
+		};
+		fetch(`/api/bookings/complete/${bookingId}`, editMethod)
+			.then((response) => response.json())
+			.then((result) => {
+				console.log(bookingId);
+				console.log(result);
+			})
+			.catch((error) => console.log(error));
+	}
 	if (isLoading) {
 		return <>Loading...</>;
 	}
@@ -39,9 +57,10 @@ export default function ProviderBookings() {
 				<thead>
 					<tr>
 						<th>Title</th>
+						<th>Service Slot</th>
 						<th>Price</th>
 						<th>Fulfillment</th>
-						<th></th>
+						<th>Booking Actions</th>
 					</tr>
 				</thead>
 				{bookings.map((booking) => {
@@ -49,12 +68,17 @@ export default function ProviderBookings() {
 						<tbody>
 							<tr key={booking.id}>
 								<td>{booking.Service.title}</td>
+								<td>{booking.Slot.startTime}</td>
 								<td>{booking.Service.price}</td>
-								<td>{booking.fulfilled}</td>
+								<td>{booking.fulfilled === false ? "pending" : "complete"}</td>
 								<td>
-									<Link to={`/viewbooking/${booking.id}`}>
-										<button>View Booking</button>
-									</Link>{" "}
+									{booking.fulfilled === false ? (
+										<button onClick={() => completeService(booking.id)}>
+											Service Complete
+										</button>
+									) : (
+										""
+									)}
 								</td>
 							</tr>
 						</tbody>

@@ -335,9 +335,10 @@ input[type="datetime-local"]{
   border: none;
     background: white;
 }
-a{
+a, a:hover{
   text-decoration: none !important
 }
-.a-btn:hover, a:hover{
-  text-decoration: underline !important;
+
+.recharts-surface {
+  height:180px
 }
