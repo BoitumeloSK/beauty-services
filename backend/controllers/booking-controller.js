@@ -46,7 +46,7 @@ function getUserBookings(req, res) {
 
 function getProviderBookings(req, res) {
 	const { userId } = JWT.verify(req.cookies.access_token, process.env.SECRET);
-	Booking.findAll({ include: [{ model: Service }, { model: Slot }] })
+	Booking.findAll({ include: [{ model: Service }] })
 		.then((data) => {
 			const providerBookings = data.filter((x) => x.Service.UserId == userId);
 			if (providerBookings.length == 0) {
@@ -55,7 +55,6 @@ function getProviderBookings(req, res) {
 					error: "No bookings made for posted services yet",
 				});
 			}
-
 			return res.status(200).json({ success: true, data: providerBookings });
 		})
 		.catch((error) => {
@@ -206,7 +205,7 @@ function completeBooking(req, res) {
 
 			Booking.update({ fulfilled }, { where: { id } })
 				.then((data) => {
-					return res.status(200).json({ success: true, data: data });
+					return res.status(200).json({ success: false, data: data });
 				})
 				.catch((error) => {
 					return res.status(400).json({ success: false, error: error });
