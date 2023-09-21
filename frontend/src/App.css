@@ -340,5 +340,13 @@ a, a:hover{
 }
 
 .recharts-surface {
-  height:180px
+  height:200px
+}
+.recharts-label {
+  transform: translateY(10px); /* Adjust the translateY value as needed */
+  font-family: Poppins, "sans-serif" !important
+}
+.css-3vyd2d-MuiPaper-root{
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
 }

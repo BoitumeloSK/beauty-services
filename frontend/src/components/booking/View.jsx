@@ -72,7 +72,7 @@ export default function ViewBooking() {
 				""
 			)}
 			{user.id === booking.Service.UserId ? (
-				<button onClick={() => completeService()}>Service Complete</button>
+				<button>Service Complete</button>
 			) : (
 				""
 			)}

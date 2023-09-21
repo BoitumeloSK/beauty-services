@@ -67,7 +67,13 @@ export default function Dashboard() {
 
 	return (
 		<ThemeProvider theme={defaultTheme}>
-			<Box sx={{ display: "flex" }}>
+			<Box
+				sx={{ display: "flex" }}
+				style={{
+					backgroundImage: `url("https://res.cloudinary.com/dhrftaik2/image/upload/v1695329091/beauty-shop/Site%20Images/mitchel-lensink-DFIl2Kw6ulw-unsplash_sltk1s.jpg")`,
+					backgroundSize: "cover",
+				}}
+			>
 				<CssBaseline />
 
 				<Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -79,7 +85,7 @@ export default function Dashboard() {
 									p: 2,
 									display: "flex",
 									flexDirection: "column",
-									height: 240,
+									height: 300,
 								}}
 							>
 								<Chart bookings={bookings} />
@@ -92,7 +98,7 @@ export default function Dashboard() {
 									p: 2,
 									display: "flex",
 									flexDirection: "column",
-									height: 240,
+									height: 300,
 								}}
 							>
 								<Total bookings={bookings} />

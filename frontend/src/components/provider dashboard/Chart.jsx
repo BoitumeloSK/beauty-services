@@ -7,6 +7,7 @@ import {
 	YAxis,
 	Label,
 	ResponsiveContainer,
+	Text,
 } from "recharts";
 
 // Generate Sales Data
@@ -35,7 +36,7 @@ export default function Chart({ bookings }) {
 
 	return (
 		<React.Fragment>
-			<h2>Today</h2>
+			<h2>This Year</h2>
 			<ResponsiveContainer>
 				<LineChart
 					data={addData()}
@@ -53,7 +54,7 @@ export default function Chart({ bookings }) {
 					>
 						<Label
 							angle={0}
-							position="bottom"
+							position="middle"
 							style={{
 								textAnchor: "middle",
 								fill: theme.palette.text.primary,
@@ -66,19 +67,12 @@ export default function Chart({ bookings }) {
 					<YAxis
 						stroke={theme.palette.text.secondary}
 						style={theme.typography.body2}
-					>
-						<Label
-							angle={270}
-							position="left"
-							style={{
-								textAnchor: "middle",
-								fill: theme.palette.text.primary,
-								...theme.typography.body1,
-							}}
-						>
-							Services (R)
-						</Label>
-					</YAxis>
+						label={
+							<Text x={0} y={-20} dx={50} dy={150} offset={0} angle={-90}>
+								Services (R)
+							</Text>
+						}
+					/>
 					<Line
 						isAnimationActive={false}
 						type="monotone"
