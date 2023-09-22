@@ -26,9 +26,7 @@ export default function ViewProfile() {
 				<>
 					{" "}
 					<img src={user.image} alt="User" />
-					{user.firstName}
-					<br></br>
-					{user.lastName}
+					{user.name}
 					<br></br>
 					{user.email}
 					<br></br>

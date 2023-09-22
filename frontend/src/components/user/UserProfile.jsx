@@ -18,16 +18,11 @@ export default function UserProfile() {
 				window.location.replace("/applications");
 			});
 	}
-	console.log("hey");
 	return (
 		<>
 			<p>
-				<b>First Name: </b>
-				{user.firstName}
-			</p>
-			<p>
-				<b>Last Name: </b>
-				{user.lastName}
+				<b>Name: </b>
+				{user.name}
 			</p>
 			<p>
 				<b>Email: </b>

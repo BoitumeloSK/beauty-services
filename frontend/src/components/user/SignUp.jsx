@@ -16,8 +16,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 export default function SignUp() {
-	const [fName, setFName] = useState();
-	const [lName, setLName] = useState();
+	const [name, setName] = useState();
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
 	const [confirmPassword, setConfirmPassword] = useState();
@@ -48,11 +47,8 @@ export default function SignUp() {
 	//
 
 	function handleChange(e) {
-		if (e.target.name === "fName") {
-			setFName(e.target.value);
-		}
-		if (e.target.name === "lName") {
-			setLName(e.target.value);
+		if (e.target.name === "name") {
+			setName(e.target.value);
 		}
 		if (e.target.name === "email") {
 			setEmail(e.target.value);
@@ -77,15 +73,7 @@ export default function SignUp() {
 		}
 	}
 
-	function createUser(
-		fName,
-		lName,
-		email,
-		password,
-		confirmPassword,
-		about,
-		address
-	) {
+	function createUser(name, email, password, confirmPassword, about, address) {
 		console.log("hey");
 		const data = new FormData();
 		data.append("file", image);
@@ -103,8 +91,7 @@ export default function SignUp() {
 						"Content-Type": "application/json",
 					},
 					body: JSON.stringify({
-						firstName: fName,
-						lastName: lName,
+						name: name,
 						email: email,
 						password: password,
 						confirmPassword: confirmPassword,
@@ -167,20 +154,10 @@ export default function SignUp() {
 						<Grid item xs={12} sm={6}>
 							<TextField
 								autoComplete="given-name"
-								name="fName"
+								name="name"
 								required
 								fullWidth
-								label="First Name"
-								onChange={(e) => handleChange(e)}
-							/>
-						</Grid>
-						<Grid item xs={12} sm={6}>
-							<TextField
-								required
-								fullWidth
-								label="Last Name"
-								name="lName"
-								autoComplete="family-name"
+								label="Name"
 								onChange={(e) => handleChange(e)}
 							/>
 						</Grid>
@@ -268,15 +245,7 @@ export default function SignUp() {
 						variant="contained"
 						sx={{ mt: 3, mb: 2 }}
 						onClick={() =>
-							createUser(
-								fName,
-								lName,
-								email,
-								password,
-								confirmPassword,
-								about,
-								address
-							)
+							createUser(name, email, password, confirmPassword, about, address)
 						}
 					>
 						Sign Up
