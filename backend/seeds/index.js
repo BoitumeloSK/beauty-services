@@ -8,8 +8,7 @@ sequelize.sync({ force: false }).then(async () => {
 		{
 			email: "customer@email.com",
 			password: hash,
-			firstName: "Customer",
-			lastName: "Customer",
+			name: "Customer",
 			image: "image.png",
 			about: "I am a customer",
 			address: "23 Paris Road, CPT",
@@ -17,20 +16,18 @@ sequelize.sync({ force: false }).then(async () => {
 			isActive: true,
 		},
 		{
-			email: "doe@email.com",
+			email: "john@email.com",
 			password: hash,
-			firstName: "John",
-			lastName: "Doe",
+			name: "John",
 			image: "image.png",
 			about: "I am a customer",
 			address: "23 Paris Road, CPT",
 			role: "customer",
 		},
 		{
-			email: "cena@email.com",
+			email: "thami@email.com",
 			password: hash,
-			firstName: "John",
-			lastName: "Cena",
+			name: "Thami",
 			image: "image.png",
 			about: "I am a customer",
 			address: "23 Paris Road, CPT",
@@ -39,8 +36,7 @@ sequelize.sync({ force: false }).then(async () => {
 		{
 			email: "provider@email.com",
 			password: hash,
-			firstName: "Provider",
-			lastName: "Provider",
+			name: "Provider",
 			image: "image.png",
 			about: "I am a service provider",
 			address: "18 Durban Street, CPT",
@@ -50,8 +46,7 @@ sequelize.sync({ force: false }).then(async () => {
 		{
 			email: "jane@email.com",
 			password: hash,
-			firstName: "Jane",
-			lastName: "Doe",
+			name: "Jane",
 			image: "image.png",
 			about: "I am a service provider",
 			address: "18 Durban Street, CPT",
@@ -59,10 +54,9 @@ sequelize.sync({ force: false }).then(async () => {
 			isActive: true,
 		},
 		{
-			email: "gama@email.com",
+			email: "thandi@email.com",
 			password: hash,
-			firstName: "Thandi",
-			lastName: "Gama",
+			name: "Thandi",
 			image: "image.png",
 			about: "I am a service provider",
 			address: "18 Durban Street, CPT",
@@ -227,6 +221,16 @@ sequelize.sync({ force: false }).then(async () => {
 			startTime: "2023-10-16 17:00",
 			booked: true,
 		},
+		{
+			ServiceId: 2,
+			startTime: "2023-08-05 17:00",
+			booked: true,
+		},
+		{
+			ServiceId: 2,
+			startTime: "2023-07-05 11:00",
+			booked: true,
+		},
 	]);
 
 	await Booking.bulkCreate([
@@ -248,8 +252,22 @@ sequelize.sync({ force: false }).then(async () => {
 			UserId: 5,
 			ServiceId: 2,
 			SlotId: 5,
-			fulfilled: false,
+			fulfilled: true,
 			totalPaid: 300,
+		},
+		{
+			UserId: 5,
+			ServiceId: 2,
+			SlotId: 17,
+			fulfilled: true,
+			totalPaid: 120,
+		},
+		{
+			UserId: 5,
+			ServiceId: 2,
+			SlotId: 18,
+			fulfilled: true,
+			totalPaid: 150,
 		},
 	]);
 });

@@ -30,16 +30,8 @@ function getUserById(req, res) {
 }
 
 function signup(req, res) {
-	const {
-		email,
-		password,
-		firstName,
-		lastName,
-		image,
-		about,
-		address,
-		confirmPassword,
-	} = req.body;
+	const { email, password, name, image, about, address, confirmPassword } =
+		req.body;
 	User.findAll({ where: { email } }).then(async (data) => {
 		if (data.length > 0) {
 			return res
@@ -56,8 +48,7 @@ function signup(req, res) {
 		User.create({
 			email,
 			password: hash,
-			firstName,
-			lastName,
+			name,
 			image,
 			about,
 			address,
@@ -114,7 +105,7 @@ function logout(req, res) {
 
 function updateUser(req, res) {
 	const { id } = req.params;
-	const { firstName, lastName, image, about, address } = req.body;
+	const { name, image, about, address } = req.body;
 	const updates = {};
 	User.findAll({ where: { id } }).then((data) => {
 		if (data.length == 0) {
@@ -129,11 +120,8 @@ function updateUser(req, res) {
 				error: "Not authorised to makes changes to user",
 			});
 		} else {
-			if (firstName) {
-				updates["firstName"] = firstName;
-			}
-			if (lastName) {
-				updates["lastName"] = lastName;
+			if (name) {
+				updates["name"] = name;
 			}
 			if (image) {
 				updates["image"] = image;
