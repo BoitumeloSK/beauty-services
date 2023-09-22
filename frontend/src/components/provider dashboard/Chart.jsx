@@ -9,6 +9,7 @@ import {
 	ResponsiveContainer,
 	Text,
 } from "recharts";
+import Typography from "@mui/material/Typography";
 
 // Generate Sales Data
 
@@ -36,7 +37,9 @@ export default function Chart({ bookings }) {
 
 	return (
 		<React.Fragment>
-			<h2 style={{ marginTop: "0", textAlign: "center" }}>This Year</h2>
+			<Typography component="h2" variant="h4" align="center" margin={1}>
+				This Year
+			</Typography>
 			<ResponsiveContainer>
 				<LineChart
 					data={addData()}

@@ -184,24 +184,16 @@ export default function CreateService() {
 	};
 
 	return (
-		<div
-			style={{
-				position: "absolute",
-				height: "auto",
-				width: "100%",
-				backgroundImage: `url("https://res.cloudinary.com/dhrftaik2/image/upload/v1692003783/beauty-shop/Site%20Images/josh-calabrese-XXpbdU_31Sg-unsplash-copy_ewguoh.jpg")`,
-				backgroundSize: "cover",
-			}}
-		>
-			<Typography component="h2" variant="h4" align="center" margin={3.5}>
-				Create New Service
-			</Typography>
+		<div style={{ width: "100%" }}>
 			<CssBaseline />
 			<Container component="main" maxWidth="md" sx={{ mb: 4 }}>
 				<Paper
 					variant="outlined"
 					sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
 				>
+					<Typography component="h2" variant="h4" align="center" margin={1}>
+						Create New Service
+					</Typography>
 					<Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
 						{steps.map((label) => (
 							<Step key={label}>

@@ -4,6 +4,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { Typography } from "@mui/material";
 
 export default function BookingsList({ bookings }) {
 	function completeService(bookingId) {
@@ -26,7 +27,9 @@ export default function BookingsList({ bookings }) {
 	}
 	return (
 		<React.Fragment>
-			<h2 style={{ marginTop: "0", textAlign: "center" }}>Bookings</h2>
+			<Typography component="h2" variant="h4" align="center" margin={1}>
+				Bookings
+			</Typography>
 			{bookings ? (
 				<>
 					<Table size="small">

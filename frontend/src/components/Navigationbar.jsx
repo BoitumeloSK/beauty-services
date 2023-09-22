@@ -42,11 +42,11 @@ function GrantedAccess() {
 				<>
 					<Link
 						variant="button"
-						to="/postService"
+						to="/dashboard"
 						sx={{ my: 1, mx: 1.5 }}
 						className="link"
 					>
-						POST SERVICE
+						DASHBOARD
 					</Link>
 					<Link
 						variant="button"

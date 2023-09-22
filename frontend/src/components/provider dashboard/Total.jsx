@@ -26,8 +26,10 @@ export default function Total({ bookings }) {
 	}
 	return (
 		<React.Fragment>
-			<h2 style={{ marginTop: "0" }}>Total</h2>
-			<Typography component="p" variant="h4">
+			<Typography component="h2" variant="h4" margin={1} align="center">
+				Total
+			</Typography>
+			<Typography component="p" variant="h3" margin={2} align="center">
 				R {calculateTotal()}
 			</Typography>
 			<Typography color="text.secondary" sx={{ flex: 1 }}>

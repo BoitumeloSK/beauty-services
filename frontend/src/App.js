@@ -8,7 +8,6 @@ import EditProfile from "./components/user/Edit";
 import ChangePassword from "./components/user/ChangePassword";
 import Applications from "./components/user/Applications";
 import UserProfile from "./components/user/UserProfile";
-import CreateService from "./components/service/create service/CreateService";
 import ProviderServices from "./components/service/ProviderServices";
 import ViewService from "./components/service/View";
 import EditService from "./components/service/edit service/Edit";
@@ -36,7 +35,6 @@ function App() {
 				<Route path="/changePassword" element={<ChangePassword />} />
 				<Route path="/applications" element={<Applications />} />
 				<Route path="/userProfile" element={<UserProfile />} />
-				<Route path="/postService" element={<CreateService />} />
 				<Route path="/myservices" element={<ProviderServices />} />
 				<Route path="/viewservice/:id" element={<ViewService />} />
 				<Route path="editservice/:id" element={<EditService />} />

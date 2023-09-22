@@ -288,8 +288,8 @@ color: white;
 }
 /*Create service page*/
 /*-------------------------------------*/
-.css-126nd9x-MuiPaper-root{
-  margin-top: 0 !important;
+.css-q5bj02-MuiTypography-root, .css-a55std-MuiTypography-root{
+font-size: 1.5rem !important;
 }
 .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active, .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed{
   color: #ff5501 !important;

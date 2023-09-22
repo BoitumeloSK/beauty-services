@@ -22,6 +22,8 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import List from "@mui/material/List";
 
+import CreateService from "../service/create service/CreateService";
+
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 const drawerWidth = 200;
@@ -29,6 +31,7 @@ const drawerWidth = 200;
 export default function Dashboard() {
 	const [bookings, setBookings] = useState([]);
 	const [isLoading, setLoading] = useState(true);
+	const [test, setTest] = useState(false);
 	useEffect(() => {
 		const getBookings = async () => {
 			try {
@@ -75,85 +78,13 @@ export default function Dashboard() {
 	if (!bookings) {
 		return <>No data found</>;
 	}
-
-	return (
-		<div
-			style={{
-				display: "flex",
-				position: "absolute",
-				height: "auto",
-				width: "100%",
-				backgroundImage: `url("https://res.cloudinary.com/dhrftaik2/image/upload/v1692003783/beauty-shop/Site%20Images/josh-calabrese-XXpbdU_31Sg-unsplash-copy_ewguoh.jpg")`,
-				backgroundSize: "cover",
-			}}
-		>
-			<div>
-				<Drawer
-					variant="permanent"
-					sx={{
-						width: drawerWidth,
-						flexShrink: 0,
-						[`& .MuiDrawer-paper`]: {
-							width: drawerWidth,
-							boxSizing: "border-box",
-						},
-					}}
-				>
-					<Box sx={{ overflow: "auto" }}>
-						<List>
-							{["Inbox", "Starred", "Send email", "Drafts"].map(
-								(text, index) => (
-									<ListItem key={text} disablePadding>
-										<ListItemButton>
-											<ListItemIcon>
-												{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-											</ListItemIcon>
-											<ListItemText primary={text} />
-										</ListItemButton>
-									</ListItem>
-								)
-							)}
-						</List>
-						<Divider />
-						<List>
-							{["All mail", "Trash", "Spam"].map((text, index) => (
-								<ListItem key={text} disablePadding>
-									<ListItemButton>
-										<ListItemIcon>
-											{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-										</ListItemIcon>
-										<ListItemText primary={text} />
-									</ListItemButton>
-								</ListItem>
-							))}
-						</List>
-					</Box>
-				</Drawer>
-			</div>
-			<div>
-				<Typography component="h1" variant="h3" align="center" margin={3}>
-					Service Dashboard
-				</Typography>
-				<p
-					style={{
-						padding: "0 20px",
-						textAlign: "center",
-						background: "white",
-					}}
-				>
-					Hi [User], welcome to your service dashboard where you will find all
-					your service reports, as well as service creation and management
-					tools. Explore your Iconic Flair!
-				</p>
-				<Box
-					// sx={{ display: "flex" }}
-					// style={{
-					// 	backgroundImage: `url("https://res.cloudinary.com/dhrftaik2/image/upload/v1695329091/beauty-shop/Site%20Images/mitchel-lensink-DFIl2Kw6ulw-unsplash_sltk1s.jpg")`,
-					// 	backgroundSize: "cover",
-					// }}
-					component="main"
-					sx={{ flexGrow: 1, p: 3 }}
-				>
+	function check() {
+		setTest(true);
+	}
+	function Dash() {
+		return (
+			<>
+				<Box component="main" sx={{ flexGrow: 1, p: 3 }}>
 					<CssBaseline />
 
 					<Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -193,6 +124,83 @@ export default function Dashboard() {
 						</Grid>
 					</Container>
 				</Box>
+			</>
+		);
+	}
+	return (
+		<div
+			style={{
+				display: "flex",
+				position: "absolute",
+				height: "auto",
+				width: "100%",
+				backgroundImage: `url("https://res.cloudinary.com/dhrftaik2/image/upload/v1692003783/beauty-shop/Site%20Images/josh-calabrese-XXpbdU_31Sg-unsplash-copy_ewguoh.jpg")`,
+				backgroundSize: "cover",
+			}}
+		>
+			<div>
+				<Drawer
+					variant="permanent"
+					sx={{
+						width: drawerWidth,
+						flexShrink: 0,
+						[`& .MuiDrawer-paper`]: {
+							width: drawerWidth,
+							boxSizing: "border-box",
+						},
+					}}
+				>
+					<Box sx={{ overflow: "auto" }}>
+						<List>
+							<ListItem disablePadding>
+								<ListItemButton onClick={() => check()}>
+									<ListItemIcon>
+										<InboxIcon />
+									</ListItemIcon>
+									<ListItemText primary="Dashboard" />
+								</ListItemButton>
+							</ListItem>
+							<ListItem disablePadding>
+								<ListItemButton onClick={() => check()}>
+									<ListItemIcon>
+										<InboxIcon />
+									</ListItemIcon>
+									<ListItemText primary="Create Service" />
+								</ListItemButton>
+							</ListItem>
+						</List>
+						<Divider />
+						<List>
+							{["All mail", "Trash", "Spam"].map((text, index) => (
+								<ListItem key={text} disablePadding>
+									<ListItemButton>
+										<ListItemIcon>
+											{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+										</ListItemIcon>
+										<ListItemText primary={text} />
+									</ListItemButton>
+								</ListItem>
+							))}
+						</List>
+					</Box>
+				</Drawer>
+			</div>
+			<div>
+				<Typography component="h1" variant="h3" align="center" margin={3}>
+					Service Dashboard
+				</Typography>
+				<p
+					style={{
+						padding: "0 20px",
+						textAlign: "center",
+						background: "white",
+					}}
+				>
+					Hi [User], welcome to your service dashboard where you will find all
+					your service reports, as well as service creation and management
+					tools. Explore your Iconic Flair!
+				</p>
+				{test === false ? <Dash /> : <CreateService />}
 			</div>
 		</div>
 	);
