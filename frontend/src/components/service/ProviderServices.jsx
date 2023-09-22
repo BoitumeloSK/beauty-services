@@ -44,10 +44,6 @@ export default function ProviderServices() {
 	}
 	return (
 		<>
-			<div className="center">
-				<h1>MY SERVICES</h1>
-				<p>All the services you have created</p>
-			</div>
 			<Box sx={{ flexGrow: 1 }}>
 				<Grid
 					container

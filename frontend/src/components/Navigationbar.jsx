@@ -48,22 +48,6 @@ function GrantedAccess() {
 					>
 						DASHBOARD
 					</Link>
-					<Link
-						variant="button"
-						to="/myservices"
-						sx={{ my: 1, mx: 1.5 }}
-						className="link"
-					>
-						MY SERVICES
-					</Link>
-					<Link
-						variant="button"
-						to="/providerbookings"
-						sx={{ my: 1, mx: 1.5 }}
-						className="link"
-					>
-						BOOKINGS
-					</Link>
 				</>
 			) : storageKey.role === "admin" ? (
 				<>

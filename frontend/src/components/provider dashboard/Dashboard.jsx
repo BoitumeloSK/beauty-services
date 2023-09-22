@@ -1,8 +1,6 @@
 import * as React from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -23,15 +21,14 @@ import MailIcon from "@mui/icons-material/Mail";
 import List from "@mui/material/List";
 
 import CreateService from "../service/create service/CreateService";
+import ProviderServices from "../service/ProviderServices";
 
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
 const drawerWidth = 200;
 
 export default function Dashboard() {
 	const [bookings, setBookings] = useState([]);
 	const [isLoading, setLoading] = useState(true);
-	const [test, setTest] = useState(false);
+	const [target, setTarget] = useState("analytics");
 	useEffect(() => {
 		const getBookings = async () => {
 			try {
@@ -54,34 +51,17 @@ export default function Dashboard() {
 		};
 		getBookings();
 	}, []);
-	function completeService(bookingId) {
-		const editMethod = {
-			method: "PUT",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				fulfilled: true,
-			}),
-		};
-		fetch(`/api/bookings/complete/${bookingId}`, editMethod)
-			.then((response) => response.json())
-			.then((result) => {
-				console.log(bookingId);
-				console.log(result);
-			})
-			.catch((error) => console.log(error));
-	}
+
 	if (isLoading) {
 		return <>Loading...</>;
 	}
 	if (!bookings) {
 		return <>No data found</>;
 	}
-	function check() {
-		setTest(true);
+	function targetComponent(name) {
+		setTarget(name);
 	}
-	function Dash() {
+	function Analytics() {
 		return (
 			<>
 				<Box component="main" sx={{ flexGrow: 1, p: 3 }}>
@@ -153,19 +133,27 @@ export default function Dashboard() {
 					<Box sx={{ overflow: "auto" }}>
 						<List>
 							<ListItem disablePadding>
-								<ListItemButton onClick={() => check()}>
+								<ListItemButton onClick={() => targetComponent("analytics")}>
 									<ListItemIcon>
 										<InboxIcon />
 									</ListItemIcon>
-									<ListItemText primary="Dashboard" />
+									<ListItemText primary="Bookings and Reports" />
 								</ListItemButton>
 							</ListItem>
 							<ListItem disablePadding>
-								<ListItemButton onClick={() => check()}>
+								<ListItemButton onClick={() => targetComponent("services")}>
 									<ListItemIcon>
 										<InboxIcon />
 									</ListItemIcon>
-									<ListItemText primary="Create Service" />
+									<ListItemText primary="My Services" />
+								</ListItemButton>
+							</ListItem>
+							<ListItem disablePadding>
+								<ListItemButton onClick={() => targetComponent("addService")}>
+									<ListItemIcon>
+										<InboxIcon />
+									</ListItemIcon>
+									<ListItemText primary="Add Service" />
 								</ListItemButton>
 							</ListItem>
 						</List>
@@ -200,7 +188,15 @@ export default function Dashboard() {
 					your service reports, as well as service creation and management
 					tools. Explore your Iconic Flair!
 				</p>
-				{test === false ? <Dash /> : <CreateService />}
+				{target === "analytics" ? (
+					<Analytics />
+				) : target === "addService" ? (
+					<CreateService />
+				) : target === "services" ? (
+					<ProviderServices />
+				) : (
+					""
+				)}
 			</div>
 		</div>
 	);
