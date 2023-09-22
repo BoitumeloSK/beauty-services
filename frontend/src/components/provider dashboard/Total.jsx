@@ -29,10 +29,19 @@ export default function Total({ bookings }) {
 			<Typography component="h2" variant="h4" margin={1} align="center">
 				Total
 			</Typography>
-			<Typography component="p" variant="h3" margin={2} align="center">
+			<Typography
+				component="p"
+				variant="h3"
+				margin={2}
+				align="center"
+				style={{ fontFamily: "Poppins, sans-serif" }}
+			>
 				R {calculateTotal()}
 			</Typography>
-			<Typography color="text.secondary" sx={{ flex: 1 }}>
+			<Typography
+				sx={{ flex: 1 }}
+				style={{ fontFamily: "Poppins, sans-serif" }}
+			>
 				Made this year as of <i>{getDate()}</i>
 			</Typography>
 		</React.Fragment>

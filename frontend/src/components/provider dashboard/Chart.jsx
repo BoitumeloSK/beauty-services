@@ -15,9 +15,6 @@ import Typography from "@mui/material/Typography";
 
 export default function Chart({ bookings }) {
 	const theme = useTheme();
-	function createData(time, amount) {
-		return { time, amount };
-	}
 
 	function addData() {
 		let data = [];
@@ -25,14 +22,20 @@ export default function Chart({ bookings }) {
 		let year = date.getFullYear();
 		let completed = bookings.filter((x) => x.fulfilled == true);
 		let bookingYear = completed.filter(
-			(x) => String(x.createdAt.slice(0, 4)) == String(year)
+			(x) => String(x.Slot.startTime.slice(0, 4)) === String(year)
 		);
+
 		if (bookingYear.length > 0) {
 			bookingYear.forEach((x) => {
-				data.push(createData(`${x.createdAt.slice(6, 7)}`, x.totalPaid));
+				const check = new Date(x.Slot.startTime.slice(0, 10));
+				data.push({
+					date: `${check.getMonth()}`,
+					amount: x.totalPaid,
+				});
 			});
 		}
-		return data;
+		const sortedArray = data.sort((a, b) => a.date - b.date);
+		return sortedArray;
 	}
 
 	return (
@@ -51,7 +54,7 @@ export default function Chart({ bookings }) {
 					}}
 				>
 					<XAxis
-						dataKey="time"
+						dataKey="date"
 						stroke={theme.palette.text.secondary}
 						style={theme.typography.body2}
 					>
@@ -81,7 +84,7 @@ export default function Chart({ bookings }) {
 						type="monotone"
 						dataKey="amount"
 						stroke={theme.palette.primary.main}
-						dot={false}
+						dot={true}
 					/>
 				</LineChart>
 			</ResponsiveContainer>
