@@ -36,7 +36,7 @@ export default function Chart({ bookings }) {
 
 	return (
 		<React.Fragment>
-			<h2>This Year</h2>
+			<h2 style={{ marginTop: "0", textAlign: "center" }}>This Year</h2>
 			<ResponsiveContainer>
 				<LineChart
 					data={addData()}

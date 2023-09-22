@@ -26,7 +26,7 @@ export default function BookingsList({ bookings }) {
 	}
 	return (
 		<React.Fragment>
-			<h2>Bookings</h2>
+			<h2 style={{ marginTop: "0", textAlign: "center" }}>Bookings</h2>
 			{bookings ? (
 				<>
 					<Table size="small">

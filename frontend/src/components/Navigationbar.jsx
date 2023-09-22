@@ -126,7 +126,7 @@ export default function Navigationbar() {
 	const storageKey = localStorage.getItem("beauty-shop-user");
 	return (
 		<AppBar
-			position="static"
+			position="fixed"
 			color="default"
 			elevation={0}
 			sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
