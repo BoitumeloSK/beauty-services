@@ -20,7 +20,7 @@ export default function Chart({ bookings }) {
 		let data = [];
 		const date = new Date();
 		let year = date.getFullYear();
-		let completed = bookings.filter((x) => x.fulfilled == true);
+		let completed = bookings.filter((x) => x.fulfilled === true);
 		let bookingYear = completed.filter(
 			(x) => String(x.Slot.startTime.slice(0, 4)) === String(year)
 		);
