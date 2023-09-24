@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 
-function AddAbout(name, { changeFunction }, about) {
+function AddAbout({ name, changeFunction, about }) {
 	return (
 		<>
 			<label htmlFor={name}>About:</label>
@@ -84,7 +84,6 @@ export default function EditProfile() {
 			<button onClick={() => confirmEdit(name, about, address)}>
 				Confirm Edit
 			</button>
-			<Link to="/profile">Back</Link>
 		</Fragment>
 	);
 }
