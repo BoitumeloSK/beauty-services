@@ -46,9 +46,11 @@ sequelize.sync({ force: false }).then(async () => {
 		{
 			email: "jane@email.com",
 			password: hash,
-			name: "Jane",
-			image: "image.png",
-			about: "I am a service provider",
+			name: "Jane's Studio",
+			image:
+				"https://res.cloudinary.com/dhrftaik2/image/upload/v1695548399/beauty-shop/Site%20Images/Elegant_Hair_and_Beauty_Business_Logo_dehwdn.png",
+			about:
+				"Discover the perfect fusion of style and artistry at our hair salon. From trendy haircuts to mesmerizing braids, we've got your unique look covered. Step in and let us turn your hair into a masterpiece that speaks to your style.",
 			address: "18 Durban Street, CPT",
 			role: "provider",
 			isActive: true,
