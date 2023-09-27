@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import { linkClasses } from "@mui/material";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import EmailIcon from "@mui/icons-material/Email";
+
 function NoAccess() {
 	return (
 		<>
@@ -109,36 +113,86 @@ function logout() {
 export default function Navigationbar() {
 	const storageKey = localStorage.getItem("beauty-shop-user");
 	return (
-		<AppBar
-			position="fixed"
-			color="default"
-			elevation={0}
-			sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
-		>
-			<Toolbar sx={{ flexWrap: "wrap" }}>
-				<Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-					ICONIC FLAIR
-				</Typography>
-				<nav>
-					<Link
-						variant="button"
-						to="/"
-						sx={{ my: 1, mx: 1.5 }}
-						className="link"
-					>
-						HOME
-					</Link>
-					<Link
-						variant="button"
-						to="/services"
-						sx={{ my: 1, mx: 1.5 }}
-						className="link"
-					>
-						SERVICES
-					</Link>
-					{storageKey === null ? <NoAccess /> : <GrantedAccess />}
-				</nav>
-			</Toolbar>
-		</AppBar>
+		<>
+			<div
+				style={{
+					padding: "0 30px",
+					background: "#DAB180",
+					display: "flex",
+					justifyContent: "space-between",
+				}}
+			>
+				<div style={{ display: "flex", alignItems: "center" }}>
+					<EmailIcon style={{ color: "#FFEDED", padding: "5px" }} />
+					<p style={{ color: "#FFEDED" }}> info@balanceme.co.za</p>
+				</div>
+				<div
+					style={{
+						display: "flex",
+						justifyContent: "space-between",
+						alignItems: "center",
+						width: "22%",
+					}}
+				>
+					<div>
+						<Link
+							variant="button"
+							to="/services"
+							sx={{ my: 1, mx: 1.5 }}
+							className="link2"
+							style={{ display: "flex" }}
+						>
+							<CalendarMonthIcon style={{ color: "#ede9e9" }} /> BOOK NOW
+						</Link>
+					</div>
+					<div>
+						{" "}
+						<FacebookIcon style={{ color: "#FFEDED", padding: "5px" }} />
+						<TwitterIcon style={{ color: "#FFEDED", padding: "5px" }} />
+						<InstagramIcon style={{ color: "#FFEDED", padding: "5px" }} />
+					</div>
+				</div>
+			</div>
+			<AppBar
+				position="sticky"
+				top="0"
+				color="default"
+				elevation={0}
+				sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
+			>
+				<Toolbar
+					sx={{
+						flexWrap: "wrap",
+						display: "flex",
+						justifyContent: "space-between",
+					}}
+				>
+					<img
+						src="https://res.cloudinary.com/dhrftaik2/image/upload/v1695747013/beauty-shop/Site%20Images/White_And_Black_Modern_Abstract_Beauty_Logo2_xgbifs.png"
+						style={{ width: "180px" }}
+						alt=""
+					/>
+					<nav>
+						<Link
+							variant="button"
+							to="/"
+							sx={{ my: 1, mx: 1.5 }}
+							className="link"
+						>
+							HOME
+						</Link>
+						<Link
+							variant="button"
+							to="/services"
+							sx={{ my: 1, mx: 1.5 }}
+							className="link"
+						>
+							SERVICES
+						</Link>
+						{storageKey === null ? <NoAccess /> : <GrantedAccess />}
+					</nav>
+				</Toolbar>
+			</AppBar>
+		</>
 	);
 }

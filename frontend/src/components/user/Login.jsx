@@ -87,8 +87,7 @@ export default function Login() {
 					sm={4}
 					md={7}
 					sx={{
-						backgroundImage:
-							"url(https://res.cloudinary.com/dhrftaik2/image/upload/v1689847232/beauty-shop/gllcsltpw8i9vnw3fpka.jpg)",
+						backgroundImage: `url("https://res.cloudinary.com/dhrftaik2/image/upload/v1691952881/beauty-shop/Site%20Images/erol-ahmed-aIYFR0vbADk-unsplash_kkky1n.jpg")`,
 						backgroundRepeat: "no-repeat",
 						backgroundColor: (t) =>
 							t.palette.mode === "light"
@@ -114,54 +113,66 @@ export default function Login() {
 						<Typography component="h1" variant="h5">
 							Sign in
 						</Typography>
-
-						<TextField
-							margin="normal"
-							required
-							fullWidth
-							label="Email Address"
-							name="email"
-							autoComplete="email"
-							autoFocus
-							onChange={(e) => handleChange(e)}
-						/>
-						<TextField
-							margin="normal"
-							required
-							fullWidth
-							name="password"
-							label="Password"
-							type="password"
-							autoComplete="current-password"
-							onChange={(e) => handleChange(e)}
-						/>
-						{/* <FormControlLabel
+						<Box
+							component="form"
+							noValidate
+							onSubmit={loginUser(email, password)}
+							sx={{ mt: 1 }}
+						>
+							<TextField
+								margin="normal"
+								required
+								fullWidth
+								label="Email Address"
+								name="email"
+								autoComplete="email"
+								autoFocus
+								onChange={(e) => handleChange(e)}
+							/>
+							<TextField
+								margin="normal"
+								required
+								fullWidth
+								name="password"
+								label="Password"
+								type="password"
+								autoComplete="current-password"
+								onChange={(e) => handleChange(e)}
+							/>
+							{/* <FormControlLabel
 							control={<Checkbox value="remember" color="primary" />}
 							label="Remember me"
 						/> */}
-						{loginDenied ? <p>Invalid Credentials</p> : ""}
-						<Button
-							type="submit"
-							fullWidth
-							variant="contained"
-							sx={{ mt: 3, mb: 2 }}
-							onClick={() => loginUser(email, password)}
-						>
-							Sign In
-						</Button>
-						<Grid container>
-							<Grid item xs>
-								<Link href="/changePassword" variant="body2">
-									Forgot password?
-								</Link>
+							{loginDenied ? (
+								<p style={{ color: "red" }}>
+									<b>Invalid Credentials</b>
+								</p>
+							) : (
+								""
+							)}
+							<Button
+								type="submit"
+								fullWidth
+								variant="contained"
+								sx={{ mt: 3, mb: 2 }}
+							>
+								Sign In
+							</Button>
+
+							<Grid container>
+								<Grid item xs>
+									<Link href="/changePassword" variant="body2">
+										Forgot password?
+									</Link>
+								</Grid>
+								<Grid item>
+									<Link href="/signup" variant="body2">
+										{"Don't have an account? Sign Up"}
+									</Link>
+								</Grid>
 							</Grid>
-							<Grid item>
-								<Link href="/signup" variant="body2">
-									{"Don't have an account? Sign Up"}
-								</Link>
-							</Grid>
-						</Grid>
-						<Copyright sx={{ mt: 5 }} />
+							<Copyright sx={{ mt: 5 }} />
+						</Box>
 					</Box>
 				</Grid>
 			</Grid>

@@ -2,7 +2,7 @@ import "./App.css";
 import Home from "./components/Home";
 import SignUp from "./components/user/SignUp";
 import Login from "./components/user/Login";
-import { BrowserRouter, Route, Routes, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ViewProfile from "./components/user/View";
 import EditProfile from "./components/user/Edit";
 import ChangePassword from "./components/user/ChangePassword";
@@ -20,6 +20,7 @@ import CategoryServices from "./components/service/CategoryServices";
 import Navigationbar from "./components/Navigationbar";
 import TokenExpirationCheck from "./components/TokenExpirationCheck";
 import Dashboard from "./components/provider dashboard/Dashboard";
+import Footer from "./components/Footer";
 
 function App() {
 	return (
@@ -46,6 +47,7 @@ function App() {
 				<Route path="/services/:category" element={<CategoryServices />} />
 				<Route path="/dashboard" element={<Dashboard />} />
 			</Routes>
+			<Footer />
 		</BrowserRouter>
 	);
 }

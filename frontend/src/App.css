@@ -3,7 +3,7 @@
   
 }
 body{
-  font-family: "Poppins","sans-serif" !important
+  font-family: "Poppins","sans-serif", !important
 }
 .App-logo {
   height: 40vmin;
@@ -19,12 +19,6 @@ body{
 /*----------------------------------------
 Common styles 
 -------*/
-#root{
-  position: relative;
-}
-#root:nth-child(2){
-  top:64px
-}
 .flex-and-center{
   display:flex;
   justify-content: center;
@@ -101,7 +95,9 @@ table, th, td {
 .css-1xt5tlz-MuiPaper-root-MuiAppBar-root{
   border-bottom: none !important;
 }
-
+.css-1abmkaz-MuiPaper-root-MuiAppBar-root{
+position: unset;
+}
 .css-uh02xs-MuiTypography-root {
     font-family: chonburi !important;
     font-weight: 800 !important;
@@ -111,9 +107,19 @@ table, th, td {
 .link, .link2, .slot-btn{
   color: white;
   text-decoration: none;
-  padding: 15px;
+  padding: 16px;
   cursor: pointer;
-  font-family: "Poppins","sans-serif" !important
+  font-family: "Poppins","sans-serif" !important;
+}
+.link{
+  color:#959595;
+  font-weight: 600 !important
+}
+.link:hover{
+  color:#9b6a4e;
+}
+.link:focus{
+  color:#9b6a4e;
 }
 .link2, .css-8bjq0v-MuiButtonBase-root-MuiButton-root{
   background: #9b6a4e !important;
@@ -125,9 +131,12 @@ padding: 12px;
 background: #ff5501;
 border: none
 }
+.css-11bf41k-MuiToolbar-root{
+  background-color: white !important;
+}
 @media (min-width: 600px){
   .css-1r339ym-MuiToolbar-root {
-    background-color: #dab180 !important;
+    background-color: white !important;
 }
 }
 /*Image slider*/
@@ -376,7 +385,7 @@ a, a:hover{
 }
 .recharts-label {
   transform: translateY(10px); /* Adjust the translateY value as needed */
-  font-family: Poppins, "sans-serif" !important
+  font-family: "Poppins", "sans-serif" !important
 }
 .css-3vyd2d-MuiPaper-root{
   border-radius: 4px;
@@ -387,7 +396,7 @@ a, a:hover{
   top:unset !important
 }
 .css-10hburv-MuiTypography-root{
-  font-family: Poppins, sans-serif !important;
+  font-family: "Poppins", sans-serif !important;
 }
 .css-cveggr-MuiListItemIcon-root{
   min-width: 35px !important
@@ -404,3 +413,4 @@ a, a:hover{
   color: white
 }
 /*Profile*/
+ 
