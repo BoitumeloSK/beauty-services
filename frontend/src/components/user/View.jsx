@@ -1,5 +1,3 @@
-import { Fragment } from "react";
-import { Link } from "react-router-dom";
 import EditProfile from "./Edit";
 import { useState } from "react";
 import Typography from "@mui/material/Typography";
@@ -34,10 +32,9 @@ export default function ViewProfile() {
 		<div
 			style={{
 				height: "auto",
-				backgroundImage: `url("https://res.cloudinary.com/dhrftaik2/image/upload/v1695328725/beauty-shop/Site%20Images/paul-weaver-zVaYmVJ5y3s-unsplash_cdend8.jpg")`,
+				backgroundImage: `url("https://res.cloudinary.com/dhrftaik2/image/upload/v1695819540/beauty-shop/Site%20Images/alex-perri-bmM_IdLd1SA-unsplash_qfuwz2.jpg")`,
 				backgroundSize: "cover",
 				padding: "60px",
-				heigh: "460px",
 			}}
 		>
 			<Card
@@ -72,17 +69,21 @@ export default function ViewProfile() {
 								<div className="service-btns">
 									<button
 										onClick={() => deleteUser()}
-										style={{ background: "red" }}
+										style={{ background: "red", width: "unset" }}
 									>
 										DELETE ACCOUNT
 									</button>
-									<button onClick={() => viewEdit(true)}>EDIT PROFILE</button>
+									<button
+										onClick={() => viewEdit(true)}
+										style={{ width: "unset" }}
+									>
+										EDIT PROFILE
+									</button>
 								</div>
 							</>
 						) : (
 							<>
-								<EditProfile />
-								<button onClick={() => viewEdit(false)}>VIEW PROFILE</button>
+								<EditProfile viewEditFunction={() => viewEdit(false)} />
 							</>
 						)}
 					</>
@@ -91,7 +92,7 @@ export default function ViewProfile() {
 					component="img"
 					image={user.image}
 					alt=""
-					style={{ height: "60vh", width: "45vw" }}
+					style={{ height: "60vh", width: "45vw", margin: "0 0 0 10px" }}
 				/>
 			</Card>
 		</div>

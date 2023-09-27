@@ -41,10 +41,11 @@ export default function VisibleServices() {
 	return (
 		<>
 			<div className="center">
-				<h1>ALL SERVICES</h1>
+				<h1>All Services</h1>
 				<p>
-					There is a variety of hair, skin and body services. Filter the
-					services type you would like to see.
+					There is a variety of hair, skin and body services from various
+					service providers within the city. Filter the services type you would
+					like to see.
 				</p>
 			</div>
 			<Box sx={{ flexGrow: 1 }}>

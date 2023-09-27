@@ -1,18 +1,25 @@
-import { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { TextField } from "@mui/material";
 
 function AddAbout({ name, changeFunction, about }) {
 	return (
 		<>
-			<label htmlFor={name}>About:</label>
-			<textarea name={name} onChange={() => changeFunction}>
-				{about}
-			</textarea>
+			<TextField
+				id="outlined-multiline-static"
+				name={name}
+				label="About"
+				multiline
+				rows={5}
+				defaultValue={about}
+				onChange={changeFunction}
+				style={{ marginBottom: "20px" }}
+			/>
+			<br></br>
 		</>
 	);
 }
 
-export default function EditProfile() {
+export default function EditProfile({ viewEditFunction }) {
 	const user = JSON.parse(localStorage.getItem("beauty-shop-user"));
 
 	const [name, setName] = useState(user.name);
@@ -70,20 +77,42 @@ export default function EditProfile() {
 	}
 
 	return (
-		<Fragment>
-			<label htmlFor="name">Name:</label>
-			<input name="name" onChange={(e) => handleChange(e)} value={name} />
+		<div>
+			<TextField
+				style={{ width: "400px", marginBottom: "20px" }}
+				name="name"
+				label="Name"
+				autoComplete="name"
+				defaultValue={name}
+				onChange={(e) => handleChange(e)}
+			/>
 			{user.role === "provider" ? (
 				<AddAbout name="about" changeFunction={handleChange} about={about} />
 			) : (
 				""
 			)}
-			<label htmlFor="address">Address:</label>
-			<input name="address" onChange={(e) => handleChange(e)} value={address} />
-			<br></br>
-			<button onClick={() => confirmEdit(name, about, address)}>
-				Confirm Edit
-			</button>
-		</Fragment>
+			<TextField
+				style={{ width: "400px", marginBottom: "20px" }}
+				name="address"
+				autoComplete="address"
+				defaultValue={address}
+				label="Address"
+				onChange={(e) => handleChange(e)}
+			/>
+			<div
+				className="service-btns"
+				style={{ display: "flex", justifyContent: "center" }}
+			>
+				<button
+					onClick={() => confirmEdit(name, about, address)}
+					style={{ width: "unset" }}
+				>
+					CONFIRM EDIT
+				</button>
+				<button onClick={viewEditFunction} style={{ width: "unset" }}>
+					VIEW PROFILE
+				</button>
+			</div>
+		</div>
 	);
 }

@@ -40,7 +40,7 @@ function GrantedAccess() {
 				sx={{ my: 1, mx: 1.5 }}
 				className="link"
 			>
-				VIEW PROFILE
+				PROFILE
 			</Link>
 			{storageKey.role === "provider" ? (
 				<>
