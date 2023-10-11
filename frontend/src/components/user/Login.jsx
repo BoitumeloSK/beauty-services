@@ -87,7 +87,7 @@ export default function Login() {
 					sm={4}
 					md={7}
 					sx={{
-						backgroundImage: `url("https://res.cloudinary.com/dhrftaik2/image/upload/v1691952881/beauty-shop/Site%20Images/erol-ahmed-aIYFR0vbADk-unsplash_kkky1n.jpg")`,
+						backgroundImage: `url("https://res.cloudinary.com/dhrftaik2/image/upload/v1697021874/beauty-shop/Site%20Images/joshua-fuller-Q1Vb0xIn0Ag-_xvmzuw.jpg")`,
 						backgroundRepeat: "no-repeat",
 						backgroundColor: (t) =>
 							t.palette.mode === "light"
@@ -116,7 +116,10 @@ export default function Login() {
 						<Box
 							component="form"
 							noValidate
-							onSubmit={loginUser(email, password)}
+							onSubmit={(e) => {
+								e.preventDefault();
+								loginUser(email, password);
+							}}
 							sx={{ mt: 1 }}
 						>
 							<TextField
@@ -139,10 +142,6 @@ export default function Login() {
 								autoComplete="current-password"
 								onChange={(e) => handleChange(e)}
 							/>
-							{/* <FormControlLabel
-							control={<Checkbox value="remember" color="primary" />}
-							label="Remember me"
-						/> */}
 							{loginDenied ? (
 								<p style={{ color: "red" }}>
 									<b>Invalid Credentials</b>
@@ -159,18 +158,10 @@ export default function Login() {
 								Sign In
 							</Button>
 
-							<Grid container>
-								<Grid item xs>
-									<Link href="/changePassword" variant="body2">
-										Forgot password?
-									</Link>
-								</Grid>
-								<Grid item>
-									<Link href="/signup" variant="body2">
-										{"Don't have an account? Sign Up"}
-									</Link>
-								</Grid>
-							</Grid>
+							<Link href="/signup" variant="body2">
+								{"Don't have an account? Sign Up"}
+							</Link>
+
 							<Copyright sx={{ mt: 5 }} />
 						</Box>
 					</Box>

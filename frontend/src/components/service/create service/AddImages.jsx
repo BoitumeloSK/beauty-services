@@ -24,7 +24,7 @@ export default function AddImages({ urls, changeFunction }) {
 					className="file"
 					onChange={changeFunction}
 				/>
-				<label htmlFor="images">Add Image</label>
+				<label htmlFor="images">ADD IMAGE</label>
 			</div>
 		</div>
 	);

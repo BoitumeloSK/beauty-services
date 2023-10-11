@@ -32,7 +32,7 @@ export default function ViewProfile() {
 		<div
 			style={{
 				height: "auto",
-				backgroundImage: `url("https://res.cloudinary.com/dhrftaik2/image/upload/v1695819540/beauty-shop/Site%20Images/alex-perri-bmM_IdLd1SA-unsplash_qfuwz2.jpg")`,
+				backgroundImage: `url("https://res.cloudinary.com/dhrftaik2/image/upload/v1697021874/beauty-shop/Site%20Images/joshua-fuller-Q1Vb0xIn0Ag-_xvmzuw.jpg")`,
 				backgroundSize: "cover",
 				padding: "60px",
 			}}

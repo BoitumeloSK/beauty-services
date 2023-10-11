@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-
+import Loader from "../Loader";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -104,124 +104,133 @@ export default function ViewService() {
 			setViewSlots(false);
 		}
 	}
-	if (isLoading) {
-		return <div>Loading...</div>;
-	}
+	// if (isLoading) {
+	// 	return <Loader />;
+	// }
 
-	if (!service) {
-		return <div>No data found.</div>;
-	}
+	// if (!service) {
+	// 	return <div>No data found.</div>;
+	// }
 
 	return (
-		<div
-			style={{
-				height: "auto",
-				backgroundImage: `url("https://res.cloudinary.com/dhrftaik2/image/upload/v1692972783/beauty-shop/Site%20Images/Untitled_design_l4ombc.png")`,
-				backgroundSize: "cover",
-				padding: "60px",
-				display: "flex",
-				flexDirection: "column",
-			}}
-		>
-			<Card
-				sx={{
-					display: "flex",
-					backgroundColor: "transparent",
-				}}
-			>
-				<CardContent sx={{ flex: 1 }}>
-					{!viewSlots ? (
-						<>
-							<Typography component="h2" variant="h5">
-								{service.title}
-							</Typography>
-							<Typography variant="subtitle1" paragraph>
-								{service.description}
-							</Typography>
-							<Typography variant="subtitle1" color="text.secondary">
-								R {service.price}
-							</Typography>
-							{user != null && user.id === service.UserId ? (
+		<>
+			{isLoading ? (
+				<Loader />
+			) : !service ? (
+				<div>No data found.</div>
+			) : (
+				<div
+					style={{
+						height: "auto",
+						backgroundImage: `url("https://res.cloudinary.com/dhrftaik2/image/upload/v1692972783/beauty-shop/Site%20Images/Untitled_design_l4ombc.png")`,
+						backgroundSize: "cover",
+						padding: "60px",
+						display: "flex",
+						flexDirection: "column",
+					}}
+				>
+					<Card
+						sx={{
+							display: "flex",
+							backgroundColor: "transparent",
+						}}
+					>
+						<CardContent sx={{ flex: 1 }}>
+							{!viewSlots ? (
 								<>
-									<div className="service-btns">
-										<button onClick={() => deleteService()}>DELETE</button>
-										<Link to={`/editservice/${service.id}`}>
-											<button>EDIT</button>
-										</Link>
-									</div>
-									<br></br>
-									{/* <Link to="/myservices">Back to my services</Link> */}
+									<Typography component="h2" variant="h5">
+										{service.title}
+									</Typography>
+									<Typography variant="subtitle1" paragraph>
+										{service.description}
+									</Typography>
+									<Typography variant="subtitle1" color="text.secondary">
+										R {service.price}
+									</Typography>
+									{user != null && user.id === service.UserId ? (
+										<>
+											<div className="service-btns">
+												<button onClick={() => deleteService()}>DELETE</button>
+												<Link to={`/editservice/${service.id}`}>
+													<button>EDIT</button>
+												</Link>
+											</div>
+											<br></br>
+											{/* <Link to="/myservices">Back to my services</Link> */}
+										</>
+									) : (
+										""
+									)}
+									{!user ? (
+										<p style={{ background: "white" }}>
+											<Link to="/signup">Sign Up</Link> or{" "}
+											<Link to="/login">Login</Link> to view available service
+											slots
+										</p>
+									) : (
+										<button
+											onClick={() => showHideSlots(true)}
+											className="clear-btn"
+										>
+											VIEW SLOTS
+										</button>
+									)}
 								</>
 							) : (
-								""
+								<div className="center">
+									{last && slots.length > 0 ? (
+										<>
+											<AvailabilityCalendar
+												availableDates={slots}
+												user={user}
+												serviceId={id}
+												preferredFunction={createBooking}
+												ownerId={ownerId}
+												btnTxt={"BOOK NOW"}
+												getSlots={true}
+											/>
+											<br></br>
+											<button
+												onClick={() => showHideSlots(false)}
+												className="clear-btn"
+											>
+												VIEW SERVICE DETAILS
+											</button>
+										</>
+									) : (
+										<p>Currently no available slots.</p>
+									)}
+								</div>
 							)}
-							{!user ? (
-								<p style={{ background: "white" }}>
-									<Link to="/signup">Sign Up</Link> or{" "}
-									<Link to="/login">Login</Link> to view available service slots
-								</p>
-							) : (
-								<button
-									onClick={() => showHideSlots(true)}
-									className="no-style-btn"
-								>
-									VIEW SLOTS
-								</button>
-							)}
-						</>
-					) : (
-						<div className="center">
-							{last && slots.length > 0 ? (
-								<>
-									<AvailabilityCalendar
-										availableDates={slots}
-										user={user}
-										serviceId={id}
-										preferredFunction={createBooking}
-										ownerId={ownerId}
-										btnTxt={"Book Now"}
-										getSlots={true}
-									/>
-									<br></br>
-									<button
-										onClick={() => showHideSlots(false)}
-										className="no-style-btn"
-									>
-										VIEW SERVICE DETAILS
-									</button>
-								</>
-							) : (
-								<p>Currently no available slots.</p>
-							)}
+						</CardContent>
+						<div style={{ display: "flex", flexDirection: "column" }}>
+							<CardMedia
+								component="img"
+								image={displayImage}
+								alt=""
+								style={{ height: "60vh", width: "45vw" }}
+							/>
+							<div className="cards flex-space">
+								<div className="service-pics">
+									{service.images.split(",").map((url, index) => {
+										return (
+											<div key={index}>
+												<img
+													key={index}
+													src={url}
+													onClick={() => changeImage(url)}
+													alt=""
+													style={{ cursor: "pointer" }}
+												/>
+											</div>
+										);
+									})}
+								</div>
+							</div>
 						</div>
-					)}
-				</CardContent>
-				<div style={{ display: "flex", flexDirection: "column" }}>
-					<CardMedia
-						component="img"
-						image={displayImage}
-						alt=""
-						style={{ height: "60vh", width: "45vw" }}
-					/>
-					<div className="cards flex-space">
-						<div className="service-pics">
-							{service.images.split(",").map((url, index) => {
-								return (
-									<div key={index}>
-										<img
-											key={index}
-											src={url}
-											onClick={() => changeImage(url)}
-											alt=""
-											style={{ cursor: "pointer" }}
-										/>
-									</div>
-								);
-							})}
-						</div>
-					</div>
+					</Card>
 				</div>
-			</Card>
-		</div>
+			)}
+		</>
 	);
 }

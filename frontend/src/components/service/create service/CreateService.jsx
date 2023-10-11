@@ -228,7 +228,7 @@ export default function CreateService() {
 										}
 										sx={{ mt: 3, ml: 1 }}
 									>
-										Add Service
+										ADD SERVICE
 									</Button>
 								) : (
 									<Button
@@ -236,7 +236,7 @@ export default function CreateService() {
 										onClick={handleNext}
 										sx={{ mt: 3, ml: 1 }}
 									>
-										Next
+										NEXT
 									</Button>
 								)}
 							</Box>

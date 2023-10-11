@@ -29,7 +29,7 @@ h1{
   text-align: "center";
 }
 h1, .css-149xwtl-MuiTypography-root,h2{
-  font-family: 'EB Garamond', serif !important;
+  font-family: 'Poppins', serif !important;
   color: #414040;
 }
 /*----------------------------------------
@@ -56,8 +56,7 @@ img{
   position: absolute;
   z-index:2
 }
-.file-label label{
-  display: block;
+.file-label label, .clear-btn{
   position: relative;
   width: 200px;
   height: 50px;
@@ -66,16 +65,17 @@ img{
   display: flex;
   align-items: center;
   justify-content: center;
-  color:"black";
   font-weight: bold;
   cursor: pointer;
   transition: transform .2s ease-out;
+  font-family: "Poppins";
+  border:1px;
 }
 .file-label input:hover + label,
-.file-label input:focus + label {
+.file-label input:focus + label, .clear-btn:focus, .clear-btn:hover {
   transform: scale(1.02);
 }
-.file-label input:focus + label {
+.file-label input:focus + label, .clear-btn:focus{
   outline: 1px solid #000;
   outline: -webkit-focus-ring-color auto 2px;
 }
@@ -116,10 +116,10 @@ position: unset;
   font-weight: 600 !important
 }
 .link:hover{
-  color:#9b6a4e;
+  color:#dab180;
 }
 .link:focus{
-  color:#9b6a4e;
+  color:#dab180;
 }
 .link2, .css-8bjq0v-MuiButtonBase-root-MuiButton-root{
   background: #9b6a4e !important;
@@ -150,7 +150,7 @@ border: none
   margin:0
 }
 
-/*Cards*/
+/*Home Cards*/
 .cards{
   display:flex
 }
@@ -160,6 +160,7 @@ border: none
       display: flex !important;
       justify-content: center !important;
       height: 250px !important;
+      border-radius: 0;
   }
 .css-1oitmrd-MuiButtonBase-root-MuiCardActionArea-root{
   text-align: center !important;
@@ -170,14 +171,20 @@ border: none
 max-width: 100% !important;
 display: flex !important;
 align-items: center;
-border-radius:0
+border-radius:unset !important;
+padding: 30px !important;
+
 }
 .css-1ri6ub7-MuiPaper-root-MuiCard-root a{
   text-decoration: none;
   width:100%;
 }
+.css-1mktp8m-MuiTypography-root, .css-adfmws-MuiTypography-root{
+  font-family: "Poppins", "serif" !important;
+}
 /*Card hover*/
-.css-46bh2p-MuiCardContent-root {
+
+.css-46bh2p-MuiCardContent-root:hover {
   padding: 80px 20px 80px 20px !important;
 }
 /*Card bottom text*/
@@ -246,7 +253,8 @@ border-radius:0
 }
 .service-btns button{
   background: #9b6a4e;
-  border: none;
+  border: 1px;
+  border-radius: 25px;
   cursor: pointer;
 color: white;
   text-decoration: none;
@@ -414,3 +422,33 @@ a, a:hover{
 }
 /*Profile*/
  
+
+/*Loader*/
+@keyframes pulse_animation {
+  0% { box-shadow: 0 0 0 0 rgba(254, 206, 104, 0.8) }
+  100% { box-shadow: 0 0 0 200px rgba(254, 206, 104, 0) }
+}
+
+#pulse-wrapper {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+#pulse-wrapper #pulse {
+  margin: auto;
+}
+#pulse-wrapper #pulse span {
+  position: absolute;
+  margin-top: -25px; /* = height / 2 */
+  margin-left: -25px; /* = width / 2 */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #fece68;
+  animation: pulse_animation 1.3s infinite;
+}
+#pulse-wrapper #pulse span:nth-child(2) {
+  animation-delay: 0.3s; /* Start the second wave with some delay */
+}

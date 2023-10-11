@@ -2,10 +2,8 @@ import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import EmailIcon from "@mui/icons-material/Email";
+import { Facebook, Instagram, Twitter, Email } from "@mui/icons-material";
+// import EmailIcon from "@mui/icons-material/Email";
 
 function NoAccess() {
 	return (
@@ -84,14 +82,14 @@ function GrantedAccess() {
 			) : (
 				""
 			)}
-			<button
+			<Link
 				onClick={() => logout()}
 				sx={{ my: 1, mx: 1.5 }}
-				className="link2"
+				className="link"
 				variant="button"
 			>
 				LOGOUT
-			</button>
+			</Link>
 		</>
 	);
 }
@@ -123,7 +121,7 @@ export default function Navigationbar() {
 				}}
 			>
 				<div style={{ display: "flex", alignItems: "center" }}>
-					<EmailIcon style={{ color: "#FFEDED", padding: "5px" }} />
+					<Email style={{ color: "#FFEDED", padding: "5px" }} />
 					<p style={{ color: "#FFEDED" }}> info@balanceme.co.za</p>
 				</div>
 				<div
@@ -147,9 +145,19 @@ export default function Navigationbar() {
 					</div>
 					<div>
 						{" "}
-						<FacebookIcon style={{ color: "#FFEDED", padding: "5px" }} />
-						<TwitterIcon style={{ color: "#FFEDED", padding: "5px" }} />
-						<InstagramIcon style={{ color: "#FFEDED", padding: "5px" }} />
+						<Link href="https://www.facebook.com/" color="white">
+							<Facebook style={{ color: "#FFEDED", padding: "5px" }} />
+						</Link>
+						<Link
+							href="https://www.instagram.com/"
+							color="white"
+							sx={{ pl: 1, pr: 1 }}
+						>
+							<Instagram style={{ color: "#FFEDED", padding: "5px" }} />
+						</Link>
+						<Link href="https://www.twitter.com/" color="white">
+							<Twitter style={{ color: "#FFEDED", padding: "5px" }} />
+						</Link>
 					</div>
 				</div>
 			</div>
