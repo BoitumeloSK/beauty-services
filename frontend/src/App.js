@@ -10,6 +10,7 @@ import Applications from "./components/user/Applications";
 import UserProfile from "./components/user/UserProfile";
 import ProviderServices from "./components/service/ProviderServices";
 import ViewService from "./components/service/View";
+import CreateService from "./components/service/create service/CreateService";
 import EditService from "./components/service/edit service/Edit";
 import VisibleServices from "./components/service/VisibleServices";
 import MyBookings from "./components/booking/MyBookings";
@@ -38,6 +39,7 @@ function App() {
 				<Route path="/userProfile" element={<UserProfile />} />
 				<Route path="/myservices" element={<ProviderServices />} />
 				<Route path="/viewservice/:id" element={<ViewService />} />
+				<Route path="/createService" element={<CreateService />} />
 				<Route path="editservice/:id" element={<EditService />} />
 				<Route path="/services" element={<VisibleServices />} />
 				<Route path="/mybookings" element={<MyBookings />} />

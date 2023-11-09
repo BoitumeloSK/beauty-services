@@ -4,19 +4,11 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
 import Chart from "./Chart";
 import Total from "./Total";
 import BookingsList from "./BookingsList";
 import { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
-import Drawer from "@mui/material/Drawer";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import List from "@mui/material/List";
 
 import CreateService from "../service/create service/CreateService";
 import ProviderServices from "../service/ProviderServices";
@@ -27,6 +19,7 @@ export default function Dashboard() {
 	const [bookings, setBookings] = useState([]);
 	const [isLoading, setLoading] = useState(true);
 	const [target, setTarget] = useState("analytics");
+
 	useEffect(() => {
 		const getBookings = async () => {
 			try {
@@ -56,9 +49,9 @@ export default function Dashboard() {
 	if (!bookings) {
 		return <>No data found</>;
 	}
-	function targetComponent(name) {
-		setTarget(name);
-	}
+	// function targetComponent(name) {
+	// 	setTarget(name);
+	// }
 	function Analytics() {
 		return (
 			<>
@@ -105,77 +98,20 @@ export default function Dashboard() {
 			</>
 		);
 	}
+
 	return (
 		<div
-			style={{
-				display: "flex",
-				position: "absolute",
-				height: "auto",
-				width: "100%",
-				backgroundImage: `url("https://res.cloudinary.com/dhrftaik2/image/upload/v1692003783/beauty-shop/Site%20Images/josh-calabrese-XXpbdU_31Sg-unsplash-copy_ewguoh.jpg")`,
-				backgroundSize: "cover",
-			}}
+			style={
+				{
+					// display: "flex",
+					// position: "absolute",
+					// height: "auto",
+					// width: "100%",
+					// backgroundImage: `url("https://res.cloudinary.com/dhrftaik2/image/upload/v1692003783/beauty-shop/Site%20Images/josh-calabrese-XXpbdU_31Sg-unsplash-copy_ewguoh.jpg")`,
+					// backgroundSize: "cover",
+				}
+			}
 		>
-			<div>
-				<Drawer
-					variant="permanent"
-					sx={{
-						width: drawerWidth,
-						flexShrink: 0,
-						[`& .MuiDrawer-paper`]: {
-							width: drawerWidth,
-							boxSizing: "border-box",
-						},
-					}}
-				>
-					<Box sx={{ overflow: "auto" }}>
-						<List>
-							<ListItem disablePadding>
-								<ListItemButton onClick={() => targetComponent("analytics")}>
-									<ListItemIcon>
-										<img
-											className="icon"
-											alt=""
-											src="https://res.cloudinary.com/dhrftaik2/image/upload/v1695498625/beauty-shop/Site%20Images/reportIcon_glpafb.png"
-										/>
-									</ListItemIcon>
-									<ListItemText primary="Bookings and Reports" />
-								</ListItemButton>
-							</ListItem>
-							<Divider />
-							<ListItem disablePadding>
-								<ListItemButton onClick={() => targetComponent("services")}>
-									<ListItemIcon>
-										<img
-											alt=""
-											className="icon"
-											src="https://res.cloudinary.com/dhrftaik2/image/upload/v1695498986/beauty-shop/Site%20Images/listIcon_fyi8gp.png"
-										/>
-									</ListItemIcon>
-									<ListItemText primary="My Services" />
-								</ListItemButton>
-							</ListItem>
-							<Divider />
-							<ListItem disablePadding>
-								<ListItemButton
-									onClick={() => targetComponent("addService")}
-									className="check"
-								>
-									<ListItemIcon>
-										<img
-											className="icon"
-											src="https://res.cloudinary.com/dhrftaik2/image/upload/v1695400324/beauty-shop/Site%20Images/addIcon_jfn0vz.png"
-											alt=""
-										/>
-									</ListItemIcon>
-									<ListItemText primary="Add Service" />
-								</ListItemButton>
-							</ListItem>
-						</List>
-						<Divider />
-					</Box>
-				</Drawer>
-			</div>
 			<div>
 				<Typography component="h1" variant="h3" align="center" margin={3}>
 					Service Dashboard
@@ -191,15 +127,7 @@ export default function Dashboard() {
 					your service reports, as well as service creation and management
 					tools. Explore your Iconic Flair!
 				</p>
-				{target === "analytics" ? (
-					<Analytics />
-				) : target === "addService" ? (
-					<CreateService />
-				) : target === "services" ? (
-					<ProviderServices />
-				) : (
-					""
-				)}
+				<Analytics />
 			</div>
 		</div>
 	);
